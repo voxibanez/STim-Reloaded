@@ -1,6 +1,2 @@
 #TargetFrameworkVersion=v4.0:PlatformToolSet=v120:EnableManagedIncrementalBuild=false:VCToolArchitecture=Native32Bit
-<<<<<<< HEAD
-Debug|Win32|\\psf\Home\Documents\STim-Reloaded\|
-=======
 Debug|Win32|C:\Users\ccapt_000\Desktop\STim-Reloaded\|
->>>>>>> origin/master

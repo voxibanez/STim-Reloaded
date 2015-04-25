@@ -95,15 +95,15 @@ int main(int argc, char* argv[]){
 	weapons[0]->picture = loadArt("Unknown.txt");
 	weapons[1] = initWeapon("Wooden Sword", 0.0, 0.7, 1.3, 90, 1, "The strongest of all wooden swords", NULL);
 	weapons[1]->picture = loadArt("Wsword.txt");
-	weapons[2] = initWeapon("Fire Rune", 2.0, 0.8, 1.2, 70, 0,"HOT",NULL);
+	weapons[2] = initWeapon("Fire Rune", 2.0, 0.8, 1.2, 70, 0,"Kindle your flame",NULL);
 	weapons[2]->picture = loadArt("Firune.txt");
-	weapons[3] = initWeapon("Wood Club", 3.0, 0.6, 1.4, 80, 1,"Big stick",NULL);
+	weapons[3] = initWeapon("Wood Club", 3.0, 0.6, 1.4, 80, 1,"Politics is the skilled use of blunt objects",NULL);
 	weapons[3]->picture = loadArt("Wclub.txt");
-	weapons[4] = initWeapon("Chipped Dagger", -1.0, 0.9, 1.1, 70, 1,"Sucks to suck",NULL);
+	weapons[4] = initWeapon("Chipped Dagger", -1.0, 0.9, 1.1, 70, 1,"Excellent for spreading butter",NULL);
 	weapons[4]->picture = loadArt("Cdagger.txt");
-	weapons[5] = initWeapon("Light Rune", -1.0, 0.9, 1.1, 70, 1, "ZZZZZP", NULL);
+	weapons[5] = initWeapon("Lightning Rune", -1.0, 0.9, 1.1, 70, 1, "ZZZZZP", NULL);
 	weapons[5]->picture = loadArt("Lrune.txt");
-	weapons[6] = initWeapon("Frost Rune", -1.0, 0.9, 1.1, 70, 1, "Chilly...", NULL);
+	weapons[6] = initWeapon("Frost Rune", -1.0, 0.9, 1.1, 70, 1, "Death is a dish best served cold", NULL);
 	weapons[6]->picture = loadArt("Frrune.txt");
 
 	
