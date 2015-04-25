@@ -229,7 +229,7 @@ int main(int argc, char* argv[]){
 		addItem(mainChar, NULL, 1, weapons[3]);
 		addItem(mainChar, NULL, 1, weapons[4]);
 		addItem(mainChar, NULL, 1, weapons[6]);
-
+		warriornextlevel(mainChar);
 	}
 	else
 	{
@@ -251,7 +251,7 @@ int main(int argc, char* argv[]){
 
 	updateEnemyPosition(enemies, mainChar);
 
-	warriornextlevel(mainChar);
+	
 	updatePlayerPosition(mainChar);
 	moveSalesman(storeman, mainChar);
 	updateScreen();
@@ -501,25 +501,10 @@ void updateEnemyPosition(Enemy* en, Player user){
 
 void warriornextlevel(Player user)
 {
-	user->MAXHP = 11;
-	user->ATK = 11;
-	user->DEF = 13;
-	user->MATK = 6;
-	user->MDEF = 12;
-	user->ACC = 70;
-	user->LCK = 8;
-
 	user->Position[0][0] = 15;
 	user->Position[0][1] = 15;
 	user->Position[1][0] = 15;
 	user->Position[1][1] = 15;
-	//issword = 0, isrune = 0, ismace = 0, isdagger = 0, isarmor = 0;
-	//your_main_weapon();
-	//your_off_weapon();
-	//your_armor();
-	//DMG = calc_dmg();
-	//isdual();
-	//iswarrior = 1;
 }
 
 void addAnimation(AnimationPtr animate, int x, int y){
@@ -1744,6 +1729,9 @@ void loadGame(Player user){
 	fscanf(fp, "%d", &user->CURRENCY);
 	fscanf(fp, "%d", &user->Position[1][0]);
 	fscanf(fp, "%d", &user->Position[1][1]);
+
+	user->Position[0][0] = user->Position[1][0];
+	user->Position[0][1] = user->Position[1][1];
 
 
 	fgets(loadChar, 10, fp);

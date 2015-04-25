@@ -1,4 +1,4 @@
-121
+Tim
 1
 11
 13
@@ -10,8 +10,8 @@
 11
 1
 -842150451
-13
-19
+0
+21
 Chipped Dagger
 Empty
 5
@@ -30,9 +30,7 @@ Chipped Dagger
 Weapon
 Frost Rune
 1
-1
--33686019
-1
-13
-11
 0
+1
+19
+6
