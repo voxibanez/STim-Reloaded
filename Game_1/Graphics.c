@@ -61,6 +61,8 @@ void loadGame(Player user);
 
 void initGame(Player mainChar);
 
+void hpBars(Player user, Enemy en);
+
 
 char screen[20][80] = { { 176 } };
 int playerPosition[2][2] = { 0 };
@@ -155,10 +157,6 @@ int main(int argc, char* argv[]){
 	potions[0] = initPotion("Potion", 0, 5, 0, 0, 0, 0, 0, 0, "A Simple Healing Potion", "Potion.txt");
 	potions[0]->picture = loadArt("Potion.txt");
 	potionsSize = 1;
-	//PotionPtr initPotion(char* name, int MAXHPRAISE, int HPRAISE, int ATKRAISE, int DEFRAISE, int MATKRAISE, int MDEFRAISE, int ACCRAISE, int LCKRAISE);
-
-	//tempItem->POTION = potions[0];
-	//tempItem->QUANTITY = 2;
 
 	srand(time(NULL));
 
@@ -621,7 +619,8 @@ void battleSequence(Enemy en, Player user){
 		updateScreen();
 		Sleep(20);
 	}
-	Sleep(200);
+	Sleep(500);
+	
 
 	for (i = 0; playerSprite[i] != NULL && i < 10; i++){
 		for (j = 0; playerSprite[i][j] != NULL && i < 78; j++){
@@ -1804,4 +1803,54 @@ void initGame(Player mainChar){
 	
 	
 	
+}
+
+void hpBars(Player user, Enemy en){
+	int i, j, k;
+	char temp[64];
+
+	for (i = 0; i <= 20; i++)
+		screen[2][i + 10] = ' ';
+
+	for (i = 0; i <= 20; i++)
+		screen[1][i + 10] = ' ';
+
+	sprintf(temp, "Enemy Hp %d/%d",en->HP,en->MAXHP);
+	for (i = 0; i < strlen(temp); i++)
+		screen[1][i + 10] = temp[i];
+	j = 0;
+
+	for (i = 0; i <= (((double)en->HP*100) / ((double)en->MAXHP*10))*2;i++){
+
+		if (i % 2 == 1)
+			screen[2][j+10] = 177;
+		else{
+			screen[2][j+10] = 219;
+			j++;
+		}
+			
+	}
+
+	for (i = 0; i <= 20; i++)
+		screen[17][i + 20] = ' ';
+
+	for (i = 0; i <= 20; i++)
+		screen[18][i + 20] = ' ';
+
+	sprintf(temp, "Player Hp %d/%d", user->HP, user->MAXHP);
+	for (i = 0; i < strlen(temp); i++)
+		screen[17][i + 20] = temp[i];
+	j = 0;
+
+	for (i = 0; i <= (((double)user->HP * 100) / ((double)user->MAXHP * 10)) * 2; i++){
+
+		if (i % 2 == 1)
+			screen[18][j + 20] = 177;
+		else{
+			screen[18][j + 20] = 219;
+			j++;
+		}
+
+	}
+	updateScreen();
 }
