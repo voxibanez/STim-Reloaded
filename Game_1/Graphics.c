@@ -51,6 +51,7 @@ void inventoryGraphics(Player user);
 
 void useItem(Player user, ItemPtr it);
 
+void playerStats(Player user);
 char screen[20][80] = { { 176 } };
 int playerPosition[2][2] = { 0 };
 int screenCounter;
@@ -719,6 +720,12 @@ void menuGraphics(Player user){
 	{
 		screen[6][i + 5] = temp[i];
 	}
+
+	sprintf(temp, "Save", user->NAME);
+	for (i = 0; i < strlen(temp); i++)
+	{
+		screen[8][i + 5] = temp[i];
+	}
 	updateScreen();
 
 	cursor[0] = 4;
@@ -755,7 +762,7 @@ void menuGraphics(Player user){
 					inventoryGraphics(user);
 					break;
 				case 1:
-					printf("You are very handsome\n");
+					playerStats(user);
 					break;
 				case 2:
 					break;
@@ -924,7 +931,7 @@ void inventoryGraphics(Player user){
 }
 
 void itemBox(Player user,ItemPtr it,int* exit){
-		char* tempchar = malloc(sizeof(char)*40);
+		char* tempchar = malloc(sizeof(char)*64);
 		int cursor[3];
 		int i, j, k,tempInt;
 		int key_code = 0;
@@ -1038,7 +1045,10 @@ void itemBox(Player user,ItemPtr it,int* exit){
 			sprintf(tempchar, "%s", it->POTION->DESCRIPTION);
 			for (i = 0; i < strlen(tempchar); i++)
 			{
-				screen[11][i + 41] = tempchar[i];
+				if (i>36)
+					screen[12][i + 41 - 37] = tempchar[i];
+				else
+					screen[11][i + 41] = tempchar[i];
 			}
 			for (i = 0; i < 10; i++){
 				for (j = 0; j < 13; j++){
@@ -1067,7 +1077,10 @@ void itemBox(Player user,ItemPtr it,int* exit){
 			sprintf(tempchar, "%s", it->WEAPON->DESCRIPTION);
 			for (i = 0; i < strlen(tempchar); i++)
 			{
-				screen[11][i + 41] = tempchar[i];
+				if (i>36)
+					screen[12][i + 41-37] = tempchar[i];
+				else
+					screen[11][i + 41] = tempchar[i];
 			}
 			for (i = 0; i < 10; i++){
 				for (j = 0; j < 13; j++){
@@ -1081,7 +1094,7 @@ void itemBox(Player user,ItemPtr it,int* exit){
 
 			i = 1;
 			if (it->WEAPON->AccMod != 0){
-				sprintf(tempchar, "Accuracy: %g   ", it->WEAPON->AccMod);
+				sprintf(tempchar, "Accuracy: %g", it->WEAPON->AccMod);
 				for (j = 0; j < strlen(tempchar); j++){
 					screen[3 + i][j + 41] = tempchar[j];
 					
@@ -1089,7 +1102,7 @@ void itemBox(Player user,ItemPtr it,int* exit){
 				i++;
 			}
 			if (it->WEAPON->attackModMax != 0){
-				sprintf(tempchar, "Attack MOD: %g   ", it->WEAPON->attackModMax);
+				sprintf(tempchar, "Attack MOD: %g", it->WEAPON->attackModMax);
 				for (j = 0; j < strlen(tempchar); j++){
 					screen[3 + i][j + 41] = tempchar[j];
 
@@ -1330,3 +1343,7 @@ void useItem(Player User, ItemPtr it){
 					removeItem(User, 1, it);
 			}
 		}
+
+void playerStats(Player user){
+
+}
