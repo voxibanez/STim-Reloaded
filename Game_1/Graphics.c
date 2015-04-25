@@ -1780,7 +1780,7 @@ void loadGame(Player user){
 	fscanf(fp, "%d", &j);
 	for (i = 0; i < j; i++){
 		fscanf(fp, "%d", &loadInt);
-		fscanf(fp, "%d", loadInt2);
+		fscanf(fp, "%d", &loadInt2);
 		enemies[i] = lv1_pick_monster(loadInt2, loadInt);
 		fscanf(fp, "%d", &enemies[i]->Position[1][0]);
 		fscanf(fp, "%d", &enemies[i]->Position[1][1]);
