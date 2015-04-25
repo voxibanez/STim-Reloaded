@@ -96,11 +96,15 @@
     <Text Include="Orc.txt" />
     <Text Include="Player.txt" />
     <Text Include="Potion.txt" />
+    <Text Include="Save.txt" />
     <Text Include="Skeleton.txt" />
     <Text Include="Troll.txt" />
     <Text Include="Unknown.txt" />
     <Text Include="Wsword.txt" />
     <Text Include="Wclub.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Save.s" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -13,7 +13,7 @@
 
 
 
-void titleScreen();
+int titleScreen(Player user);
 void setWindow();
 void battleSequence(Enemy en, Player user);
 
@@ -53,6 +53,15 @@ void useItem(Player user, ItemPtr it);
 
 void playerStats(Player user);
 
+void findSaveFile(Player user);
+
+void saveGame(Player user);
+
+void loadGame(Player user);
+
+void initGame(Player mainChar);
+
+
 char screen[20][80] = { { 176 } };
 int playerPosition[2][2] = { 0 };
 int screenCounter;
@@ -60,9 +69,13 @@ char ground;
 char*** characters;
 char** playerSprite;
 Enemy* enemies;
+int enemiesSize;
 WeaponPtr* weapons;
+int weaponSize;
 PotionPtr* potions;
+int potionsSize;
 SalesMan storeman;
+char** title;
 
 HANDLE wHnd;    // Handle to write to the console.
 HANDLE rHnd;    // Handle to read from the console.
@@ -73,62 +86,86 @@ int main(int argc, char* argv[]){
 	Player mainChar = malloc(sizeof(PlayerSize));
 	ItemPtr tempItem;
 	char key_code;
-	boxes = initAnimation(80, 20, 80);
+
+	enemies = malloc(sizeof(Enemy) * 3);
+	for (i = 0; i < 3; i++)
+		enemies[i] = NULL;
+		
+
+	mainChar->INVENTORY = malloc(sizeof(Inventory));
+	mainChar->INVENTORY->head = malloc(sizeof(Item));
+	mainChar->INVENTORY->head = NULL;
+	mainChar->INVENTORY->size = 0;
+
+	mainChar->weaponLeft = malloc(sizeof(Weapon));
+	mainChar->weaponRight = malloc(sizeof(Weapon));
+
 	characters = malloc(5 * sizeof(char*));
-	characters[0] = loadArt("Unknown.txt");
+	weapons = malloc(sizeof(WeaponPtr*) * 7);
+	potions = malloc(sizeof(PotionPtr*) * 1);
 	
+	
+	
+
+	boxes = initAnimation(80, 20, 80);
+
+	for (i = 0; i < 20; i++){
+		for (j = 0; j < 80; j++)
+			screen[i][j] = ' ';
+	}
+
+
+	characters[0] = loadArt("Unknown.txt");
 	characters[1] = loadArt("Skeleton.txt");
 	characters[2] = loadArt("Goblin.txt");
 	characters[3] = loadArt("Orc.txt");
 	characters[4] = loadArt("Troll.txt");
-	
+
 	playerSprite = loadArt("Player.txt");
+
 	storeman = NULL;
-	mainChar->BATTLES = 1;
-	
 
-	//mainChar->INVENTORY->size = 0;
-
-
-
+<<<<<<< HEAD
 	weapons = malloc(sizeof(WeaponPtr*) * 7);
 
 	weapons[0] = initWeapon("Empty", 0.0,0.0, 0.0, 1.0, 100, 1,"Nothing to see here",NULL);
+=======
+	weapons[0] = initWeapon("Empty", 0.0, 0.0, 1.0, 100, 1, "Nothing to see here", NULL);
+>>>>>>> origin/master
 	weapons[0]->picture = loadArt("Unknown.txt");
 	weapons[1] = initWeapon("Wooden Sword", 1.0, 1.2, 0.85, 1.15, 90, 1, "The strongest of all wooden swords", NULL);
 	weapons[1]->picture = loadArt("Wsword.txt");
+<<<<<<< HEAD
 	weapons[2] = initWeapon("Fire Rune", 2.0, 1.4, 0.9, 1.1, 70, 0,"Kindle your flame",NULL);
 	weapons[2]->picture = loadArt("Firune.txt");
 	weapons[3] = initWeapon("Wood Club", 3.0, 1.0, 0.8, 1.2, 80, 1,"Politics is the skilled use of blunt objects",NULL);
 	weapons[3]->picture = loadArt("Wclub.txt");
 	weapons[4] = initWeapon("Chipped Dagger", -1.0, 1.1, 0.95, 1.05, 75, 1,"Excellent for spreading butter",NULL);
+=======
+	weapons[2] = initWeapon("Fire Rune", 2.0, 0.8, 1.2, 70, 0, "Kindle your flame", NULL);
+	weapons[2]->picture = loadArt("Firune.txt");
+	weapons[3] = initWeapon("Wood Club", 3.0, 0.6, 1.4, 80, 1, "Politics is the skilled use of blunt objects", NULL);
+	weapons[3]->picture = loadArt("Wclub.txt");
+	weapons[4] = initWeapon("Chipped Dagger", -1.0, 0.9, 1.1, 70, 1, "Excellent for spreading butter", NULL);
+>>>>>>> origin/master
 	weapons[4]->picture = loadArt("Cdagger.txt");
 	weapons[5] = initWeapon("Lightning Rune", 2.0, 1.4, 0.9, 1.1, 70, 0, "ZZZZZP", NULL);
 	weapons[5]->picture = loadArt("Lrune.txt");
 	weapons[6] = initWeapon("Frost Rune", 2.0, 1.4, 0.9, 1.1, 70, 0, "Death is a dish best served cold", NULL);
 	weapons[6]->picture = loadArt("Frrune.txt");
+	weaponSize = 7;
 
-	
-
-	potions = malloc(sizeof(PotionPtr*) * 1);
-	potions[0] = initPotion("Potion",0,5,0,0,0,0,0,0,"A Simple Healing Potion","Potion.txt");
+	potions[0] = initPotion("Potion", 0, 5, 0, 0, 0, 0, 0, 0, "A Simple Healing Potion", "Potion.txt");
 	potions[0]->picture = loadArt("Potion.txt");
+	potionsSize = 1;
 	//PotionPtr initPotion(char* name, int MAXHPRAISE, int HPRAISE, int ATKRAISE, int DEFRAISE, int MATKRAISE, int MDEFRAISE, int ACCRAISE, int LCKRAISE);
-
-
-
-	mainChar->weaponLeft = weapons[4];
-	mainChar->weaponRight = weapons[0];
 
 	//tempItem->POTION = potions[0];
 	//tempItem->QUANTITY = 2;
-	
 
 	srand(time(NULL));
 
-	enemies = malloc(sizeof(Enemy) * 3);
-	for (i = 0; i < 3; i++)
-		enemies[i] = NULL;
+
 
 
 	for (i = 0; i < 79; i++)
@@ -143,8 +180,6 @@ int main(int argc, char* argv[]){
 				boxes->frames[i][10 + i][j] = 219;
 				boxes->frames[i][10 - i][j] = 219;
 			}
-
-
 		}
 		if (i < 10)
 		{
@@ -166,40 +201,48 @@ int main(int argc, char* argv[]){
 		boxes->speed = 1;
 	}
 
-
 	setWindow();
+	initGame(mainChar);
 	system("cls");
 	getch();
-	titleScreen();
-	system("cls");
 
-	character_select(mainChar);
-	mainChar->INVENTORY = malloc(sizeof(Inventory));
-	mainChar->INVENTORY->head = malloc(sizeof(Item));
-	mainChar->INVENTORY->head = NULL;
-	mainChar->INVENTORY->size = 0;
-	system("cls");
-	printf("\n\n\n\n\t\t\t%s, Your journey begins here...\n", mainChar->NAME);
-	Sleep(1000);
-	system("cls");
+	if (titleScreen(mainChar) == 0){
+		system("cls");
+
+		mainChar->BATTLES = 1;
+		mainChar->weaponLeft = weapons[4];
+		mainChar->weaponRight = weapons[0];
+
+		character_select(mainChar);
+
+
+		system("cls");
+		printf("\n\n\n\n\t\t\t%s, Your journey begins here...\n", mainChar->NAME);
+		Sleep(1000);
+		system("cls");
+
+		tempItem = malloc(sizeof(Item));
+		tempItem->POTION = potions[0];
+		tempItem->QUANTITY = 3;
+		tempItem->next = NULL;
+
+		addItem(mainChar, potions[0], 3, NULL);
+		addItem(mainChar, potions[0], 3, NULL);
+		addItem(mainChar, NULL, 1, weapons[2]);
+		addItem(mainChar, NULL, 1, weapons[3]);
+		addItem(mainChar, NULL, 1, weapons[4]);
+		addItem(mainChar, NULL, 1, weapons[6]);
+
+	}
+	else
+	{
+		system("cls");
+		printf("\n\n\n\n\t\t\tWelcome back %s...\n", mainChar->NAME);
+		Sleep(1000);
+		system("cls");
+	}
 	srand(time(NULL));
 	ground = 176;
-
-
-
-	tempItem = malloc(sizeof(Item));
-	tempItem->POTION = potions[0];
-	tempItem->QUANTITY = 3;
-	tempItem->next = NULL;
-
-	addItem(mainChar, potions[0],3,NULL);
-	addItem(mainChar, potions[0], 3,NULL);
-	addItem(mainChar, NULL, 1, weapons[2]);
-	addItem(mainChar, NULL, 1, weapons[3]);
-	addItem(mainChar, NULL, 1, weapons[4]);
-	addItem(mainChar, NULL, 1, weapons[6]);
-	
-
 
 	for (i = 0; i < 20; i++)
 		screen[i][79] = NULL;
@@ -213,6 +256,7 @@ int main(int argc, char* argv[]){
 
 	warriornextlevel(mainChar);
 	updatePlayerPosition(mainChar);
+	moveSalesman(storeman, mainChar);
 	updateScreen();
 
 	while (1){
@@ -254,12 +298,15 @@ int main(int argc, char* argv[]){
 
 }
 
-void titleScreen(){
-	int i, j;
+int titleScreen(Player user){
+	int i, j,k;
 	char animation[51] = { ' ' };
+	char cursor[3];
+	char temp[64];
+	int key_code = 0;
 
 	animation[50] = NULL;
-
+	
 	for (i = 0; i < 20; i++){
 		animation[25 - i] = '-';
 		animation[25 + i] = '-';
@@ -271,8 +318,58 @@ void titleScreen(){
 		if (i < 19)
 			system("cls");
 	}
-	printf("\t\tPress Any Key To Continue...\n");
-	getch();
+	system("cls");
+
+	
+	sprintf(temp, "Start");
+	for (j = 0; j < strlen(temp); j++){
+		screen[10][j + 31] = temp[j];
+	}
+	sprintf(temp, "Load");
+	for (j = 0; j < strlen(temp); j++){
+		screen[10][j + 41] = temp[j];
+	}
+	cursor[0] = 10;
+	cursor[1] = 30;
+	cursor[2] = 0;
+
+	screen[cursor[0]][cursor[1]] = 219;
+
+	updateScreen();
+
+	while (key_code != 13){
+		key_code = getch();
+
+		if (key_code == 'a' && cursor[1] >= 31){
+			screen[cursor[0]][cursor[1]] = ' ';
+			cursor[1] -= 10;
+			cursor[2] --;
+		}
+		if (key_code == 'd' && (cursor[1] < 31)){
+			if (!(cursor[0]>13))
+			{
+				screen[cursor[0]][cursor[1]] = ' ';
+				cursor[1] += 10;
+				cursor[2] ++;
+			}
+		}
+		if (key_code == 13){
+			switch (cursor[2]){
+			case 0:
+				return 0;
+				break;
+			case 1:
+				loadGame(user);
+				return 1;
+				break;
+			}
+		}
+		else
+			screen[cursor[0]][cursor[1]] = 219;
+		updateScreen();
+	}
+	//printf("\t\tPress Any Key To Continue...\n");
+	//getch();
 	system("cls");
 }
 
@@ -320,7 +417,7 @@ void updatePlayerPosition(Player user){
 	if (rand() % 20 == 0){
 		for (i = 0; i < 3; i++){
 			if (enemies[i] == NULL){
-				enemies[i] = lv1_pick_monster();
+				enemies[i] = lv1_pick_monster((rand() % 4));
 				break;
 			}
 
@@ -766,6 +863,7 @@ void menuGraphics(Player user){
 					playerStats(user);
 					break;
 				case 2:
+					findSaveFile(user);
 					break;
 				}
 				screen[cursor[0]][cursor[1]] = 219;
@@ -1240,7 +1338,6 @@ void itemBox(Player user,ItemPtr it,int* exit,int* removedItem){
 		return;
 	}
 
-
 PotionPtr initPotion(char* NAME, int MAXHPRAISE, int HPRAISE, int ATKRAISE, int DEFRAISE, int MATKRAISE, int MDEFRAISE, int ACCRAISE, int LCKRAISE, char* DESCRIPTION,char* fileName){
 	int i;
 	PotionPtr temp = malloc(sizeof(Potion));
@@ -1480,4 +1577,246 @@ void playerStats(Player user){
 	printf("Press any key to exit...");
 	getch();
 
+}
+
+void findSaveFile(Player user){
+	int i, j, k;
+	char temp[64];
+	int key_code = 0;
+	char cursor[3];
+	char tempScreen[20][80];
+
+	if (fopen("Save.s", "r") != NULL)
+	{
+		for (i = 0; i < 20; i++){
+			for (j = 0; j < 80; j++)
+				screen[i][j] = ' ';
+		}
+		sprintf(temp, "There is already a save file, would you like to overwrite?");
+		for (j = 0; j < strlen(temp); j++){
+			screen[3][j + 11] = temp[j];
+		}
+		sprintf(temp, "Yes");
+		for (j = 0; j < strlen(temp); j++){
+			screen[10][j + 21] = temp[j];
+		}
+		sprintf(temp, "No");
+		for (j = 0; j < strlen(temp); j++){
+			screen[10][j + 31] = temp[j];
+		}
+		cursor[0] = 10;
+		cursor[1] = 20;
+		cursor[2] = 0;
+
+		screen[cursor[0]][cursor[1]] = 219;
+
+		updateScreen();
+
+		while (key_code != 13 && key_code != 27){
+			key_code = getch();
+
+			if (key_code == 'a' && cursor[1] >= 21){
+				screen[cursor[0]][cursor[1]] = ' ';
+				cursor[1] -= 10;
+				cursor[2] --;
+			}
+			if (key_code == 'd' && (cursor[1] < 21)){
+				if (!(cursor[0]>13))
+				{
+					screen[cursor[0]][cursor[1]] = ' ';
+					cursor[1] += 10;
+					cursor[2] ++;
+				}
+			}
+			if (key_code == 13){
+				switch (cursor[2]){
+				case 0:
+					saveGame(user);
+					break;
+				case 1:
+					break;
+				}
+				for (i = 0; i < 20; i++){
+					for (j = 0; j < 80; j++){
+						screen[i][j] = tempScreen[i][j];
+					}
+				}
+			}
+			else
+				screen[cursor[0]][cursor[1]] = 219;
+			updateScreen();
+		}
+	}
+	else{
+		saveGame(user);
+	}
+
+}
+
+void saveGame(Player user){
+	FILE* fp;
+	ItemPtr temp = user->INVENTORY->head;
+	int i,j;
+	printf("Saving...\n\n");
+
+
+	fp = fopen("Save.s", "w");
+
+	fprintf(fp, "%s\n", user->NAME);
+	
+	fprintf(fp,"%d\n", user->CLASS);
+	fprintf(fp,"%d\n", user->ATK);
+	fprintf(fp,"%d\n", user->DEF);
+	fprintf(fp, "%d\n", user->ACC);
+	fprintf(fp, "%d\n", user->LCK);
+	fprintf(fp, "%d\n", user->MATK);
+	fprintf(fp, "%d\n", user->MDEF);
+	fprintf(fp, "%d\n", user->HP);
+	fprintf(fp, "%d\n", user->MAXHP);
+	fprintf(fp, "%d\n", user->BATTLES);
+	fprintf(fp, "%d\n", user->CURRENCY);
+	fprintf(fp, "%d\n", user->Position[1][0]);
+	fprintf(fp, "%d\n", user->Position[1][1]);
+	fprintf(fp, "%s\n", user->weaponLeft->NAME);
+	fprintf(fp, "%s\n", user->weaponRight->NAME);
+	fprintf(fp, "%d\n", user->INVENTORY->size);
+
+
+	for (i = 0; i < user->INVENTORY->size; i++){
+		if (temp->POTION != NULL){
+			fprintf(fp, "Potion\n");
+			fprintf(fp, "%s\n%d\n", temp->POTION->NAME, temp->QUANTITY);
+		}
+		else if (temp->WEAPON != NULL){
+			fprintf(fp, "Weapon\n");
+			fprintf(fp, "%s\n%d\n", temp->WEAPON->NAME, temp->QUANTITY);
+		}
+		temp = temp->next;
+	}
+	j = 0;
+	for (i = 0; i < 3; i++){
+		if (enemies[i] != NULL)
+			j++;
+	}
+	fprintf(fp, "%d\n", j);
+	for (i = 0; i < 3; i++){
+		if (enemies[i] != NULL){
+			fprintf(fp, "%d\n", enemies[i]->index);
+			fprintf(fp, "%d\n", enemies[i]->LEVEL);
+			fprintf(fp, "%d\n", enemies[i]->Position[1][0]);
+			fprintf(fp, "%d\n", enemies[i]->Position[1][1]);
+		}
+	}
+	if (storeman == NULL)
+		fprintf(fp, "0\n");
+	else{
+		fprintf(fp, "1\n");
+		fprintf(fp, "%d\n", storeman->Position[1][0]);
+		fprintf(fp, "%d\n", storeman->Position[1][1]);
+	}
+
+	fclose(fp);
+
+	
+	Sleep(1000);
+	printf("Save complete");
+}
+
+void loadGame(Player user){
+	FILE* fp;
+	ItemPtr temp = user->INVENTORY->head;
+	int loadInt,tempSize;
+	char loadChar[64];
+	int i, j;
+
+	printf("Loading...\n");
+	fp = fopen("Save.s", "r");
+
+	fscanf(fp, "%s", user->NAME);
+
+	fscanf(fp, "%d", &user->CLASS);
+	fscanf(fp, "%d", &user->ATK);
+	fscanf(fp, "%d", &user->DEF);
+	fscanf(fp, "%d", &user->ACC);
+	fscanf(fp, "%d", &user->LCK);
+	fscanf(fp, "%d", &user->MATK);
+	fscanf(fp, "%d", &user->MDEF);
+	fscanf(fp, "%d", &user->HP);
+	fscanf(fp, "%d", &user->MAXHP);
+	fscanf(fp, "%d", &user->BATTLES);
+	fscanf(fp, "%d", &user->CURRENCY);
+	fscanf(fp, "%d", &user->Position[1][0]);
+	fscanf(fp, "%d", &user->Position[1][1]);
+
+
+	fgets(loadChar, 10, fp);
+	fgets(loadChar, 64, fp);
+	for (j = 0; j < weaponSize; j++){
+		if (strncmp(weapons[j]->NAME, loadChar, strlen(weapons[j]->NAME)) == 0)
+			user->weaponLeft = weapons[j];
+	}
+	fgets(loadChar, 64, fp);
+	for (j = 0; j < weaponSize; j++){
+		if (strncmp(weapons[j]->NAME, loadChar, strlen(weapons[j]->NAME)) == 0)
+			user->weaponRight = weapons[j];
+	}
+
+	fscanf(fp, "%d", &tempSize);
+
+	
+	user->INVENTORY->size = 0;
+
+	for (i = 0; i < tempSize; i++){
+		//fgets(loadChar, 64, fp);
+		fscanf(fp,"%s%*c",loadChar);
+		if (strcmp(loadChar,"Potion",1) == 0){
+			fgets(loadChar, 64, fp);
+			fscanf(fp, "%d", &loadInt);
+
+			for (j = 0; j < potionsSize; j++){
+				if (strncmp(potions[j]->NAME, loadChar, strlen(potions[j]->NAME)) == 0)
+					addItem(user, potions[j], loadInt, NULL);
+			}
+		}
+			
+		else if (strcmp(loadChar, "Weapon", 1) == 0){
+			fgets(loadChar, 64, fp);
+			fscanf(fp, "%d", &loadInt);
+
+			for (j = 0; j < weaponSize; j++){
+				if (strncmp(weapons[j]->NAME, loadChar, strlen(weapons[j]->NAME)) == 0)
+					addItem(user, NULL, loadInt, weapons[j]);
+			}
+		}
+	}
+
+	
+	fscanf(fp, "%d", &j);
+	for (i = 0; i < j; i++){
+		fscanf(fp, "%d", &loadInt);
+		enemies[i] = lv1_pick_monster(loadInt);
+		
+		fscanf(fp, "%d", &enemies[i]->LEVEL);
+		fscanf(fp, "%d", &enemies[i]->Position[1][0]);
+		fscanf(fp, "%d", &enemies[i]->Position[1][1]);
+		}
+	
+	fscanf(fp, "%d", &loadInt);
+	if (loadInt == 1){
+		storeman = malloc(sizeof(SalesManSize));
+		fscanf(fp, "%d", &storeman->Position[1][0]);
+		fscanf(fp, "%d", &storeman->Position[1][1]);
+		storeman->Position[0][0] = storeman->Position[1][0];
+		storeman->Position[0][1] = storeman->Position[1][1];
+	}
+	fclose(fp);
+
+}
+
+void initGame(Player mainChar){
+	int i, j, k, l;
+	
+	
+	
+	
 }

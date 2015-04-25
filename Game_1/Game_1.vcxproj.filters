@@ -79,5 +79,13 @@
     <Text Include="Cdagger.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="Save.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Save.s">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
