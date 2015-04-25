@@ -38,7 +38,7 @@ void your_attack(Enemy en, Player user);
 void enemy_attack(Enemy en, Player user);
 void encounter(Enemy en, Player user, char** screen);
 void combat(void);
-void meditate(void);
+void stance(void);
 //work on meditate
 void clear_buffer(void);
 void skeleton(void);
@@ -416,7 +416,7 @@ void menu(void)
 		break;
 	case 4:
 		system("cls");
-		meditate();
+		stance();
 		break;
 	case 5:
 		system("cls");
@@ -886,7 +886,7 @@ void mage_reroll()
 			lv1drops();
 	}
 }
-void meditate(void)
+void stance(void)
 {
 	int i, answer;
 	printf("Every adventurer needs a well-earned rest. What shall you do?\n"
