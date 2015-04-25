@@ -13,6 +13,7 @@ typedef struct enemy{
 	int LCK;
 	int WMOD;
 	int drop_rareity;
+	int index;
 }EnemySize, *Enemy;
 
 typedef struct weapon{
@@ -24,6 +25,7 @@ typedef struct weapon{
 	int isPhysical;
 	char* DESCRIPTION;
 	char** picture;
+	int index;
 }Weapon, *WeaponPtr;
 
 typedef struct potion{

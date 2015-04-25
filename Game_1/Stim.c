@@ -33,7 +33,7 @@ void pickup_weapon(int*weapon);
 void pickup_potion();
 void pickup_misc(int * misc);
 //to make different potion types, just make an array and each space will represent a type
-Enemy lv1_pick_monster(void);
+Enemy lv1_pick_monster(int r);
 void your_attack(Enemy en, Player user);
 void enemy_attack(Enemy en, Player user);
 void encounter(Enemy en, Player user, char** screen);
@@ -126,9 +126,8 @@ int character_select(Player user)
 
 
 
-Enemy lv1_pick_monster(void)
+Enemy lv1_pick_monster(int r)
 {
-	int r = (rand() % 4);
 	Enemy temp = malloc(sizeof(EnemySize));
 	temp->NAME = malloc(sizeof(char) * 10);
 	temp->Position[0][0] = rand() % 20;
@@ -138,6 +137,7 @@ Enemy lv1_pick_monster(void)
 	enemy_level = 1;
 	temp->LEVEL = 1;
 	if (r == 0){
+		temp->index = 0;
 		temp->MAXHP = 8 + (.2*enemy_level);
 		temp->ATK = 6 + (.2*enemy_level);
 		temp->DEF = 1 + (.2*enemy_level);
@@ -151,6 +151,7 @@ Enemy lv1_pick_monster(void)
 		temp->drop_rareity = .5;
 	}
 	else if (r == 1){
+		temp->index = 1;
 		temp->MAXHP = 10 + (.2*enemy_level);
 		temp->ATK = 10 + (.2*enemy_level);
 		temp->DEF = 5 + (.2*enemy_level);
@@ -165,6 +166,7 @@ Enemy lv1_pick_monster(void)
 	}
 
 	else if (r == 2){
+		temp->index = 2;
 		temp->MAXHP = 12 + (.2*enemy_level);
 		temp->ATK = 12 + (.2*enemy_level);
 		temp->DEF = 6 + (.2*enemy_level);
@@ -178,6 +180,7 @@ Enemy lv1_pick_monster(void)
 		temp->drop_rareity = 1.5;
 	}
 	else if (r == 3){
+		temp->index = 3;
 		temp->MAXHP = 18 + (.2*enemy_level);
 		temp->ATK = 14 + (.2*enemy_level);
 		temp->DEF = 2 + (.2*enemy_level);
