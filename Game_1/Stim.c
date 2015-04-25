@@ -27,7 +27,6 @@ double DMG, eDMG, WMOD1, WMOD2, WMULT1, WMULT2;
 int isskeleton = 0, istroll = 0, isgoblin = 0, isorc = 0;
 int eHP, temp_eHP, eATK, eDEF, eMATK, eMDEF, eACC, eLCK, eWMOD, enemy_level = 1, enemy = 1, drop_rarity;
 void enemy_combat(Enemy en, Player user);
-void lv1drops(Player user);
 int drop_roll();
 void damage_range(Enemy en, Player user);
 void pickup_weapon(int*weapon);
