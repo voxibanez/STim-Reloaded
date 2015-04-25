@@ -45,7 +45,7 @@ PotionPtr initPotion(char* NAME, int MAXHPRAISE, int HPRAISE, int ATKRAISE, int 
 
 ItemPtr initItem(PotionPtr POTION, int QUANTITY, WeaponPtr WEAPON);
 
-void itemBox(Player user, ItemPtr it, int* exit);
+void itemBox(Player user, ItemPtr it, int* exit, int* removedItem);
 
 void inventoryGraphics(Player user);
 
@@ -796,6 +796,7 @@ void inventoryGraphics(Player user){
 	char* temp = malloc(sizeof(char)*64);
 	int key_code = 0;
 	int exit = 0;
+	int removedItem = 0;
 	int cursor[3];
 	ItemPtr tempItem;
 	tempItem;
@@ -812,6 +813,7 @@ void inventoryGraphics(Player user){
 	
 
 		do{
+			removedItem = 0;
 		tempItem = user->INVENTORY->head;
 		key_code = 0;
 		for (i = 0; i < 20; i++){
@@ -883,13 +885,15 @@ void inventoryGraphics(Player user){
 				cursor[1] -= 20;
 				cursor[2] --;
 			}
-			if (key_code == 'd' && (cursor[0] <  4 + 2 * ceil(user->INVENTORY->size / 2) && cursor[1] < 22 - (20 * (user->INVENTORY->size % 2)))){
-				screen[cursor[0]][cursor[1]] = ' ';
-				cursor[1] += 20;
-				cursor[2] ++;
+			if (key_code == 'd' && cursor[1]<20){
+				if (!(cursor[0] >= 3 + 2*round(user->INVENTORY->size/2.0) && cursor[1] >= 21 - (20 * (user->INVENTORY->size % 2)))){
+					screen[cursor[0]][cursor[1]] = ' ';
+					cursor[1] += 20;
+					cursor[2] ++;
+				}
 			}
-			if (key_code == 's' && !(cursor[0] == 3 + 2 * ceil(user->INVENTORY->size / 2) && cursor[1] >= 22 - (20 * (user->INVENTORY->size % 2)))){
-				if (!(cursor[0] == 5 + 2 * ceil(user->INVENTORY->size / 2)))
+			if (key_code == 's' && cursor[0] < 3 + 2*round(user->INVENTORY->size/2.0)){
+				if (!(cursor[0] >= 1 + 2 * round(user->INVENTORY->size / 2.0) && cursor[1] > 21 - (20 * (user->INVENTORY->size % 2))))
 				{
 					screen[cursor[0]][cursor[1]] = ' ';
 					cursor[0] += 2;
@@ -907,19 +911,38 @@ void inventoryGraphics(Player user){
 				for (i = 0; i < cursor[2]; i++){
 					tempItem = tempItem->next;
 				}
-				itemBox(user, tempItem,&exit);
+				itemBox(user, tempItem,&exit,&removedItem);
 				for (i = 0; i < 20; i++){
 					for (j = 0; j < 80; j++)
 						screen[i][j] = tempScreen[i][j];
 				}
 
+				if (cursor[2] + 1 > user->INVENTORY->size)
+				{
+
+					if (cursor[1] >= 20){
+						screen[cursor[0]][cursor[1]] = ' ';
+						cursor[1] -= 20;
+						cursor[2] --;
+					}
+					else if (cursor[0] > 5){
+						screen[cursor[0]][cursor[1]] = ' ';
+						cursor[0] -= 2;
+						cursor[2] -= 2;
+					}
+				}
+
 			}
-			screen[cursor[0]][cursor[1]] = 219;
+
+			
+			
+			}
+			//screen[cursor[0]][cursor[1]] = 219;
 
 
 			updateScreen();
 
-		}
+		
 	}while (key_code != 27 && exit == 0);
 	for (i = 0; i < 20; i++){
 		for (j = 0; j < 80; j++)
@@ -930,7 +953,7 @@ void inventoryGraphics(Player user){
 	return;
 }
 
-void itemBox(Player user,ItemPtr it,int* exit){
+void itemBox(Player user,ItemPtr it,int* exit,int* removedItem){
 		char* tempchar = malloc(sizeof(char)*64);
 		int cursor[3];
 		int i, j, k,tempInt;
@@ -1191,11 +1214,16 @@ void itemBox(Player user,ItemPtr it,int* exit){
 
 						if (it->QUANTITY != tempInt)
 							it->QUANTITY -= tempInt;
-						else
+						else{
+							*removedItem = 1;
 							removeItem(user, 1, it);
+						}
+							
 					}
-					else
+					else{
+						*removedItem = 1;
 						removeItem(user, 1, it);
+					}
 					break;
 				case 2:
 					key_code = 13;
@@ -1447,6 +1475,8 @@ void playerStats(Player user){
 		screen[12][j + 30] = temp[j];
 	updateScreen();
 	Sleep(100);
+
+	printf("Press any key to exit...");
 	getch();
 
 }

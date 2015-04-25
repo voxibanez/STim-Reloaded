@@ -49,6 +49,7 @@ void troll(void);
 void addItem(Player user, PotionPtr POTION, int QUANTITY, WeaponPtr);
 void removeItem(Player user, int quantity, ItemPtr it);
 int countPotions(Player user);
+//int saveGame(Player user);
 
 
 int main2(int argc, char* argv[])
