@@ -52,6 +52,7 @@ void inventoryGraphics(Player user);
 void useItem(Player user, ItemPtr it);
 
 void playerStats(Player user);
+
 char screen[20][80] = { { 176 } };
 int playerPosition[2][2] = { 0 };
 int screenCounter;
@@ -403,7 +404,6 @@ void updateEnemyPosition(Enemy* en, Player user){
 
 
 }
-
 
 void warriornextlevel(Player user)
 {
@@ -1034,9 +1034,6 @@ void itemBox(Player user,ItemPtr it,int* exit){
 				i++;
 
 			}
-
-
-
 			sprintf(tempchar, "%.20s", it->POTION->NAME);
 			for (i = 0; i < strlen(tempchar); i++)
 			{
@@ -1187,6 +1184,7 @@ void itemBox(Player user,ItemPtr it,int* exit){
 						do{
 							printf("How many would you like to throw away?: ");
 							scanf("%d", &tempInt);
+							clear_buffer();
 							if (tempInt <= 0 || tempInt > it->QUANTITY)
 								printf("\nInvalid choice, please select a number between 0 and %d\n", it->QUANTITY);
 						} while (tempInt <= 0 || tempInt > it->QUANTITY);
@@ -1345,5 +1343,110 @@ void useItem(Player User, ItemPtr it){
 		}
 
 void playerStats(Player user){
+	int i, j;
+	char temp[64];
+	char screenTemp[20][80];
+
+	for (i = 0; i < 20; i++){
+		for (j = 0; j < 80; j++)
+			screenTemp[i][j] = screen[i][j];
+	}
+	for (i = 0; i < 20; i++){
+		for (j = 0; j < 80; j++)
+			screen[i][j] = ' ';
+	}
+
+	for (i = 0; i < 20; i++){
+		for (j = 0; j < 20 && playerSprite[i][j] != '\0'; j++){
+			if (playerSprite[i][j] != '\n')
+				screen[i][j] = playerSprite[i][j];
+		}
+			
+		updateScreen();
+		Sleep(20);
+			
+	}
+	Sleep(100);
+
+	sprintf(temp,"%s", user->NAME);
+	for (j = 0; j < strlen(temp); j++)
+		screen[2][j+20] = temp[j];
+	updateScreen();
+	Sleep(100);
+
+	
+	switch (user->CLASS){
+	case 1:
+		sprintf(temp, "Warrior", user->CLASS);
+		break;
+	case 2:
+		sprintf(temp, "Cleric", user->CLASS);
+		break;
+	case 3:
+		sprintf(temp, "Mage", user->CLASS);
+		break;
+	case 4:
+		sprintf(temp, "Rouge", user->CLASS);
+		break;
+	}
+	for (j = 0; j < strlen(temp); j++)
+		screen[3][j + 20] = temp[j];
+	updateScreen();
+	Sleep(100);
+
+	sprintf(temp, "Attack: %d", user->ATK);
+	for (j = 0; j < strlen(temp); j++)
+		screen[4][j+30] = temp[j];
+	updateScreen();
+	Sleep(100);
+
+	sprintf(temp, "Defense: %d", user->DEF);
+	for (j = 0; j < strlen(temp); j++)
+		screen[5][j+30] = temp[j];
+	updateScreen();
+	Sleep(100);
+
+	sprintf(temp, "Accuracy: %d", user->ACC);
+	for (j = 0; j < strlen(temp); j++)
+		screen[6][j+30] = temp[j];
+	updateScreen();
+	Sleep(100);
+
+	sprintf(temp, "Max HP: %d", user->MAXHP);
+	for (j = 0; j < strlen(temp); j++)
+		screen[7][j+30] = temp[j];
+	updateScreen();
+	Sleep(100);
+
+	sprintf(temp, "Current HP: %d", user->HP);
+	for (j = 0; j < strlen(temp); j++)
+		screen[8][j + 30] = temp[j];
+	updateScreen();
+	Sleep(100);
+
+	sprintf(temp, "Luck: %d", user->LCK);
+	for (j = 0; j < strlen(temp); j++)
+		screen[9][j + 30] = temp[j];
+	updateScreen();
+	Sleep(100);
+
+	sprintf(temp, "Magic Attack: %d", user->MATK);
+	for (j = 0; j < strlen(temp); j++)
+		screen[10][j + 30] = temp[j];
+	updateScreen();
+	Sleep(100);
+
+	sprintf(temp, "Magic Defense: %d", user->MDEF);
+	for (j = 0; j < strlen(temp); j++)
+		screen[11][j + 30] = temp[j];
+	updateScreen();
+	Sleep(100);
+
+	sprintf(temp, "Currency: %d", user->CURRENCY);
+	for (j = 0; j < strlen(temp); j++)
+		screen[12][j + 30] = temp[j];
+	updateScreen();
+	Sleep(100);
+	getch();
 
 }
