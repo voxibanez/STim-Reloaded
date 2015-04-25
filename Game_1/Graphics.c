@@ -63,6 +63,8 @@ void initGame(Player mainChar);
 
 void hpBars(Player user, Enemy en);
 
+void lv1drops(Player user);
+
 
 char screen[20][80] = { { 176 } };
 int playerPosition[2][2] = { 0 };
@@ -412,7 +414,7 @@ void updatePlayerPosition(Player user){
 	if (rand() % 20 == 0){
 		for (i = 0; i < 3; i++){
 			if (enemies[i] == NULL){
-				enemies[i] = lv1_pick_monster((rand() % 4));
+				enemies[i] = lv1_pick_monster(user->BATTLES,(rand() % 4));
 				break;
 			}
 
@@ -1706,7 +1708,7 @@ void saveGame(Player user){
 void loadGame(Player user){
 	FILE* fp;
 	ItemPtr temp = user->INVENTORY->head;
-	int loadInt,tempSize;
+	int loadInt,tempSize,loadInt2;
 	char loadChar[64];
 	int i, j;
 
@@ -1778,9 +1780,8 @@ void loadGame(Player user){
 	fscanf(fp, "%d", &j);
 	for (i = 0; i < j; i++){
 		fscanf(fp, "%d", &loadInt);
-		enemies[i] = lv1_pick_monster(loadInt);
-		
-		fscanf(fp, "%d", &enemies[i]->LEVEL);
+		fscanf(fp, "%d", loadInt2);
+		enemies[i] = lv1_pick_monster(loadInt2, loadInt);
 		fscanf(fp, "%d", &enemies[i]->Position[1][0]);
 		fscanf(fp, "%d", &enemies[i]->Position[1][1]);
 		}
@@ -1853,4 +1854,29 @@ void hpBars(Player user, Enemy en){
 
 	}
 	updateScreen();
+}
+
+void lv1drops(Player user)
+{
+	int itm;
+	int choice;
+	int roll = drop_roll();
+	if (roll < 5)
+		printf("It dropped nothing!\n");
+	if (roll >= 5 && roll < 9)
+	{
+		itm = rand() % 5;
+		do{
+			updateScreen();
+			printf("Enemy dropped a %s\n", weapons[itm]->NAME);
+			printf("1)Pick up\n2)Leave there\n", weapons[itm]->NAME);
+			scanf("%d", &choice);
+			if (choice == 1){
+				addItem(user, NULL, 1, weapons[itm]);
+			}
+			clear_buffer();
+		} while (choice > 2 && choice < 1);
+		
+		
+	}
 }

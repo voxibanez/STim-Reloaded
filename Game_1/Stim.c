@@ -34,7 +34,7 @@ void pickup_weapon(int*weapon);
 void pickup_potion();
 void pickup_misc(int * misc);
 //to make different potion types, just make an array and each space will represent a type
-Enemy lv1_pick_monster(int r);
+Enemy lv1_pick_monster(int levelNum,int r);
 void your_attack(Enemy en, Player user);
 void enemy_attack(Enemy en, Player user);
 void encounter(Enemy en, Player user, char** screen);
@@ -128,7 +128,7 @@ int character_select(Player user)
 
 
 
-Enemy lv1_pick_monster(int r)
+Enemy lv1_pick_monster(int levelNum,int r)
 {
 	Enemy temp = malloc(sizeof(EnemySize));
 	temp->NAME = malloc(sizeof(char) * 10);
@@ -136,8 +136,8 @@ Enemy lv1_pick_monster(int r)
 	temp->Position[0][1] = rand() % 80;
 	temp->Position[1][0] = temp->Position[0][0];
 	temp->Position[1][1] = temp->Position[0][1];
-	enemy_level = 1;
-	temp->LEVEL = 1;
+	enemy_level = levelNum;
+	temp->LEVEL = enemy_level;
 	if (r == 0){
 		temp->index = 0;
 		temp->MAXHP = 8 + (.2*enemy_level);
@@ -231,6 +231,7 @@ void encounter(Enemy en, Player user, char** screen)
 		enemy_attack(en, user);
 		
 		if (en->HP <= 0){
+			user->BATTLES++;
 			updateScreen();
 			coins = en->MAXHP*user->LCK*(rand() % 3);
 			if (coins > 0){
@@ -322,13 +323,11 @@ void combat(Enemy en, Player user)
 		if (loss < 1)
 			loss = 1;
 		en->HP = en->HP - loss;
-<<<<<<< HEAD
+
 		printf("You delivered %d damage\n", loss);
 		if (r >= luck)
 			DMG /= 2;
-=======
-		printf("You delivered %d damage. Enemy is at %d HP\n", loss, en->HP);
->>>>>>> origin/master
+
 		if (user->CLASS == 4)
 		{
 			r = rand() % 100;
@@ -535,77 +534,7 @@ int drop_roll()
 	int bonus = floor(r - 1 + .2*LCK + drop_rarity);
 	return bonus;
 }
-void lv1drops(Player user)
-{
-	ismain_hand = 0, isoff_hand = 0, isarmor = 0;
-	int roll = drop_roll();
-	if (roll < 5)
-		printf("It dropped nothing!\n");
-	if (roll >= 5 && roll < 9)
-	{
-		ismain_hand = 1;
-		isoff_hand = 1;
-		printf("The enemy dropped a chipped dagger.\n\n\nDropped Item: Chipped Dagger (-1 ATK, 1.1 MOD)\n\n");
-		if (mage_roll == 1)
-			mage_reroll(user);
-		else if (mage_roll == 0)
-			pickup_weapon(chipped_dagger);
-	}
-	if (roll >= 9 && roll < 13)
-	{
-		ismain_hand = 1;
-		isoff_hand = 1;
-		printf("The enemy dropped a wood club.\n\n\nDropped Item: Wood Club (+3 ATK, 1 MOD)\n\n");
-		if (mage_roll == 1)
-			mage_reroll(user);
-		else if (mage_roll == 0)
-			pickup_weapon(wood_club);
-	}
-	if (roll >= 13 && roll < 18)
-	{
-		printf("It dropped a potion!\n");
-		if (mage_roll == 1)
-			mage_reroll(user);
-		else if (mage_roll == 0)
-			pickup_potion();
-	}
-	if (roll >= 18 && roll<22)
-	{
-		ismain_hand = 1;
-		isoff_hand = 1;
-		printf("It dropped a wooden sword!\n\n\nDropped Item: Wooden Sword (+0 ATK, 1.5 MOD)\n\n");
-		if (mage_roll == 1)
-			mage_reroll(user);
-		else if (mage_roll == 0)
-			pickup_weapon(wooden_sword);
-	}
-	if (roll >= 22 && roll<25)
-	{
-		ismain_hand = 1;
-		isoff_hand = 1;
-		printf("It dropped a fire rune!!\n\n\nDropped Item: Fire Rune (+2 MATK, 1.2 MOD)\n\n");
-		if (mage_roll == 1)
-			mage_reroll(user);
-		else if (mage_roll == 0)
-			pickup_weapon(fire_rune);
-	}
-	if (roll >= 25 && roll < 28)
-	{
-		printf("It dropped light armor!!!\n\n\nDropped Item: Light Armor (+1 DEF, +2 MDEF,+1 HP,+5 ACC)\n\n");
-		if (mage_roll == 1)
-			mage_reroll(user);
-		else if (mage_roll == 0)
-			pickup_misc(light_armor);
-	}
-	if (roll >= 28 && roll < 31)
-	{
-		printf("It dropped heavy armor!!!\n\n\nDropped Item: Heavy Armor (+2 DEF, +1 MDEF,+3HP)\n\n");
-		if (mage_roll == 1)
-			mage_reroll(user);
-		else if (mage_roll == 0)
-			pickup_misc(heavy_armor);
-	}
-}
+
 void pickup_weapon(int* weapon)
 {
 	int i, answer1, answer2, answer3;
