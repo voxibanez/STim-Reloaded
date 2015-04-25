@@ -119,7 +119,6 @@ void damage_range();
 void main_hand();
 void off_hand();
 void armor();
-void mage_reroll();
 double calc_dmg();
 void your_main_weapon();
 void your_off_weapon();
