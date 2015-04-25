@@ -125,29 +125,18 @@ int main(int argc, char* argv[]){
 
 	storeman = NULL;
 
-<<<<<<< HEAD
+
 	weapons = malloc(sizeof(WeaponPtr*) * 7);
 
 	weapons[0] = initWeapon("Empty", 0.0,0.0, 0.0, 1.0, 100, 1,"Nothing to see here",NULL);
-=======
-	weapons[0] = initWeapon("Empty", 0.0, 0.0, 1.0, 100, 1, "Nothing to see here", NULL);
->>>>>>> origin/master
 	weapons[0]->picture = loadArt("Unknown.txt");
 	weapons[1] = initWeapon("Wooden Sword", 1.0, 1.2, 0.85, 1.15, 90, 1, "The strongest of all wooden swords", NULL);
 	weapons[1]->picture = loadArt("Wsword.txt");
-<<<<<<< HEAD
 	weapons[2] = initWeapon("Fire Rune", 2.0, 1.4, 0.9, 1.1, 70, 0,"Kindle your flame",NULL);
 	weapons[2]->picture = loadArt("Firune.txt");
 	weapons[3] = initWeapon("Wood Club", 3.0, 1.0, 0.8, 1.2, 80, 1,"Politics is the skilled use of blunt objects",NULL);
 	weapons[3]->picture = loadArt("Wclub.txt");
 	weapons[4] = initWeapon("Chipped Dagger", -1.0, 1.1, 0.95, 1.05, 75, 1,"Excellent for spreading butter",NULL);
-=======
-	weapons[2] = initWeapon("Fire Rune", 2.0, 0.8, 1.2, 70, 0, "Kindle your flame", NULL);
-	weapons[2]->picture = loadArt("Firune.txt");
-	weapons[3] = initWeapon("Wood Club", 3.0, 0.6, 1.4, 80, 1, "Politics is the skilled use of blunt objects", NULL);
-	weapons[3]->picture = loadArt("Wclub.txt");
-	weapons[4] = initWeapon("Chipped Dagger", -1.0, 0.9, 1.1, 70, 1, "Excellent for spreading butter", NULL);
->>>>>>> origin/master
 	weapons[4]->picture = loadArt("Cdagger.txt");
 	weapons[5] = initWeapon("Lightning Rune", 2.0, 1.4, 0.9, 1.1, 70, 0, "ZZZZZP", NULL);
 	weapons[5]->picture = loadArt("Lrune.txt");
