@@ -138,7 +138,7 @@ int main(int argc, char* argv[]){
 
 	weapons[0] = initWeapon("Empty", 0.0,0.0, 0.0, 1.0, 100, 1,"Nothing to see here",NULL);
 	weapons[0]->picture = loadArt("Unknown.txt");
-	weapons[1] = initWeapon("Wooden Sword", 1.0, 1.2, 0.85, 1.15, 90, 1, "The strongest of all wooden swords", NULL);
+	weapons[1] = initWeapon("Wooden Sword", 1.0, 1.5, 0.85, 1.15, 90, 1, "The strongest of all wooden swords", NULL);
 	weapons[1]->picture = loadArt("Wsword.txt");
 	weapons[2] = initWeapon("Fire Rune", 2.0, 1.4, 0.9, 1.1, 70, 0,"Kindle your flame",NULL);
 	weapons[2]->picture = loadArt("Firune.txt");
