@@ -74,6 +74,7 @@ int main(int argc, char* argv[]){
 	boxes = initAnimation(80, 20, 80);
 	characters = malloc(5 * sizeof(char*));
 	characters[0] = loadArt("Unknown.txt");
+	
 	characters[1] = loadArt("Skeleton.txt");
 	characters[2] = loadArt("Goblin.txt");
 	characters[3] = loadArt("Orc.txt");
@@ -86,24 +87,26 @@ int main(int argc, char* argv[]){
 
 	//mainChar->INVENTORY->size = 0;
 
-	
 
 
 	weapons = malloc(sizeof(WeaponPtr*) * 7);
+	
 	weapons[0] = initWeapon("Empty", 0.0, 0.0, 1.0, 100, 1,"Nothing to see here",NULL);
 	weapons[0]->picture = loadArt("Unknown.txt");
-	weapons[1] = initWeapon("Wooden Sword", 0.0, 0.7, 1.3, 90, 1,"The strongest of all wooden swords",NULL);
-	weapons[1]->picture = loadArt("Wooden_sword.txt");
+	weapons[1] = initWeapon("Wooden Sword", 0.0, 0.7, 1.3, 90, 1, "The strongest of all wooden swords", NULL);
+	weapons[1]->picture = loadArt("Wsword.txt");
 	weapons[2] = initWeapon("Fire Rune", 2.0, 0.8, 1.2, 70, 0,"HOT",NULL);
-	weapons[2]->picture = loadArt("Fire_rune.txt");
+	weapons[2]->picture = loadArt("Firune.txt");
 	weapons[3] = initWeapon("Wood Club", 3.0, 0.6, 1.4, 80, 1,"Big stick",NULL);
-	weapons[3]->picture = loadArt("Wood_club.txt");
+	weapons[3]->picture = loadArt("Wclub.txt");
 	weapons[4] = initWeapon("Chipped Dagger", -1.0, 0.9, 1.1, 70, 1,"Sucks to suck",NULL);
-	weapons[4]->picture = loadArt("Chipped_dagger.txt");
-	//weapons[5] = initWeapon("Light Rune", -1.0, 0.9, 1.1, 70, 1, "ZZZZZP", NULL);
-	//weapons[5]->picture = loadArt("Light_rune.txt");
+	weapons[4]->picture = loadArt("Cdagger.txt");
+	weapons[5] = initWeapon("Light Rune", -1.0, 0.9, 1.1, 70, 1, "ZZZZZP", NULL);
+	weapons[5]->picture = loadArt("Lrune.txt");
 	weapons[6] = initWeapon("Frost Rune", -1.0, 0.9, 1.1, 70, 1, "Chilly...", NULL);
-	//weapons[6]->picture = loadArt("Frost_rune.txt");
+	weapons[6]->picture = loadArt("Frrune.txt");
+
+	
 
 	potions = malloc(sizeof(PotionPtr*) * 1);
 	potions[0] = initPotion("Potion",0,5,0,0,0,0,0,0,"A Simple Healing Potion","Potion.txt");

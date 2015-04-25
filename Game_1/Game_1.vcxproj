@@ -52,6 +52,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>\\psf\Home\Documents\STim-Reloaded\Game_1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -81,28 +82,25 @@
     <ClInclude Include="Stim.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Game_1.rc" />
+    <ClCompile Include="Graphics.c" />
+    <ClCompile Include="InventoryLinkedList.c" />
+    <ClCompile Include="Stim.c" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Chipped_dagger.txt" />
-    <Text Include="Fire_rune.txt" />
-    <Text Include="Frost_rune.txt" />
+    <Text Include="Cdagger.txt" />
+    <Text Include="Firune.txt" />
+    <Text Include="Frrune.txt" />
     <Text Include="Game_info.txt" />
     <Text Include="Goblin.txt" />
-    <Text Include="Light_rune.txt" />
+    <Text Include="Lrune.txt" />
     <Text Include="Orc.txt" />
     <Text Include="Player.txt" />
     <Text Include="Potion.txt" />
     <Text Include="Skeleton.txt" />
     <Text Include="Troll.txt" />
     <Text Include="Unknown.txt" />
-    <Text Include="Wooden_sword.txt" />
-    <Text Include="Wood_club.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Graphics.c" />
-    <ClCompile Include="InventoryLinkedList.c" />
-    <ClCompile Include="Stim.c" />
+    <Text Include="Wsword.txt" />
+    <Text Include="Wclub.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

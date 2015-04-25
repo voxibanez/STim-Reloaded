@@ -26,55 +26,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Game_1.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Game_info.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="Skeleton.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="Player.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="Orc.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="Goblin.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="Troll.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="Unknown.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="Potion.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="Fire_rune.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="Frost_rune.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="Wooden_sword.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="Wood_club.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="Chipped_dagger.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="Light_rune.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="Stim.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -84,5 +35,49 @@
     <ClCompile Include="InventoryLinkedList.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Game_info.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Goblin.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Orc.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Player.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Potion.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Skeleton.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Troll.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Unknown.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Wsword.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Firune.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Frrune.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Wclub.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Lrune.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Cdagger.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
