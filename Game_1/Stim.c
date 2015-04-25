@@ -311,7 +311,7 @@ void combat(Enemy en, Player user)
 		if (r >= luck)
 		{
 			printf("\nYou score a critical hit!\n");
-			DMG *= 2;
+			roll*=2;
 		}
 		//could implement critical modifier on weapons
 		if (user->weaponLeft->isPhysical == 1)
@@ -321,9 +321,13 @@ void combat(Enemy en, Player user)
 		if (loss < 1)
 			loss = 1;
 		en->HP = en->HP - loss;
+<<<<<<< HEAD
 		printf("You delivered %d damage\n", loss);
 		if (r >= luck)
 			DMG /= 2;
+=======
+		printf("You delivered %d damage. Enemy is at %d HP\n", loss, en->HP);
+>>>>>>> origin/master
 		if (user->CLASS == 4)
 		{
 			r = rand() % 100;
@@ -986,13 +990,15 @@ void damage_range(Enemy en,Player user)
 		min = floor(min*DMG);
 		max = ceil(max*DMG);
 		min -= en->DEF;
+		max -= en->DEF;
 	}
-	else
+	else if (user->weaponLeft->isPhysical == 0)
 	{
 		DMG = (user->MATK + user->weaponLeft->weaponMod)*user->weaponLeft->weaponMult;
 		min = floor(min*DMG);
 		max = ceil(max*DMG);
 		min -= en->MDEF;
+		max -= en->MDEF;
 	}
 	printf("Damage: %.0f - %.0f\n", min, max);
 	accuracy = (user->ACC + user->weaponLeft->AccMod) / 2;
