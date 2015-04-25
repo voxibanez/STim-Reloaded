@@ -74,7 +74,7 @@ int character_select(Player user)
 	i = scanf("%d", &pick);
 	pick = dumb_user(pick, up, low, i);
 	user->CLASS = pick;
-
+	user->CURRENCY = 200;
 	
 
 	switch (pick)
@@ -201,10 +201,8 @@ void enemy_attack(Enemy en, Player user)
 {
 	if (en->HP <= 0)
 	{
-		printf("\n\nYou have slain the monster, but the horde continues in its path of destruction\n\n\n");
+		printf("\n\nYou have slain the monster, but the horde continues in its path of destruction\n\n");
 		lv1drops(user);
-		isskeleton = 0, isgoblin = 0, istroll = 0, isorc = 0;
-		enemy_level += 1;
 	}
 	else
 	{
@@ -221,16 +219,32 @@ void encounter(Enemy en, Player user, char** screen)
 {
 	char temp[30];
 	int i;
+	int coins;
 
 	//surpise attack
 	for (;;)
 	{
 		clear_buffer();
+		hpBars(user, en);
 		your_attack(en, user);
-
+		hpBars(user, en);
 		enemy_attack(en, user);
-		if (en->HP <= 0)
+		
+		if (en->HP <= 0){
+			updateScreen();
+			coins = en->MAXHP*user->LCK*(rand() % 3);
+			if (coins > 0){
+				printf("Enemy killed, you found %d coins", coins);
+				user->CURRENCY += coins;
+			}
+			else
+				printf("Enemy killed", coins);
+		
+			printf("\n\nPress enter to continue...");
+			getch();
 			break;
+		}
+			
 		if (user->HP <= 0)
 		{
 			printf("\nYOU DIED\n\n\nHonor rank: %d\n", enemy_level);
@@ -245,7 +259,7 @@ void encounter(Enemy en, Player user, char** screen)
 void your_attack(Enemy en, Player user)
 {
 	int attack, i, up = 3, low = 1;
-	printf("HP: %d/%d\n(1) Basic Attack\n", user->HP, user->MAXHP);
+	printf("\n(1) Basic Attack\n\n");
 	damage_range(en,user);
 	printf("(2) Inventory\n");
 	i = scanf("%d", &attack);
@@ -308,7 +322,13 @@ void combat(Enemy en, Player user)
 		if (loss < 1)
 			loss = 1;
 		en->HP = en->HP - loss;
+<<<<<<< HEAD
+		printf("You delivered %d damage\n", loss);
+		if (r >= luck)
+			DMG /= 2;
+=======
 		printf("You delivered %d damage. Enemy is at %d HP\n", loss, en->HP);
+>>>>>>> origin/master
 		if (user->CLASS == 4)
 		{
 			r = rand() % 100;
@@ -362,7 +382,7 @@ void enemy_combat(Enemy en, Player user)
 		if (loss < 1)
 			loss = 1;
 		user->HP = user->HP - loss;
-		printf("Enemy delivered %d damage. You are at %d HP\n\n", loss, user->HP);
+		printf("Enemy delivered %d damage\n", loss);
 	}
 	Sleep(500);
 	printf("Press Enter To Continue...\n");
