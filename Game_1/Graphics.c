@@ -39,7 +39,7 @@ void menuGraphics(Player user);
 
 AnimationPtr initAnimation(frames, x, y);
 void initPlayer();
-WeaponPtr initWeapon(char* name, double weaponModMin, double weaponModMax, double attackMod, double AccMod, int isPhysical, char* DESCRIPTION, char* fileName);
+WeaponPtr initWeapon(char* name, double weaponMod, double weaponMult, double attackModMin, double attackModMax, double AccMod, int isPhysical, char* DESCRIPTION, char* fileName);
 
 PotionPtr initPotion(char* NAME, int MAXHPRAISE, int HPRAISE, int ATKRAISE, int DEFRAISE, int MATKRAISE, int MDEFRAISE, int ACCRAISE, int LCKRAISE, char* DESCRIPTION, char* fileName);
 
@@ -92,20 +92,20 @@ int main(int argc, char* argv[]){
 
 
 	weapons = malloc(sizeof(WeaponPtr*) * 7);
-	
-	weapons[0] = initWeapon("Empty", 0.0, 0.0, 1.0, 100, 1,"Nothing to see here",NULL);
+
+	weapons[0] = initWeapon("Empty", 0.0,0.0, 0.0, 1.0, 100, 1,"Nothing to see here",NULL);
 	weapons[0]->picture = loadArt("Unknown.txt");
-	weapons[1] = initWeapon("Wooden Sword", 0.0, 0.7, 1.3, 90, 1, "The strongest of all wooden swords", NULL);
+	weapons[1] = initWeapon("Wooden Sword", 1.0, 1.2, 0.85, 1.15, 90, 1, "The strongest of all wooden swords", NULL);
 	weapons[1]->picture = loadArt("Wsword.txt");
-	weapons[2] = initWeapon("Fire Rune", 2.0, 0.8, 1.2, 70, 0,"Kindle your flame",NULL);
+	weapons[2] = initWeapon("Fire Rune", 2.0, 1.4, 0.9, 1.1, 70, 0,"Kindle your flame",NULL);
 	weapons[2]->picture = loadArt("Firune.txt");
-	weapons[3] = initWeapon("Wood Club", 3.0, 0.6, 1.4, 80, 1,"Politics is the skilled use of blunt objects",NULL);
+	weapons[3] = initWeapon("Wood Club", 3.0, 1.0, 0.8, 1.2, 80, 1,"Politics is the skilled use of blunt objects",NULL);
 	weapons[3]->picture = loadArt("Wclub.txt");
-	weapons[4] = initWeapon("Chipped Dagger", -1.0, 0.9, 1.1, 70, 1,"Excellent for spreading butter",NULL);
+	weapons[4] = initWeapon("Chipped Dagger", -1.0, 1.1, 0.95, 1.05, 75, 1,"Excellent for spreading butter",NULL);
 	weapons[4]->picture = loadArt("Cdagger.txt");
-	weapons[5] = initWeapon("Lightning Rune", -1.0, 0.9, 1.1, 70, 1, "ZZZZZP", NULL);
+	weapons[5] = initWeapon("Lightning Rune", 2.0, 1.4, 0.9, 1.1, 70, 0, "ZZZZZP", NULL);
 	weapons[5]->picture = loadArt("Lrune.txt");
-	weapons[6] = initWeapon("Frost Rune", -1.0, 0.9, 1.1, 70, 1, "Death is a dish best served cold", NULL);
+	weapons[6] = initWeapon("Frost Rune", 2.0, 1.4, 0.9, 1.1, 70, 0, "Death is a dish best served cold", NULL);
 	weapons[6]->picture = loadArt("Frrune.txt");
 
 	
@@ -601,12 +601,13 @@ char** loadArt(char* filename){
 	return temp;
 }
 
-WeaponPtr initWeapon(char* name, double weaponMod, double attackModMin, double attackModMax, double AccMod, int isPhysical, char* DESCRIPTION,char* fileName){
+WeaponPtr initWeapon(char* name, double weaponMod,double weaponMult, double attackModMin, double attackModMax, double AccMod, int isPhysical, char* DESCRIPTION,char* fileName){
 	WeaponPtr temp;
 	temp = malloc(sizeof(Weapon));
 
 	temp->NAME = name;
 	temp->weaponMod = weaponMod;
+	temp->weaponMult = weaponMult;
 	temp->attackModMin = attackModMin;
 	temp->attackModMax = attackModMax;
 	temp->AccMod = AccMod;

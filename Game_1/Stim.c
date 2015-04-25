@@ -27,8 +27,9 @@ double DMG, eDMG, WMOD1, WMOD2, WMULT1, WMULT2;
 int isskeleton = 0, istroll = 0, isgoblin = 0, isorc = 0;
 int eHP, temp_eHP, eATK, eDEF, eMATK, eMDEF, eACC, eLCK, eWMOD, enemy_level = 1, enemy = 1, drop_rarity;
 void enemy_combat(Enemy en, Player user);
-void lv1drops();
+void lv1drops(Player user);
 int drop_roll();
+void damage_range(Enemy en, Player user);
 void pickup_weapon(int*weapon);
 void pickup_potion();
 void pickup_misc(int * misc);
@@ -197,7 +198,7 @@ void enemy_attack(Enemy en, Player user)
 	if (en->HP <= 0)
 	{
 		printf("\n\nYou have slain the monster, but the horde continues in its path of destruction\n\n\n");
-		lv1drops();
+		lv1drops(user);
 		isskeleton = 0, isgoblin = 0, istroll = 0, isorc = 0;
 		enemy_level += 1;
 	}
@@ -241,8 +242,8 @@ void your_attack(Enemy en, Player user)
 {
 	int attack, i, up = 3, low = 1;
 	printf("HP: %d/%d\n(1) Basic Attack\n", user->HP, user->MAXHP);
-	//damage_range();
-	printf("(2)Inventory\n");
+	damage_range(en,user);
+	printf("(2) Inventory\n");
 	i = scanf("%d", &attack);
 	attack = dumb_user(attack, up, low, i);
 	switch (attack)
@@ -265,18 +266,26 @@ void combat(Enemy en, Player user)
 {
 	updateScreen();
 	//system("cls");
-	int roll, min, max, loss;
-
+	int roll, loss, DMG;
+	double min, max;
+	int accuracy;
 	min = user->weaponLeft->attackModMin;
 	max = user->weaponLeft->attackModMax;
+	if (user->weaponLeft->isPhysical==1)
+		DMG = (user->ATK + user->weaponLeft->weaponMod)*user->weaponLeft->weaponMult;
+	else
+		DMG = (user->MATK + user->weaponLeft->weaponMod)*user->weaponLeft->weaponMult;
+	min = floor(min*DMG);
+	max = ceil(max*DMG);
 	//should I incorporate luck?
 	//damage range is taking into account DMG as the average damage
 	roll = max - min + 1;
-	roll = rand() % roll * 10;
+	roll = rand() % roll;
 	roll += min;
-	int r = rand() % 100, luck = floor(110 - user->LCK*1.2);
+	int r = rand() % 100, luck = floor(110 - (user->LCK*1.2));
 	r += 1;
-	if (r > user->ACC)
+	accuracy = (user->ACC + user->weaponLeft->AccMod)/2;
+	if (r > accuracy)
 		printf("You miss!\nEnemy is at %d HP\n", en->HP);
 	else
 	{
@@ -288,14 +297,14 @@ void combat(Enemy en, Player user)
 			DMG *= 2;
 		}
 		//could implement critical modifier on weapons
-		if (user->weaponLeft->isPhysical == 0)
-			loss = roll - en->MDEF;
-		else
+		if (user->weaponLeft->isPhysical == 1)
 			loss = roll - en->DEF;
+		else
+			loss = roll - en->MDEF;
 		if (loss < 1)
 			loss = 1;
 		en->HP = en->HP - loss;
-		printf("You delivered %d damage. Enemy is at %d HP  and you had a roll of: %d \n", loss, en->HP, roll);
+		printf("You delivered %d damage. Enemy is at %d HP\n", loss, en->HP);
 		if (r >= luck)
 			DMG /= 2;
 		if (user->CLASS == 4)
@@ -504,7 +513,7 @@ int drop_roll()
 	int bonus = floor(r - 1 + .2*LCK + drop_rarity);
 	return bonus;
 }
-void lv1drops()
+void lv1drops(Player user)
 {
 	ismain_hand = 0, isoff_hand = 0, isarmor = 0;
 	int roll = drop_roll();
@@ -516,7 +525,7 @@ void lv1drops()
 		isoff_hand = 1;
 		printf("The enemy dropped a chipped dagger.\n\n\nDropped Item: Chipped Dagger (-1 ATK, 1.1 MOD)\n\n");
 		if (mage_roll == 1)
-			mage_reroll();
+			mage_reroll(user);
 		else if (mage_roll == 0)
 			pickup_weapon(chipped_dagger);
 	}
@@ -526,7 +535,7 @@ void lv1drops()
 		isoff_hand = 1;
 		printf("The enemy dropped a wood club.\n\n\nDropped Item: Wood Club (+3 ATK, 1 MOD)\n\n");
 		if (mage_roll == 1)
-			mage_reroll();
+			mage_reroll(user);
 		else if (mage_roll == 0)
 			pickup_weapon(wood_club);
 	}
@@ -534,7 +543,7 @@ void lv1drops()
 	{
 		printf("It dropped a potion!\n");
 		if (mage_roll == 1)
-			mage_reroll();
+			mage_reroll(user);
 		else if (mage_roll == 0)
 			pickup_potion();
 	}
@@ -544,7 +553,7 @@ void lv1drops()
 		isoff_hand = 1;
 		printf("It dropped a wooden sword!\n\n\nDropped Item: Wooden Sword (+0 ATK, 1.5 MOD)\n\n");
 		if (mage_roll == 1)
-			mage_reroll();
+			mage_reroll(user);
 		else if (mage_roll == 0)
 			pickup_weapon(wooden_sword);
 	}
@@ -554,7 +563,7 @@ void lv1drops()
 		isoff_hand = 1;
 		printf("It dropped a fire rune!!\n\n\nDropped Item: Fire Rune (+2 MATK, 1.2 MOD)\n\n");
 		if (mage_roll == 1)
-			mage_reroll();
+			mage_reroll(user);
 		else if (mage_roll == 0)
 			pickup_weapon(fire_rune);
 	}
@@ -562,7 +571,7 @@ void lv1drops()
 	{
 		printf("It dropped light armor!!!\n\n\nDropped Item: Light Armor (+1 DEF, +2 MDEF,+1 HP,+5 ACC)\n\n");
 		if (mage_roll == 1)
-			mage_reroll();
+			mage_reroll(user);
 		else if (mage_roll == 0)
 			pickup_misc(light_armor);
 	}
@@ -570,7 +579,7 @@ void lv1drops()
 	{
 		printf("It dropped heavy armor!!!\n\n\nDropped Item: Heavy Armor (+2 DEF, +1 MDEF,+3HP)\n\n");
 		if (mage_roll == 1)
-			mage_reroll();
+			mage_reroll(user);
 		else if (mage_roll == 0)
 			pickup_misc(heavy_armor);
 	}
@@ -812,49 +821,7 @@ void isdual()
 	}
 	//this might be a huge nerf to accuracy
 }
-void damage_range(Player user)
-{
-	int min, max;
-	if (user->weaponLeft == "Wooden Sword")
-	{
-		//anywhere within 30% of DMG
-		min = DMG*.7;
-		max = DMG*1.3;
-	}
-	else if (ismace == 1)
-	{
-		//anywhere within 40% of DMG
-		min = DMG*.6;
-		max = DMG*1.4;
-	}
-	else if (isdagger == 1)
-	{
-		//anywhere within 10% of DMG
-		min = DMG*.9;
-		max = DMG*1.1;
-	}
-	else if (isrune == 1)
-	{
-		//anywhere within 20% of DMG
-		min = DMG*.8;
-		max = DMG*1.2;
-	}
-	if (is_magic_main == 1)
-	{
-		min -= eMDEF;
-		max -= eMDEF;
-	}
-	if (is_physical_main == 1)
-	{
-		min -= eDEF;
-		max -= eDEF;
-	}
-	if (min < 1)
-		min = 1;
-	if (max < 1)
-		max = 1;
-	printf("Damage: %d - %d \n", min, max);
-}
+
 void use_potion()
 {
 	system("cls");
@@ -873,10 +840,10 @@ void use_potion()
 		potions--;
 	}
 }
-void mage_reroll()
+void mage_reroll(Player user)
 {
 	int i, answer;
-	if (ismage == 1)
+	if (user->CLASS == 3)
 	{
 		clear_buffer();
 		printf("\nWould you like to pick it up?\n(1) Yes\n(2) No\n");
@@ -884,31 +851,20 @@ void mage_reroll()
 		answer = dumb_user(answer, 2, 1, i);
 		mage_roll = 0;
 		if (answer == 1)
-			lv1drops();
+			lv1drops(user);
 	}
 }
 void stance(void)
 {
 	int i, answer;
-	printf("Every adventurer needs a well-earned rest. What shall you do?\n"
-		"(1) Drink a potion\n(2) Dual Wield your weapons\n(3) Two-hand a weapon\n");
+	printf("You take time to ready yourself\n"
+		"(1) One Hand a weapon\n(2) Dual Wield your weapons\n(3) Two-hand a weapon\n");
 	i = scanf(" %d", &answer);
 	answer = dumb_user(answer, 3, 1, i);
 	switch (answer)
 	{
 	case 1:
-		if (potions == 0)
-			printf("You have no potions!\n");
-		else
-			printf("Drink up");
-		Sleep(1000);
-		printf(".");
-		Sleep(1000);
-		printf(".");
-		Sleep(1000);
-		printf(".");
-		Sleep(1000);
-		use_potion();
+		
 		break;
 	case 2:
 		isdual();
@@ -1000,4 +956,28 @@ int countPotions(Player user){
 	}
 
 	return i;
+}
+void damage_range(Enemy en,Player user)
+{ 
+	int accuracy;
+	double min, max;
+	min = user->weaponLeft->attackModMin;
+	max = user->weaponLeft->attackModMax;
+	if (user->weaponLeft->isPhysical == 1)
+	{
+		DMG = (user->ATK + user->weaponLeft->weaponMod)*user->weaponLeft->weaponMult;
+		min = floor(min*DMG);
+		max = ceil(max*DMG);
+		min -= en->DEF;
+	}
+	else
+	{
+		DMG = (user->MATK + user->weaponLeft->weaponMod)*user->weaponLeft->weaponMult;
+		min = floor(min*DMG);
+		max = ceil(max*DMG);
+		min -= en->MDEF;
+	}
+	printf("Damage: %.0f - %.0f\n", min, max);
+	accuracy = (user->ACC + user->weaponLeft->AccMod) / 2;
+	printf("Accuracy: %d%%\n", accuracy);
 }

@@ -18,6 +18,7 @@ typedef struct enemy{
 typedef struct weapon{
 	char* NAME;
 	double weaponMod;
+	double weaponMult;
 	double attackModMin;
 	double attackModMax;
 	double AccMod;
