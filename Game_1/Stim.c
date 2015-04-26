@@ -933,3 +933,68 @@ void damage_range(Enemy en,Player user)
 	accuracy = (user->ACC + user->weaponLeft->AccMod) / 2;
 	printf("Accuracy: %d%%\n", accuracy);
 }
+
+void addItemShop(SalesMan user, PotionPtr POTION, int QUANTITY, WeaponPtr WEAPON){
+	ItemPtr temp;
+	ItemPtr it = malloc(sizeof(Item));
+	int i;
+
+	it->POTION = POTION;
+	it->QUANTITY = QUANTITY;
+	it->WEAPON = WEAPON;
+	it->next = NULL;
+	it->prev = NULL;
+
+	if (user->INVENTORY->size == 0){
+		user->INVENTORY->head = it;
+		user->INVENTORY->size++;
+	}
+
+	else{
+		temp = user->INVENTORY->head;
+		for (i = 0; i < user->INVENTORY->size; i++){
+			if (it->POTION != NULL && temp->POTION != NULL){
+				if (it->POTION->NAME == temp->POTION->NAME){
+					temp->QUANTITY += it->QUANTITY;
+					return;
+				}
+			}
+			if (it->WEAPON != NULL && temp->WEAPON != NULL){
+				if (it->WEAPON->NAME == temp->WEAPON->NAME){
+					temp->QUANTITY += it->QUANTITY;
+					return;
+				}
+			}
+			temp = temp->next;
+		}
+		temp = user->INVENTORY->head;
+		for (i = 1; i < user->INVENTORY->size; i++)
+			temp = temp->next;
+		it->prev = temp;
+		temp->next = it;
+
+		user->INVENTORY->size++;
+	}
+}
+
+void removeItemShop(SalesMan user, int quantity, ItemPtr it){
+
+	//it->next = it->prev;
+	if (it->QUANTITY > 1){
+		it->QUANTITY--;
+	}
+	else{
+		if (it == user->INVENTORY->head)
+			user->INVENTORY->head = it->next;
+		else if (it->next == NULL)
+			it->prev = NULL;
+		else{
+			it->prev->next = it->next;
+			it->next->prev = it->prev;
+		}
+
+		user->INVENTORY->size--;
+
+		free(it);
+	}
+}

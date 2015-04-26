@@ -6,13 +6,13 @@
 8
 6
 12
-10
 11
-2
-200
-8
-28
-Chipped Dagger
+11
+9
+904
+6
+29
+OP Rune
 Empty
 5
 Potion
@@ -26,21 +26,15 @@ Wood Club
 1
 Weapon
 Chipped Dagger
-1
+2
 Weapon
 Frost Rune
 1
-3
 1
-2
-8
-42
-2
-2
-8
-45
-2
-2
-8
-12
 0
+9
+12
+41
+1
+6
+27

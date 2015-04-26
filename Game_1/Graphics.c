@@ -39,9 +39,9 @@ void menuGraphics(Player user);
 
 AnimationPtr initAnimation(frames, x, y);
 void initPlayer();
-WeaponPtr initWeapon(char* name, double weaponMod, double weaponMult, double attackModMin, double attackModMax, double AccMod, int isPhysical, char* DESCRIPTION, char* fileName);
+WeaponPtr initWeapon(char* name, double weaponMod, double weaponMult, double attackModMin, double attackModMax, double AccMod, int isPhysical, char* DESCRIPTION, char* fileName,int price);
 
-PotionPtr initPotion(char* NAME, int MAXHPRAISE, int HPRAISE, int ATKRAISE, int DEFRAISE, int MATKRAISE, int MDEFRAISE, int ACCRAISE, int LCKRAISE, char* DESCRIPTION, char* fileName);
+PotionPtr initPotion(char* NAME, int MAXHPRAISE, int HPRAISE, int ATKRAISE, int DEFRAISE, int MATKRAISE, int MDEFRAISE, int ACCRAISE, int LCKRAISE, char* DESCRIPTION, char* fileName,int price);
 
 ItemPtr initItem(PotionPtr POTION, int QUANTITY, WeaponPtr WEAPON);
 
@@ -65,6 +65,15 @@ void hpBars(Player user, Enemy en);
 
 void lv1drops(Player user);
 
+void Shop(Player user, SalesMan shopkeeper);
+
+void Buy(Player user, SalesMan shopkeeper);
+
+void Sell(Player user, SalesMan shopkeeper);
+
+void buyBox(Player user, SalesMan shopkeeper, ItemPtr it);
+
+void sellBox(Player user, SalesMan shopkeeper, ItemPtr it, int* exit, int* removedItem);
 
 char screen[20][80] = { { 176 } };
 int playerPosition[2][2] = { 0 };
@@ -73,11 +82,11 @@ char ground;
 char*** characters;
 char** playerSprite;
 Enemy* enemies;
-int enemiesSize;
+int enemiesSize = 0;
 WeaponPtr* weapons;
-int weaponSize;
+int weaponSize = 0;
 PotionPtr* potions;
-int potionsSize;
+int potionsSize = 0;
 SalesMan storeman;
 char** title;
 
@@ -129,36 +138,27 @@ int main(int argc, char* argv[]){
 
 	storeman = NULL;
 
-	weapons = malloc(sizeof(WeaponPtr*) * 7);
+	weapons = malloc(sizeof(WeaponPtr*) * 8);
 
-	weapons[0] = initWeapon("Empty", 0.0,0.0, 0.0, 1.0, 100, 1,"Nothing to see here",NULL);
-
-
+	weapons[0] = initWeapon("Empty", 0.0,0.0, 0.0, 1.0, 100, 1,"Nothing to see here",NULL,0);
 	weapons[0]->picture = loadArt("Unknown.txt");
-	weapons[1] = initWeapon("Wooden Sword", 1.0, 1.2, 0.85, 1.15, 90, 1, "The strongest of all wooden swords", NULL);
+	weapons[1] = initWeapon("Wooden Sword", 1.0, 1.5, 0.85, 1.15, 90, 1, "The strongest of all wooden swords", NULL,200);
 	weapons[1]->picture = loadArt("Wsword.txt");
-
-	weapons = malloc(sizeof(WeaponPtr*) * 7);
-
-	weapons[0] = initWeapon("Empty", 0.0,0.0, 0.0, 1.0, 100, 1,"Nothing to see here",NULL);
-	weapons[0]->picture = loadArt("Unknown.txt");
-	weapons[1] = initWeapon("Wooden Sword", 1.0, 1.5, 0.85, 1.15, 90, 1, "The strongest of all wooden swords", NULL);
-	weapons[1]->picture = loadArt("Wsword.txt");
-	weapons[2] = initWeapon("Fire Rune", 2.0, 1.4, 0.9, 1.1, 70, 0,"Kindle your flame",NULL);
+	weapons[2] = initWeapon("Fire Rune", 2.0, 1.4, 0.9, 1.1, 70, 0,"Kindle your flame",NULL,300);
 	weapons[2]->picture = loadArt("Firune.txt");
-	weapons[3] = initWeapon("Wood Club", 3.0, 1.0, 0.8, 1.2, 80, 1,"Politics is the skilled use of blunt objects",NULL);
+	weapons[3] = initWeapon("Wood Club", 3.0, 1.0, 0.8, 1.2, 80, 1,"Politics is the skilled use of blunt objects",NULL,600);
 	weapons[3]->picture = loadArt("Wclub.txt");
-	weapons[4] = initWeapon("Chipped Dagger", -1.0, 1.1, 0.95, 1.05, 75, 1,"Excellent for spreading butter",NULL);
+	weapons[4] = initWeapon("Chipped Dagger", -1.0, 1.1, 0.95, 1.05, 75, 1,"Excellent for spreading butter",NULL,100);
 	weapons[4]->picture = loadArt("Cdagger.txt");
-	weapons[5] = initWeapon("Lightning Rune", 2.0, 1.4, 0.9, 1.1, 70, 0, "ZZZZZP", NULL);
+	weapons[5] = initWeapon("Lightning Rune", 2.0, 1.4, 0.9, 1.1, 70, 0, "ZZZZZP", NULL,300);
 	weapons[5]->picture = loadArt("Lrune.txt");
-	weapons[6] = initWeapon("Frost Rune", 2.0, 1.4, 0.9, 1.1, 70, 0, "Death is a dish best served cold", NULL);
+	weapons[6] = initWeapon("Frost Rune", 2.0, 1.4, 0.9, 1.1, 70, 0, "Death is a dish best served cold", NULL,300);
 	weapons[6]->picture = loadArt("Frrune.txt");
-	weaponSize = 7;
+	weapons[7] = initWeapon("OP Rune", 99.0, 99.4, 99.9, 99.1, 990, 0, "Death is a dish best served OP", NULL, 300);
+	weapons[7]->picture = loadArt("Frrune.txt");
 
-	potions[0] = initPotion("Potion", 0, 5, 0, 0, 0, 0, 0, 0, "A Simple Healing Potion", "Potion.txt");
+	potions[0] = initPotion("Potion", 0, 5, 0, 0, 0, 0, 0, 0, "A Simple Healing Potion", "Potion.txt",50);
 	potions[0]->picture = loadArt("Potion.txt");
-	potionsSize = 1;
 
 	srand(time(NULL));
 
@@ -229,6 +229,7 @@ int main(int argc, char* argv[]){
 		addItem(mainChar, NULL, 1, weapons[3]);
 		addItem(mainChar, NULL, 1, weapons[4]);
 		addItem(mainChar, NULL, 1, weapons[6]);
+		addItem(mainChar, NULL, 1, weapons[7]);
 		warriornextlevel(mainChar);
 	}
 	else
@@ -681,7 +682,7 @@ char** loadArt(char* filename){
 	return temp;
 }
 
-WeaponPtr initWeapon(char* name, double weaponMod,double weaponMult, double attackModMin, double attackModMax, double AccMod, int isPhysical, char* DESCRIPTION,char* fileName){
+WeaponPtr initWeapon(char* name, double weaponMod,double weaponMult, double attackModMin, double attackModMax, double AccMod, int isPhysical, char* DESCRIPTION,char* fileName,int price){
 	WeaponPtr temp;
 	temp = malloc(sizeof(Weapon));
 
@@ -693,11 +694,20 @@ WeaponPtr initWeapon(char* name, double weaponMod,double weaponMult, double atta
 	temp->AccMod = AccMod;
 	temp->isPhysical = isPhysical;
 	temp->DESCRIPTION = DESCRIPTION;
+	temp->price = price;
+	temp->index = weaponSize;
+
+	weaponSize++;
 	return temp;
 }
 
 void moveSalesman(SalesMan storeman, Player user){
 	if (storeman != NULL && user != NULL){
+
+		if (user->Position[1][0] == storeman->Position[1][0] && user->Position[1][1] == storeman->Position[1][1]){
+			Shop(user, storeman);
+		}
+
 		int r = rand() % 4;
 		if (r == 0)
 			storeman->Position[1][1]++;
@@ -727,10 +737,7 @@ void moveSalesman(SalesMan storeman, Player user){
 		screen[storeman->Position[0][0]][storeman->Position[0][1]] = ground;
 		screen[storeman->Position[1][0]][storeman->Position[1][1]] = '$';
 
-		if (user->Position[1][0] == storeman->Position[1][0] && user->Position[1][1] == storeman->Position[1][1]){
-			printf("Welcome to my humble shop...\n\n");
-			getch();
-		}
+		
 
 
 		storeman->Position[0][0] = storeman->Position[1][0];
@@ -1321,7 +1328,7 @@ void itemBox(Player user,ItemPtr it,int* exit,int* removedItem){
 		return;
 	}
 
-PotionPtr initPotion(char* NAME, int MAXHPRAISE, int HPRAISE, int ATKRAISE, int DEFRAISE, int MATKRAISE, int MDEFRAISE, int ACCRAISE, int LCKRAISE, char* DESCRIPTION,char* fileName){
+PotionPtr initPotion(char* NAME, int MAXHPRAISE, int HPRAISE, int ATKRAISE, int DEFRAISE, int MATKRAISE, int MDEFRAISE, int ACCRAISE, int LCKRAISE, char* DESCRIPTION,char* fileName,int price){
 	int i;
 	PotionPtr temp = malloc(sizeof(Potion));
 
@@ -1336,7 +1343,10 @@ PotionPtr initPotion(char* NAME, int MAXHPRAISE, int HPRAISE, int ATKRAISE, int 
 	temp->ACCRAISE = ACCRAISE;
 	temp->LCKRAISE = LCKRAISE;
 	temp->DESCRIPTION = DESCRIPTION;
+	temp->price = price;
+	temp->index = potionsSize;
 
+	potionsSize++;
 	return temp;
 }
 
@@ -1814,14 +1824,14 @@ void hpBars(Player user, Enemy en){
 		screen[2][i + 10] = ' ';
 
 	for (i = 0; i <= 20; i++)
-		screen[1][i + 10] = ' ';
+		screen[0][i + 10] = ' ';
 
 	sprintf(temp, "Enemy Hp %d/%d",en->HP,en->MAXHP);
 	for (i = 0; i < strlen(temp); i++)
-		screen[1][i + 10] = temp[i];
+		screen[0][i + 10] = temp[i];
 	j = 0;
 
-	for (i = 0; i <= (((double)en->HP*100) / ((double)en->MAXHP*10))*2;i++){
+	for (i = 0; i <= (((double)en->HP*100) / ((double)en->MAXHP*10))*4;i++){
 
 		if (i % 2 == 1)
 			screen[2][j+10] = 177;
@@ -1832,18 +1842,30 @@ void hpBars(Player user, Enemy en){
 			
 	}
 
+	screen[2][31] = 186;
+	screen[2][9] = 186;
+	screen[1][9] = 201;
+	screen[3][9] = 200;
+
+	for (i = 0; i < 21; i++)
+		screen[3][i + 10] = 205;
+	screen[3][i + 10] = 188;
+	for (i = 0; i < 21; i++)
+		screen[1][i + 10] = 205;
+	screen[1][i + 10] = 187;
+
 	for (i = 0; i <= 20; i++)
-		screen[17][i + 20] = ' ';
+		screen[16][i + 20] = ' ';
 
 	for (i = 0; i <= 20; i++)
 		screen[18][i + 20] = ' ';
 
 	sprintf(temp, "Player Hp %d/%d", user->HP, user->MAXHP);
 	for (i = 0; i < strlen(temp); i++)
-		screen[17][i + 20] = temp[i];
+		screen[16][i + 20] = temp[i];
 	j = 0;
 
-	for (i = 0; i <= (((double)user->HP * 100) / ((double)user->MAXHP * 10)) * 2; i++){
+	for (i = 0; i <= (((double)user->HP * 100) / ((double)user->MAXHP * 10))*4; i++){
 
 		if (i % 2 == 1)
 			screen[18][j + 20] = 177;
@@ -1851,8 +1873,18 @@ void hpBars(Player user, Enemy en){
 			screen[18][j + 20] = 219;
 			j++;
 		}
-
 	}
+	screen[18][41] = 186;
+	screen[18][19] = 186;
+
+	screen[17][19] = 201;
+	screen[19][19] = 200;
+	for (i = 0; i < 21; i++)
+		screen[17][i + 20] = 205;
+	screen[17][i + 20] = 187;
+	for (i = 0; i < 21; i++)
+		screen[19][i + 20] = 205;
+	screen[19][i + 20] = 188;
 	updateScreen();
 }
 
@@ -1879,4 +1911,823 @@ void lv1drops(Player user)
 		
 		
 	}
+}
+
+void Shop(Player user, SalesMan shopkeeper){
+	int i, j, k;
+	char temp[64];
+	int cursor[3];
+	int key_code = 0;
+	char tempScreen[20][80];
+	
+
+	shopkeeper->INVENTORY = malloc(sizeof(Inventory));
+	shopkeeper->INVENTORY->size = 0;
+
+	for (i = 0; i < potionsSize; i++)
+		addItemShop(shopkeeper, potions[i], 5, NULL);
+
+	for (i = 1; i < weaponSize; i++)
+		addItemShop(shopkeeper, NULL, 1, weapons[i]);
+
+	for (i = 0; i < 20; i++){
+		for (j = 0; j < 80; j++){
+			tempScreen[i][j] = screen[i][j];
+			screen[i][j] = ' ';
+		}
+			
+	}
+	sprintf(temp, "Hello, welcome to my shop");
+	for (j = 0; j < strlen(temp); j++){
+		screen[3][j + 11] = temp[j];
+	}
+	sprintf(temp, "Buy");
+	for (j = 0; j < strlen(temp); j++){
+		screen[10][j + 21] = temp[j];
+	}
+	sprintf(temp, "Sell");
+	for (j = 0; j < strlen(temp); j++){
+		screen[10][j + 31] = temp[j];
+	}
+	sprintf(temp, "Talk");
+	for (j = 0; j < strlen(temp); j++){
+		screen[12][j + 21] = temp[j];
+	}
+	sprintf(temp, "Cancel");
+	for (j = 0; j < strlen(temp); j++){
+		screen[12][j + 31] = temp[j];
+	}
+	cursor[0] = 10;
+	cursor[1] = 20;
+	cursor[2] = 0;
+
+	screen[cursor[0]][cursor[1]] = 219;
+
+	updateScreen();
+
+	while (key_code != 13){
+		key_code = getch();
+
+		if (key_code == 'a' && cursor[1] >= 21){
+			screen[cursor[0]][cursor[1]] = ' ';
+			cursor[1] -= 10;
+			cursor[2] --;
+		}
+		if (key_code == 'w' && cursor[0] > 10){
+			screen[cursor[0]][cursor[1]] = ' ';
+			cursor[0] -= 2;
+			cursor[2] -=2;
+		}
+		if (key_code == 's' && cursor[0] < 12){
+			screen[cursor[0]][cursor[1]] = ' ';
+			cursor[0] += 2;
+			cursor[2] +=2;
+		}
+		if (key_code == 'd' && (cursor[1] < 21)){
+			if (!(cursor[0]>13))
+			{
+				screen[cursor[0]][cursor[1]] = ' ';
+				cursor[1] += 10;
+				cursor[2] ++;
+			}
+		}
+		if (key_code == 13){
+			switch (cursor[2]){
+			case 0:
+				Buy(user, shopkeeper);
+				break;
+			case 1:
+				break;
+			}
+			for (i = 0; i < 20; i++){
+				for (j = 0; j < 80; j++){
+					screen[i][j] = tempScreen[i][j];
+				}
+			}
+		}
+		else
+			screen[cursor[0]][cursor[1]] = 219;
+		updateScreen();
+	}
+}
+
+void Buy(Player user, SalesMan shopkeeper){
+	int i, j, k, l, m;
+	char tempScreen[20][80];
+	char tempScreen2[20][80];
+	char temp[64];
+	int key_code = 0;
+	int exit = 0;
+	int removedItem = 0;
+	int cursor[3];
+	ItemPtr tempItem;
+	tempItem;
+
+	for (i = 0; i < 20; i++){
+		for (j = 0; j < 80; j++)
+			tempScreen2[i][j] = screen[i][j];
+	}
+
+	cursor[0] = 5;
+	cursor[1] = 1;
+	cursor[2] = 0;
+
+
+
+	do{
+		removedItem = 0;
+		tempItem = shopkeeper->INVENTORY->head;
+		key_code = 0;
+		for (i = 0; i < 20; i++){
+			for (j = 0; j < 80; j++)
+				screen[i][j] = ' ';
+		}
+
+		i = 2;
+		k = 5;
+
+		for (l = 0; l < shopkeeper->INVENTORY->size; l++)
+		{
+			for (m = 0; m < 21; m++)
+				temp[m] = ' ';
+			if (tempItem->POTION != NULL){
+				sprintf(temp, "%.20s x%d", tempItem->POTION->NAME, tempItem->QUANTITY);
+			}
+			if (tempItem->WEAPON != NULL){
+				sprintf(temp, "%.20s x%d", tempItem->WEAPON->NAME, tempItem->QUANTITY);
+			}
+
+
+			for (j = 0; j < 20; j++){
+				if (temp[j] != NULL)
+					screen[k][i] = temp[j];
+				i++;
+			}
+
+			if (i > 39){
+				i = 2;
+				k += 2;
+			}
+			tempItem = tempItem->next;
+
+		}
+		updateScreen();
+
+		if (shopkeeper->INVENTORY->size < 1){
+			printf("Sorry, my inventory is empty...\n");
+			printf("Press ESC to exit");
+			key_code = getch();
+		}
+		else{
+
+			screen[cursor[0]][cursor[1]] = 219;
+
+			updateScreen();
+
+
+			key_code = getch();
+
+			if (key_code == 'w' && cursor[0] > 5){
+				screen[cursor[0]][cursor[1]] = ' ';
+				cursor[0] -= 2;
+				cursor[2] -= 2;
+			}
+			if (key_code == 'a' && cursor[1] >= 20){
+				screen[cursor[0]][cursor[1]] = ' ';
+				cursor[1] -= 20;
+				cursor[2] --;
+			}
+			if (key_code == 'd' && cursor[1] < 20){
+				if (!(cursor[0] >= 3 + 2 * round(shopkeeper->INVENTORY->size / 2.0) && cursor[1] >= 21 - (20 * (shopkeeper->INVENTORY->size % 2)))){
+					screen[cursor[0]][cursor[1]] = ' ';
+					cursor[1] += 20;
+					cursor[2] ++;
+				}
+			}
+			if (key_code == 's' && cursor[0] < 3 + 2 * round(user->INVENTORY->size / 2.0)){
+				if (!(cursor[0] >= 1 + 2 * round(shopkeeper->INVENTORY->size / 2.0) && cursor[1] > 21 - (20 * (shopkeeper->INVENTORY->size % 2))))
+				{
+					screen[cursor[0]][cursor[1]] = ' ';
+					cursor[0] += 2;
+					cursor[2] += 2;
+				}
+
+			}
+
+			if (key_code == 13){
+				for (i = 0; i < 20; i++){
+					for (j = 0; j < 40; j++)
+						tempScreen[i][j] = screen[i][j];
+				}
+				tempItem = shopkeeper->INVENTORY->head;
+				for (i = 0; i < cursor[2]; i++){
+					tempItem = tempItem->next;
+				}
+				buyBox(user, storeman, tempItem, &exit, &removedItem);
+				for (i = 0; i < 20; i++){
+					for (j = 0; j < 80; j++)
+						screen[i][j] = tempScreen[i][j];
+				}
+
+				if (cursor[2] + 1 > user->INVENTORY->size)
+				{
+
+					if (cursor[1] >= 20){
+						screen[cursor[0]][cursor[1]] = ' ';
+						cursor[1] -= 20;
+						cursor[2] --;
+					}
+					else if (cursor[0] > 5){
+						screen[cursor[0]][cursor[1]] = ' ';
+						cursor[0] -= 2;
+						cursor[2] -= 2;
+					}
+				}
+
+			}
+
+
+
+		}
+		//screen[cursor[0]][cursor[1]] = 219;
+
+
+		updateScreen();
+
+
+	} while (key_code != 27 && exit == 0);
+	for (i = 0; i < 20; i++){
+		for (j = 0; j < 80; j++)
+			screen[i][j] = tempScreen2[i][j];
+	}
+
+	return;
+}
+
+void Sell(Player user, SalesMan shopkeeper){
+
+}
+
+void buyBox(Player user,SalesMan shopkeeper, ItemPtr it){
+	char* tempchar = malloc(sizeof(char) * 64);
+	int cursor[3];
+	ItemPtr temp;
+	int i, j, k, tempInt;
+	int key_code = 0;
+	for (i = 0; i < 20; i++){
+		for (j = 40; j < 79; j++){
+			screen[i][j] = ' ';
+		}
+	}
+
+	for (i = 9; i > 0; i--){
+
+		if (i == 1)
+		{
+			for (j = 40; j < 79; j++)
+				screen[0][j] = 219;
+			screen[1][40] = 219;
+			screen[1][78] = 219;
+		}
+		if (i > 1){
+			screen[18 - i][40] = 219;
+			screen[18 - i][78] = 219;
+			screen[i][40] = 219;
+			screen[i][78] = 219;
+		}
+		if (i == 1)
+		{
+			screen[17][40] = 219;
+			screen[17][78] = 219;
+			for (j = 40; j < 79; j++)
+				screen[18][j] = 219;
+		}
+		Sleep(20);
+		updateScreen();
+	}
+
+	if (it->POTION != NULL)
+	{
+		i = 1;
+
+		sprintf(tempchar, "Price: %d coins", it->POTION->price);
+		for (j = 0; j < strlen(tempchar); j++){
+			screen[3 + i][j + 41] = tempchar[j];
+			
+		}
+		i+=2;
+		if (it->POTION->ACCRAISE != 0){
+			sprintf(tempchar, "Accuracy: +%d", it->POTION->ACCRAISE);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + 41] = tempchar[j];
+				
+			}
+			i++;
+		}
+		if (it->POTION->ATKRAISE != 0){
+			sprintf(tempchar, "Attack: +%d", it->POTION->ATKRAISE);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + 41] = tempchar[j];
+
+			}
+			i++;
+		}
+		if (it->POTION->DEFRAISE != 0){
+			sprintf(tempchar, "Defense: +%d   ", it->POTION->DEFRAISE);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + 41] = tempchar[j];
+
+			}
+			i++;
+		}
+		if (it->POTION->HPRAISE != 0){
+			sprintf(tempchar, "HP: +%d   ", it->POTION->HPRAISE);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + 41] = tempchar[j];
+
+			}
+			i++;
+		}
+		if (it->POTION->LCKRAISE != 0){
+			sprintf(tempchar, "Luck: +%d   ", it->POTION->LCKRAISE);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[5][j + i + 41] = tempchar[j];
+				i++;
+			}
+		}
+		if (it->POTION->MATKRAISE != 0){
+			sprintf(tempchar, "Magic Attack: +%d   ", it->POTION->MATKRAISE);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + i + 41] = tempchar[j];
+
+			}
+			i++;
+		}
+		if (it->POTION->MDEFRAISE != 0){
+			sprintf(tempchar, "Magic Defense: +%d   ", it->POTION->MDEFRAISE);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + 41] = tempchar[j];
+
+			}
+			i++;
+		}
+		if (it->POTION->MAXHPRAISE != 0){
+			sprintf(tempchar, "Max HP: +%d   ", it->POTION->MAXHPRAISE);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + 42] = tempchar[j];
+
+			}
+			i++;
+
+		}
+		sprintf(tempchar, "%.20s", it->POTION->NAME);
+		for (i = 0; i < strlen(tempchar); i++)
+		{
+			screen[2][i + 41] = tempchar[i];
+		}
+		sprintf(tempchar, "%s", it->POTION->DESCRIPTION);
+		for (i = 0; i < strlen(tempchar); i++)
+		{
+			if (i>36)
+				screen[12][i + 41 - 37] = tempchar[i];
+			else
+				screen[11][i + 41] = tempchar[i];
+		}
+		for (i = 0; i < 10; i++){
+			for (j = 0; j < 13; j++){
+				if (it->POTION->picture[i][j] == NULL)
+					break;
+				else if (it->POTION->picture[i][j] != '\n'){
+					screen[i + 1][j + 57] = it->POTION->picture[i][j];
+				}
+			}
+		}
+		sprintf(tempchar, "Buy");
+		for (i = 0; i < strlen(tempchar); i++)
+		{
+			screen[13][i + 42] = tempchar[i];
+		}
+
+	}
+
+	if (it->WEAPON != NULL)
+	{
+		sprintf(tempchar, "Price: %d coins", it->WEAPON->price);
+		for (j = 0; j < strlen(tempchar); j++){
+			screen[1 + i][j + 41] = tempchar[j];
+			
+		}
+		i+=2;
+		sprintf(tempchar, "%.20s", it->WEAPON->NAME);
+		for (i = 0; i < strlen(tempchar); i++)
+		{
+			screen[3][i + 41] = tempchar[i];
+		}
+		sprintf(tempchar, "%s", it->WEAPON->DESCRIPTION);
+		for (i = 0; i < strlen(tempchar); i++)
+		{
+			if (i>36)
+				screen[12][i + 41 - 37] = tempchar[i];
+			else
+				screen[11][i + 41] = tempchar[i];
+		}
+		for (i = 0; i < 10; i++){
+			for (j = 0; j < 13; j++){
+				if (it->WEAPON->picture[i][j] == NULL)
+					break;
+				else if (it->WEAPON->picture[i][j] != '\n'){
+					screen[i + 1][j + 57] = it->WEAPON->picture[i][j];
+				}
+			}
+		}
+
+		i = 1;
+		if (it->WEAPON->AccMod != 0){
+			sprintf(tempchar, "Accuracy: %g", it->WEAPON->AccMod);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + 41] = tempchar[j];
+
+			}
+			i++;
+		}
+		if (it->WEAPON->attackModMax != 0){
+			sprintf(tempchar, "Attack MOD: %g", it->WEAPON->attackModMax);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + 41] = tempchar[j];
+
+			}
+			i++;
+		}
+
+		sprintf(tempchar, "Buy");
+		for (i = 0; i < strlen(tempchar); i++)
+		{
+			screen[13][i + 42] = tempchar[i];
+		}
+	}
+
+	sprintf(tempchar, "Cancel");
+	for (i = 0; i < strlen(tempchar); i++)
+	{
+		screen[13][i + 52] = tempchar[i];
+	}
+
+	for (i = 0; i < 18; i++){
+		screen[i][78] = 219;
+	}
+
+
+	updateScreen();
+
+
+	cursor[0] = 13;
+	cursor[1] = 41;
+	cursor[2] = 0;
+
+	screen[cursor[0]][cursor[1]] = 219;
+
+	updateScreen();
+
+	while (key_code != 13 && key_code != 27){
+		key_code = getch();
+
+		if (key_code == 'a' && cursor[1] >= 42){
+			screen[cursor[0]][cursor[1]] = ' ';
+			cursor[1] -= 10;
+			cursor[2] --;
+		}
+		if (key_code == 'd' && (cursor[1] < 42)){
+			if (!(cursor[0]>13))
+			{
+				screen[cursor[0]][cursor[1]] = ' ';
+				cursor[1] += 10;
+				cursor[2] ++;
+			}
+		}
+		
+		if (key_code == 13){
+			switch (cursor[2]){
+			case 0:
+				
+				if (it->POTION != NULL){
+					if (user->CURRENCY >= it->POTION->price){
+						user->CURRENCY -= it->POTION->price;
+						addItem(user, potions[it->POTION->index],1, NULL);
+						removeItemShop(shopkeeper, 1, it);
+					}
+					else{
+						printf("Not enough currency");
+						getch();
+					}
+				}
+				else if (it->WEAPON != NULL){
+					if (user->CURRENCY >= it->WEAPON->price){
+						user->CURRENCY -= it->WEAPON->price;
+						addItem(user, weapons[it->WEAPON->index], 1, NULL);
+						removeItemShop(shopkeeper, 1, it);
+					}
+					else{
+						printf("Not enough currency");
+						getch();
+					}
+				}
+				
+
+				break;
+			case 1:
+				key_code = 13;
+				break;
+			}
+
+		}
+		screen[cursor[0]][cursor[1]] = 219;
+		updateScreen();
+
+	}
+	free(tempchar);
+	return;
+}
+
+void sellBox(Player user, SalesMan shopkeeper, ItemPtr it, int* exit, int* removedItem){
+	char* tempchar = malloc(sizeof(char) * 64);
+	int cursor[3];
+	int i, j, k, tempInt;
+	int key_code = 0;
+	for (i = 0; i < 20; i++){
+		for (j = 40; j < 79; j++){
+			screen[i][j] = ' ';
+		}
+	}
+
+	for (i = 9; i > 0; i--){
+
+		if (i == 1)
+		{
+			for (j = 40; j < 79; j++)
+				screen[0][j] = 219;
+			screen[1][40] = 219;
+			screen[1][78] = 219;
+		}
+		if (i > 1){
+			screen[18 - i][40] = 219;
+			screen[18 - i][78] = 219;
+			screen[i][40] = 219;
+			screen[i][78] = 219;
+		}
+		if (i == 1)
+		{
+			screen[17][40] = 219;
+			screen[17][78] = 219;
+			for (j = 40; j < 79; j++)
+				screen[18][j] = 219;
+		}
+		Sleep(20);
+		updateScreen();
+	}
+
+	if (it->POTION != NULL)
+	{
+		i = 1;
+		if (it->POTION->ACCRAISE != 0){
+			sprintf(tempchar, "Accuracy: +%d   ", it->POTION->ACCRAISE);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + 41] = tempchar[j];
+				i++;
+			}
+
+		}
+		if (it->POTION->ATKRAISE != 0){
+			sprintf(tempchar, "Attack: +%d   ", it->POTION->ATKRAISE);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + 41] = tempchar[j];
+
+			}
+			i++;
+		}
+		if (it->POTION->DEFRAISE != 0){
+			sprintf(tempchar, "Defense: +%d   ", it->POTION->DEFRAISE);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + 41] = tempchar[j];
+
+			}
+			i++;
+		}
+		if (it->POTION->HPRAISE != 0){
+			sprintf(tempchar, "HP: +%d   ", it->POTION->HPRAISE);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + 41] = tempchar[j];
+
+			}
+			i++;
+		}
+		if (it->POTION->LCKRAISE != 0){
+			sprintf(tempchar, "Luck: +%d   ", it->POTION->LCKRAISE);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[5][j + i + 41] = tempchar[j];
+				i++;
+			}
+		}
+		if (it->POTION->MATKRAISE != 0){
+			sprintf(tempchar, "Magic Attack: +%d   ", it->POTION->MATKRAISE);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + i + 41] = tempchar[j];
+
+			}
+			i++;
+		}
+		if (it->POTION->MDEFRAISE != 0){
+			sprintf(tempchar, "Magic Defense: +%d   ", it->POTION->MDEFRAISE);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + 41] = tempchar[j];
+
+			}
+			i++;
+		}
+		if (it->POTION->MAXHPRAISE != 0){
+			sprintf(tempchar, "Max HP: +%d   ", it->POTION->MAXHPRAISE);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + 42] = tempchar[j];
+
+			}
+			i++;
+
+		}
+		sprintf(tempchar, "%.20s", it->POTION->NAME);
+		for (i = 0; i < strlen(tempchar); i++)
+		{
+			screen[2][i + 41] = tempchar[i];
+		}
+		sprintf(tempchar, "%s", it->POTION->DESCRIPTION);
+		for (i = 0; i < strlen(tempchar); i++)
+		{
+			if (i>36)
+				screen[12][i + 41 - 37] = tempchar[i];
+			else
+				screen[11][i + 41] = tempchar[i];
+		}
+		for (i = 0; i < 10; i++){
+			for (j = 0; j < 13; j++){
+				if (it->POTION->picture[i][j] == NULL)
+					break;
+				else if (it->POTION->picture[i][j] != '\n'){
+					screen[i + 1][j + 57] = it->POTION->picture[i][j];
+				}
+			}
+		}
+		sprintf(tempchar, "Use");
+		for (i = 0; i < strlen(tempchar); i++)
+		{
+			screen[13][i + 42] = tempchar[i];
+		}
+
+	}
+
+	if (it->WEAPON != NULL)
+	{
+		sprintf(tempchar, "%.20s", it->WEAPON->NAME);
+		for (i = 0; i < strlen(tempchar); i++)
+		{
+			screen[2][i + 41] = tempchar[i];
+		}
+		sprintf(tempchar, "%s", it->WEAPON->DESCRIPTION);
+		for (i = 0; i < strlen(tempchar); i++)
+		{
+			if (i>36)
+				screen[12][i + 41 - 37] = tempchar[i];
+			else
+				screen[11][i + 41] = tempchar[i];
+		}
+		for (i = 0; i < 10; i++){
+			for (j = 0; j < 13; j++){
+				if (it->WEAPON->picture[i][j] == NULL)
+					break;
+				else if (it->WEAPON->picture[i][j] != '\n'){
+					screen[i + 1][j + 57] = it->WEAPON->picture[i][j];
+				}
+			}
+		}
+
+		i = 1;
+		if (it->WEAPON->AccMod != 0){
+			sprintf(tempchar, "Accuracy: %g", it->WEAPON->AccMod);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + 41] = tempchar[j];
+
+			}
+			i++;
+		}
+		if (it->WEAPON->attackModMax != 0){
+			sprintf(tempchar, "Attack MOD: %g", it->WEAPON->attackModMax);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + 41] = tempchar[j];
+
+			}
+			i++;
+		}
+
+		sprintf(tempchar, "Equip");
+		for (i = 0; i < strlen(tempchar); i++)
+		{
+			screen[13][i + 42] = tempchar[i];
+		}
+
+
+	}
+
+
+	sprintf(tempchar, "Toss");
+	for (i = 0; i < strlen(tempchar); i++)
+	{
+		screen[13][i + 52] = tempchar[i];
+	}
+	sprintf(tempchar, "Cancel");
+	for (i = 0; i < strlen(tempchar); i++)
+	{
+		screen[15][i + 42] = tempchar[i];
+	}
+
+	for (i = 0; i < 18; i++){
+		screen[i][78] = 219;
+	}
+
+
+	updateScreen();
+
+
+	cursor[0] = 13;
+	cursor[1] = 41;
+	cursor[2] = 0;
+
+	screen[cursor[0]][cursor[1]] = 219;
+
+	updateScreen();
+
+	while (key_code != 13 && key_code != 27){
+		key_code = getch();
+
+		if (key_code == 'w' && cursor[0] > 13){
+			screen[cursor[0]][cursor[1]] = ' ';
+			cursor[0] -= 2;
+			cursor[2] -= 2;
+		}
+		if (key_code == 'a' && cursor[1] >= 42){
+			screen[cursor[0]][cursor[1]] = ' ';
+			cursor[1] -= 10;
+			cursor[2] --;
+		}
+		if (key_code == 'd' && (cursor[1] < 42)){
+			if (!(cursor[0]>13))
+			{
+				screen[cursor[0]][cursor[1]] = ' ';
+				cursor[1] += 10;
+				cursor[2] ++;
+			}
+		}
+		if (key_code == 's' && cursor[0] < 15){
+			if (!(cursor[1]>41)){
+				screen[cursor[0]][cursor[1]] = ' ';
+				cursor[0] += 2;
+				cursor[2] += 2;
+			}
+		}
+		if (key_code == 13){
+			switch (cursor[2]){
+			case 0:
+				removeItem(user, 1, it);
+				break;
+			case 1:
+				if (it->QUANTITY > 1){
+					do{
+						printf("How many would you like to throw away?: ");
+						scanf("%d", &tempInt);
+						clear_buffer();
+						if (tempInt <= 0 || tempInt > it->QUANTITY)
+							printf("\nInvalid choice, please select a number between 0 and %d\n", it->QUANTITY);
+					} while (tempInt <= 0 || tempInt > it->QUANTITY);
+
+					if (it->QUANTITY != tempInt)
+						it->QUANTITY -= tempInt;
+					else{
+						*removedItem = 1;
+						removeItem(user, 1, it);
+					}
+
+				}
+				else{
+					*removedItem = 1;
+					removeItem(user, 1, it);
+				}
+				break;
+			case 2:
+				key_code = 13;
+				break;
+			}
+
+		}
+		screen[cursor[0]][cursor[1]] = 219;
+		updateScreen();
+
+	}
+	free(tempchar);
+	return;
 }

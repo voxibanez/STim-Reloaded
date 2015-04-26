@@ -27,6 +27,7 @@ typedef struct weapon{
 	char* DESCRIPTION;
 	char** picture;
 	int index;
+	int price;
 }Weapon, *WeaponPtr;
 
 typedef struct potion{
@@ -41,6 +42,8 @@ typedef struct potion{
 	int LCKRAISE;
 	char* DESCRIPTION;
 	char** picture;
+	int index;
+	int price;
 }Potion, *PotionPtr;
 
 typedef struct item{
@@ -59,6 +62,7 @@ typedef struct inventory{
 
 typedef struct salesman{
 	int Position[2][2];
+	InventoryPtr INVENTORY;
 }SalesManSize, *SalesMan;
 
 
