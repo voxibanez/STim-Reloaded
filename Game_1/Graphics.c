@@ -73,7 +73,7 @@ void Sell(Player user, SalesMan shopkeeper);
 
 void buyBox(Player user, SalesMan shopkeeper, ItemPtr it);
 
-void sellBox(Player user, SalesMan shopkeeper, ItemPtr it, int* exit, int* removedItem);
+void sellBox(Player user, SalesMan shopkeeper, ItemPtr it);
 
 char screen[20][80] = { { 176 } };
 int playerPosition[2][2] = { 0 };
@@ -1919,6 +1919,7 @@ void Shop(Player user, SalesMan shopkeeper){
 	int cursor[3];
 	int key_code = 0;
 	char tempScreen[20][80];
+	int exit = 0;
 	
 
 	shopkeeper->INVENTORY = malloc(sizeof(Inventory));
@@ -1930,83 +1931,97 @@ void Shop(Player user, SalesMan shopkeeper){
 	for (i = 1; i < weaponSize; i++)
 		addItemShop(shopkeeper, NULL, 1, weapons[i]);
 
-	for (i = 0; i < 20; i++){
-		for (j = 0; j < 80; j++){
-			tempScreen[i][j] = screen[i][j];
-			screen[i][j] = ' ';
-		}
-			
-	}
-	sprintf(temp, "Hello, welcome to my shop");
-	for (j = 0; j < strlen(temp); j++){
-		screen[3][j + 11] = temp[j];
-	}
-	sprintf(temp, "Buy");
-	for (j = 0; j < strlen(temp); j++){
-		screen[10][j + 21] = temp[j];
-	}
-	sprintf(temp, "Sell");
-	for (j = 0; j < strlen(temp); j++){
-		screen[10][j + 31] = temp[j];
-	}
-	sprintf(temp, "Talk");
-	for (j = 0; j < strlen(temp); j++){
-		screen[12][j + 21] = temp[j];
-	}
-	sprintf(temp, "Cancel");
-	for (j = 0; j < strlen(temp); j++){
-		screen[12][j + 31] = temp[j];
-	}
 	cursor[0] = 10;
 	cursor[1] = 20;
-	cursor[2] = 0;
+	cursor[2] = 0;	
+	
+	while (exit == 0){
+		key_code = 0;
 
-	screen[cursor[0]][cursor[1]] = 219;
-
-	updateScreen();
-
-	while (key_code != 13){
-		key_code = getch();
-
-		if (key_code == 'a' && cursor[1] >= 21){
-			screen[cursor[0]][cursor[1]] = ' ';
-			cursor[1] -= 10;
-			cursor[2] --;
+		for (i = 0; i < 20; i++){
+			for (j = 0; j < 80; j++){
+				tempScreen[i][j] = screen[i][j];
+				screen[i][j] = ' ';
+			}
 		}
-		if (key_code == 'w' && cursor[0] > 10){
-			screen[cursor[0]][cursor[1]] = ' ';
-			cursor[0] -= 2;
-			cursor[2] -=2;
+
+		sprintf(temp, "Hello, welcome to my shop");
+		for (j = 0; j < strlen(temp); j++){
+			screen[3][j + 11] = temp[j];
 		}
-		if (key_code == 's' && cursor[0] < 12){
-			screen[cursor[0]][cursor[1]] = ' ';
-			cursor[0] += 2;
-			cursor[2] +=2;
+		sprintf(temp, "Buy");
+		for (j = 0; j < strlen(temp); j++){
+			screen[10][j + 21] = temp[j];
 		}
-		if (key_code == 'd' && (cursor[1] < 21)){
-			if (!(cursor[0]>13))
-			{
+		sprintf(temp, "Sell");
+		for (j = 0; j < strlen(temp); j++){
+			screen[10][j + 31] = temp[j];
+		}
+		sprintf(temp, "Talk");
+		for (j = 0; j < strlen(temp); j++){
+			screen[12][j + 21] = temp[j];
+		}
+		sprintf(temp, "Cancel");
+		for (j = 0; j < strlen(temp); j++){
+			screen[12][j + 31] = temp[j];
+		}
+
+		screen[cursor[0]][cursor[1]] = 219;
+
+		updateScreen();
+
+		while (key_code != 13){
+			key_code = getch();
+
+			if (key_code == 'a' && cursor[1] >= 21){
 				screen[cursor[0]][cursor[1]] = ' ';
-				cursor[1] += 10;
-				cursor[2] ++;
+				cursor[1] -= 10;
+				cursor[2] --;
 			}
-		}
-		if (key_code == 13){
-			switch (cursor[2]){
-			case 0:
-				Buy(user, shopkeeper);
-				break;
-			case 1:
-				break;
+			if (key_code == 'w' && cursor[0] > 10){
+				screen[cursor[0]][cursor[1]] = ' ';
+				cursor[0] -= 2;
+				cursor[2] -= 2;
 			}
-			for (i = 0; i < 20; i++){
-				for (j = 0; j < 80; j++){
-					screen[i][j] = tempScreen[i][j];
+			if (key_code == 's' && cursor[0] < 12){
+				screen[cursor[0]][cursor[1]] = ' ';
+				cursor[0] += 2;
+				cursor[2] += 2;
+			}
+			if (key_code == 'd' && (cursor[1] < 21)){
+				if (!(cursor[0]>13))
+				{
+					screen[cursor[0]][cursor[1]] = ' ';
+					cursor[1] += 10;
+					cursor[2] ++;
 				}
 			}
+			if (key_code == 13){
+				switch (cursor[2]){
+				case 0:
+					Buy(user, shopkeeper);
+					break;
+				case 1:
+					Sell(user, shopkeeper);
+					break;
+				case 2:
+					break;
+				case 3:
+					exit = 1;
+					break;
+				}
+				
+			
+			}
+			else
+				screen[cursor[0]][cursor[1]] = 219;
+			updateScreen();
 		}
-		else
-			screen[cursor[0]][cursor[1]] = 219;
+		for (i = 0; i < 20; i++){
+			for (j = 0; j < 80; j++){
+				screen[i][j] = tempScreen[i][j];
+			}
+		}
 		updateScreen();
 	}
 }
@@ -2041,6 +2056,11 @@ void Buy(Player user, SalesMan shopkeeper){
 		for (i = 0; i < 20; i++){
 			for (j = 0; j < 80; j++)
 				screen[i][j] = ' ';
+		}
+
+		sprintf(temp, "Money: %d", user->CURRENCY);
+		for (i = 0; i < strlen(temp); i++){
+			screen[1][i + 15] = temp[i];
 		}
 
 		i = 2;
@@ -2165,12 +2185,168 @@ void Buy(Player user, SalesMan shopkeeper){
 }
 
 void Sell(Player user, SalesMan shopkeeper){
+	int i, j, k, l, m;
+	char tempScreen[20][80];
+	char tempScreen2[20][80];
+	char* temp = malloc(sizeof(char) * 64);
+	int key_code = 0;
+	int exit = 0;
+	int removedItem = 0;
+	int cursor[3];
+	ItemPtr tempItem;
+	tempItem;
 
+	for (i = 0; i < 20; i++){
+		for (j = 0; j < 80; j++)
+			tempScreen2[i][j] = screen[i][j];
+	}
+
+	cursor[0] = 5;
+	cursor[1] = 1;
+	cursor[2] = 0;
+
+
+
+	do{
+		removedItem = 0;
+		tempItem = user->INVENTORY->head;
+		key_code = 0;
+		for (i = 0; i < 20; i++){
+			for (j = 0; j < 80; j++)
+				screen[i][j] = ' ';
+		}
+
+		sprintf(temp, "Money: %d", user->CURRENCY);
+		for (i = 0; i < strlen(temp); i++){
+			screen[1][i + 15] = temp[i];
+		}
+
+		i = 2;
+		k = 5;
+
+		for (l = 0; l < user->INVENTORY->size; l++)
+		{
+			for (m = 0; m < 21; m++)
+				temp[m] = ' ';
+			if (tempItem->POTION != NULL){
+				sprintf(temp, "%.20s x%d", tempItem->POTION->NAME, tempItem->QUANTITY);
+			}
+			if (tempItem->WEAPON != NULL){
+				sprintf(temp, "%.20s x%d", tempItem->WEAPON->NAME, tempItem->QUANTITY);
+			}
+
+
+			for (j = 0; j < 20; j++){
+				if (temp[j] != NULL)
+					screen[k][i] = temp[j];
+				i++;
+			}
+
+			if (i > 39){
+				i = 2;
+				k += 2;
+			}
+			tempItem = tempItem->next;
+
+		}
+		updateScreen();
+
+		if (user->INVENTORY->size < 1){
+			printf("Your inventory is empty, quit wasting my time...\n");
+			printf("Press ESC to exit");
+			key_code = getch();
+		}
+		else{
+
+			screen[cursor[0]][cursor[1]] = 219;
+
+			updateScreen();
+
+
+			key_code = getch();
+
+			if (key_code == 'w' && cursor[0] > 5){
+				screen[cursor[0]][cursor[1]] = ' ';
+				cursor[0] -= 2;
+				cursor[2] -= 2;
+			}
+			if (key_code == 'a' && cursor[1] >= 20){
+				screen[cursor[0]][cursor[1]] = ' ';
+				cursor[1] -= 20;
+				cursor[2] --;
+			}
+			if (key_code == 'd' && cursor[1] < 20){
+				if (!(cursor[0] >= 3 + 2 * round(user->INVENTORY->size / 2.0) && cursor[1] >= 21 - (20 * (user->INVENTORY->size % 2)))){
+					screen[cursor[0]][cursor[1]] = ' ';
+					cursor[1] += 20;
+					cursor[2] ++;
+				}
+			}
+			if (key_code == 's' && cursor[0] < 3 + 2 * round(user->INVENTORY->size / 2.0)){
+				if (!(cursor[0] >= 1 + 2 * round(user->INVENTORY->size / 2.0) && cursor[1] > 21 - (20 * (user->INVENTORY->size % 2))))
+				{
+					screen[cursor[0]][cursor[1]] = ' ';
+					cursor[0] += 2;
+					cursor[2] += 2;
+				}
+
+			}
+
+			if (key_code == 13){
+				for (i = 0; i < 20; i++){
+					for (j = 0; j < 40; j++)
+						tempScreen[i][j] = screen[i][j];
+				}
+				tempItem = user->INVENTORY->head;
+				for (i = 0; i < cursor[2]; i++){
+					tempItem = tempItem->next;
+				}
+				sellBox(user,shopkeeper, tempItem);
+				for (i = 0; i < 20; i++){
+					for (j = 0; j < 80; j++)
+						screen[i][j] = tempScreen[i][j];
+				}
+
+				if (cursor[2] + 1 > user->INVENTORY->size)
+				{
+
+					if (cursor[1] >= 20){
+						screen[cursor[0]][cursor[1]] = ' ';
+						cursor[1] -= 20;
+						cursor[2] --;
+					}
+					else if (cursor[0] > 5){
+						screen[cursor[0]][cursor[1]] = ' ';
+						cursor[0] -= 2;
+						cursor[2] -= 2;
+					}
+				}
+
+			}
+
+
+
+		}
+		//screen[cursor[0]][cursor[1]] = 219;
+
+
+		updateScreen();
+
+
+	} while (key_code != 27 && exit == 0);
+	for (i = 0; i < 20; i++){
+		for (j = 0; j < 80; j++)
+			screen[i][j] = tempScreen2[i][j];
+	}
+
+	free(temp);
+	return;
 }
 
 void buyBox(Player user,SalesMan shopkeeper, ItemPtr it){
 	char* tempchar = malloc(sizeof(char) * 64);
 	int cursor[3];
+	int toBuy;
 	ItemPtr temp;
 	int i, j, k, tempInt;
 	int key_code = 0;
@@ -2408,12 +2584,17 @@ void buyBox(Player user,SalesMan shopkeeper, ItemPtr it){
 		if (key_code == 13){
 			switch (cursor[2]){
 			case 0:
-				
+				if (it->QUANTITY > 1){
+					do{
+						printf("How many would you like to buy?: ");
+						scanf("%d", &toBuy);
+					} while (toBuy > it->QUANTITY && toBuy < 1);
+				}
 				if (it->POTION != NULL){
-					if (user->CURRENCY >= it->POTION->price){
-						user->CURRENCY -= it->POTION->price;
-						addItem(user, potions[it->POTION->index],1, NULL);
-						removeItemShop(shopkeeper, 1, it);
+					if (user->CURRENCY >= it->POTION->price * toBuy){
+						user->CURRENCY -= it->POTION->price * toBuy;
+						addItem(user, potions[it->POTION->index], toBuy, NULL);
+						removeItemShop(shopkeeper, toBuy, it);
 					}
 					else{
 						printf("Not enough currency");
@@ -2421,13 +2602,14 @@ void buyBox(Player user,SalesMan shopkeeper, ItemPtr it){
 					}
 				}
 				else if (it->WEAPON != NULL){
-					if (user->CURRENCY >= it->WEAPON->price){
-						user->CURRENCY -= it->WEAPON->price;
-						addItem(user, weapons[it->WEAPON->index], 1, NULL);
-						removeItemShop(shopkeeper, 1, it);
+					if (user->CURRENCY >= it->WEAPON->price * toBuy){
+						user->CURRENCY -= it->WEAPON->price * toBuy;
+						addItem(user, weapons[it->WEAPON->index], toBuy, NULL);
+						removeItemShop(shopkeeper, toBuy, it);
 					}
 					else{
-						printf("Not enough currency");
+						printf("Not enough currency\n");
+						printf("Press enter to continue...");
 						getch();
 					}
 				}
@@ -2448,9 +2630,11 @@ void buyBox(Player user,SalesMan shopkeeper, ItemPtr it){
 	return;
 }
 
-void sellBox(Player user, SalesMan shopkeeper, ItemPtr it, int* exit, int* removedItem){
+void sellBox(Player user, SalesMan shopkeeper, ItemPtr it){
 	char* tempchar = malloc(sizeof(char) * 64);
 	int cursor[3];
+	int toSell;
+	ItemPtr temp;
 	int i, j, k, tempInt;
 	int key_code = 0;
 	for (i = 0; i < 20; i++){
@@ -2488,16 +2672,23 @@ void sellBox(Player user, SalesMan shopkeeper, ItemPtr it, int* exit, int* remov
 	if (it->POTION != NULL)
 	{
 		i = 1;
-		if (it->POTION->ACCRAISE != 0){
-			sprintf(tempchar, "Accuracy: +%d   ", it->POTION->ACCRAISE);
-			for (j = 0; j < strlen(tempchar); j++){
-				screen[3 + i][j + 41] = tempchar[j];
-				i++;
-			}
+
+		sprintf(tempchar, "Sell Price: %d coins", it->POTION->price/2);
+		for (j = 0; j < strlen(tempchar); j++){
+			screen[3 + i][j + 41] = tempchar[j];
 
 		}
+		i += 2;
+		if (it->POTION->ACCRAISE != 0){
+			sprintf(tempchar, "Accuracy: +%d", it->POTION->ACCRAISE);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + 41] = tempchar[j];
+
+			}
+			i++;
+		}
 		if (it->POTION->ATKRAISE != 0){
-			sprintf(tempchar, "Attack: +%d   ", it->POTION->ATKRAISE);
+			sprintf(tempchar, "Attack: +%d", it->POTION->ATKRAISE);
 			for (j = 0; j < strlen(tempchar); j++){
 				screen[3 + i][j + 41] = tempchar[j];
 
@@ -2574,7 +2765,7 @@ void sellBox(Player user, SalesMan shopkeeper, ItemPtr it, int* exit, int* remov
 				}
 			}
 		}
-		sprintf(tempchar, "Use");
+		sprintf(tempchar, "Sell");
 		for (i = 0; i < strlen(tempchar); i++)
 		{
 			screen[13][i + 42] = tempchar[i];
@@ -2584,10 +2775,16 @@ void sellBox(Player user, SalesMan shopkeeper, ItemPtr it, int* exit, int* remov
 
 	if (it->WEAPON != NULL)
 	{
+		sprintf(tempchar, "Sell Price: %d coins", it->WEAPON->price*(2/3));
+		for (j = 0; j < strlen(tempchar); j++){
+			screen[1 + i][j + 41] = tempchar[j];
+
+		}
+		i += 2;
 		sprintf(tempchar, "%.20s", it->WEAPON->NAME);
 		for (i = 0; i < strlen(tempchar); i++)
 		{
-			screen[2][i + 41] = tempchar[i];
+			screen[3][i + 41] = tempchar[i];
 		}
 		sprintf(tempchar, "%s", it->WEAPON->DESCRIPTION);
 		for (i = 0; i < strlen(tempchar); i++)
@@ -2625,25 +2822,17 @@ void sellBox(Player user, SalesMan shopkeeper, ItemPtr it, int* exit, int* remov
 			i++;
 		}
 
-		sprintf(tempchar, "Equip");
+		sprintf(tempchar, "Sell");
 		for (i = 0; i < strlen(tempchar); i++)
 		{
 			screen[13][i + 42] = tempchar[i];
 		}
-
-
 	}
 
-
-	sprintf(tempchar, "Toss");
-	for (i = 0; i < strlen(tempchar); i++)
-	{
-		screen[13][i + 52] = tempchar[i];
-	}
 	sprintf(tempchar, "Cancel");
 	for (i = 0; i < strlen(tempchar); i++)
 	{
-		screen[15][i + 42] = tempchar[i];
+		screen[13][i + 52] = tempchar[i];
 	}
 
 	for (i = 0; i < 18; i++){
@@ -2665,11 +2854,6 @@ void sellBox(Player user, SalesMan shopkeeper, ItemPtr it, int* exit, int* remov
 	while (key_code != 13 && key_code != 27){
 		key_code = getch();
 
-		if (key_code == 'w' && cursor[0] > 13){
-			screen[cursor[0]][cursor[1]] = ' ';
-			cursor[0] -= 2;
-			cursor[2] -= 2;
-		}
 		if (key_code == 'a' && cursor[1] >= 42){
 			screen[cursor[0]][cursor[1]] = ' ';
 			cursor[1] -= 10;
@@ -2683,42 +2867,32 @@ void sellBox(Player user, SalesMan shopkeeper, ItemPtr it, int* exit, int* remov
 				cursor[2] ++;
 			}
 		}
-		if (key_code == 's' && cursor[0] < 15){
-			if (!(cursor[1]>41)){
-				screen[cursor[0]][cursor[1]] = ' ';
-				cursor[0] += 2;
-				cursor[2] += 2;
-			}
-		}
+
 		if (key_code == 13){
 			switch (cursor[2]){
 			case 0:
-				removeItem(user, 1, it);
-				break;
-			case 1:
 				if (it->QUANTITY > 1){
 					do{
-						printf("How many would you like to throw away?: ");
-						scanf("%d", &tempInt);
-						clear_buffer();
-						if (tempInt <= 0 || tempInt > it->QUANTITY)
-							printf("\nInvalid choice, please select a number between 0 and %d\n", it->QUANTITY);
-					} while (tempInt <= 0 || tempInt > it->QUANTITY);
-
-					if (it->QUANTITY != tempInt)
-						it->QUANTITY -= tempInt;
-					else{
-						*removedItem = 1;
-						removeItem(user, 1, it);
-					}
-
+						printf("How many would you like to sell?: ");
+						scanf("%d", &toSell);
+					} while (toSell > it->QUANTITY && toSell < 1);
 				}
-				else{
-					*removedItem = 1;
-					removeItem(user, 1, it);
+				else
+					toSell = 1;
+				if (it->POTION != NULL){
+					
+						user->CURRENCY += it->POTION->price/2*toSell;
+						addItemShop(shopkeeper, potions[it->POTION->index], toSell, NULL);
+						removeItem(user, toSell, it);
 				}
+				else if (it->WEAPON != NULL){
+						user->CURRENCY += (it->WEAPON->price*(2.0 / 3.0)*toSell);
+						addItemShop(shopkeeper, weapons[it->WEAPON->index], toSell, NULL);
+						removeItem(user, toSell, it);
+				}
+
 				break;
-			case 2:
+			case 1:
 				key_code = 13;
 				break;
 			}

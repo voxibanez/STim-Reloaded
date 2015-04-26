@@ -1,104 +1,7 @@
-﻿Build started 4/25/2015 10:32:19 PM.
+﻿Build started 4/25/2015 11:19:28 PM.
 Project "\\psf\Home\Documents\STim-Reloaded\Game_1\Game_1.vcxproj" on node 2 (Build target(s)).
 ClCompile:
-  C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"\\psf\Home\Documents\STim-Reloaded\Game_1" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt Graphics.c Stim.c
-  Stim.c
-\\psf\home\documents\stim-reloaded\game_1\stim.c(58): warning C4244: 'function' : conversion from 'time_t' to 'unsigned int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(70): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
-\\psf\home\documents\stim-reloaded\game_1\stim.c(73): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
-\\psf\home\documents\stim-reloaded\game_1\stim.c(142): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(143): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(144): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(145): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(146): warning C4552: '+' : operator has no effect; expected operator with side-effect
-\\psf\home\documents\stim-reloaded\game_1\stim.c(148): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(149): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(150): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(152): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(156): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(157): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(158): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(159): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(160): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(162): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(163): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(171): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(172): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(173): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(174): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(175): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(177): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(178): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(179): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(181): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(185): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(186): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(187): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(188): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(189): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(191): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(192): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(193): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(204): warning C4013: 'lv1drops' undefined; assuming extern returning int
-\\psf\home\documents\stim-reloaded\game_1\stim.c(227): warning C4013: 'hpBars' undefined; assuming extern returning int
-\\psf\home\documents\stim-reloaded\game_1\stim.c(234): warning C4013: 'updateScreen' undefined; assuming extern returning int
-\\psf\home\documents\stim-reloaded\game_1\stim.c(244): warning C4013: 'getch' undefined; assuming extern returning int
-\\psf\home\documents\stim-reloaded\game_1\stim.c(220): warning C4101: 'i' : unreferenced local variable
-\\psf\home\documents\stim-reloaded\game_1\stim.c(219): warning C4101: 'temp' : unreferenced local variable
-\\psf\home\documents\stim-reloaded\game_1\stim.c(265): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
-\\psf\home\documents\stim-reloaded\game_1\stim.c(272): warning C4087: 'combat' : declared with 'void' parameter list
-\\psf\home\documents\stim-reloaded\game_1\stim.c(275): warning C4013: 'inventoryGraphics' undefined; assuming extern returning int
-\\psf\home\documents\stim-reloaded\game_1\stim.c(284): warning C4027: function declared without formal parameter list
-\\psf\home\documents\stim-reloaded\game_1\stim.c(293): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(295): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(300): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(302): warning C4244: '+=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(303): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(305): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(333): warning C4244: '+=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(350): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
-\\psf\home\documents\stim-reloaded\game_1\stim.c(353): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
-\\psf\home\documents\stim-reloaded\game_1\stim.c(362): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(364): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(366): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(368): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(372): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(393): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(431): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
-\\psf\home\documents\stim-reloaded\game_1\stim.c(488): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
-\\psf\home\documents\stim-reloaded\game_1\stim.c(494): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
-\\psf\home\documents\stim-reloaded\game_1\stim.c(533): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(545): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
-\\psf\home\documents\stim-reloaded\game_1\stim.c(553): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
-\\psf\home\documents\stim-reloaded\game_1\stim.c(539): warning C4101: 'answer3' : unreferenced local variable
-\\psf\home\documents\stim-reloaded\game_1\stim.c(576): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
-\\psf\home\documents\stim-reloaded\game_1\stim.c(574): warning C4101: 'answer2' : unreferenced local variable
-\\psf\home\documents\stim-reloaded\game_1\stim.c(574): warning C4101: 'answer3' : unreferenced local variable
-\\psf\home\documents\stim-reloaded\game_1\stim.c(590): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
-\\psf\home\documents\stim-reloaded\game_1\stim.c(607): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
-\\psf\home\documents\stim-reloaded\game_1\stim.c(615): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
-\\psf\home\documents\stim-reloaded\game_1\stim.c(770): warning C4244: '*=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(783): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(785): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-\\psf\home\documents\stim-reloaded\game_1\stim.c(800): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
-\\psf\home\documents\stim-reloaded\game_1\stim.c(812): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
-\\psf\home\documents\stim-reloaded\game_1\stim.c(933): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+  C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"\\psf\Home\Documents\STim-Reloaded\Game_1" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt Graphics.c
   Graphics.c
 \\psf\home\documents\stim-reloaded\game_1\graphics.c(163): warning C4244: 'function' : conversion from 'time_t' to 'unsigned int', possible loss of data
 \\psf\home\documents\stim-reloaded\game_1\graphics.c(204): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
@@ -384,13 +287,7 @@ ClCompile:
 \\psf\home\documents\stim-reloaded\game_1\graphics.c(1895): warning C4013: 'drop_roll' undefined; assuming extern returning int
 \\psf\home\documents\stim-reloaded\game_1\graphics.c(1905): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
           c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(1928): warning C4013: 'addItemShop' undefined; assuming extern returning int
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(1940): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(1941): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(1944): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(1945): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(1929): warning C4013: 'addItemShop' undefined; assuming extern returning int
 \\psf\home\documents\stim-reloaded\game_1\graphics.c(1948): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
           c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
 \\psf\home\documents\stim-reloaded\game_1\graphics.c(1949): warning C4018: '<' : signed/unsigned mismatch
@@ -400,153 +297,179 @@ ClCompile:
 \\psf\home\documents\stim-reloaded\game_1\graphics.c(1956): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
           c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
 \\psf\home\documents\stim-reloaded\game_1\graphics.c(1957): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(1969): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(1960): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(1961): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(1964): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(1965): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(1974): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
           c:\program files\microsoft visual studio 12.0\vc\include\conio.h(131) : see declaration of 'getch'
 \\psf\home\documents\stim-reloaded\game_1\graphics.c(1917): warning C4101: 'k' : unreferenced local variable
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2054): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2061): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
           c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2057): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2062): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2074): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
           c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2062): warning C4047: '!=' : 'int' differs in levels of indirection from 'void *'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2079): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2077): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2082): warning C4047: '!=' : 'int' differs in levels of indirection from 'void *'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2099): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
           c:\program files\microsoft visual studio 12.0\vc\include\conio.h(131) : see declaration of 'getch'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2088): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2108): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
           c:\program files\microsoft visual studio 12.0\vc\include\conio.h(131) : see declaration of 'getch'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2126): warning C4020: 'buyBox' : too many actual parameters
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2213): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2146): warning C4020: 'buyBox' : too many actual parameters
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2219): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
           c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2214): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2220): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2220): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2232): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
           c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2221): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2228): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2235): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
           c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2229): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2236): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2237): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2244): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2245): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2252): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2253): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2259): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2260): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2267): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2268): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2275): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2276): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2283): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2284): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2288): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2289): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2298): warning C4047: '==' : 'int' differs in levels of indirection from 'void *'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2305): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2306): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2315): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2316): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2321): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2322): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2326): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2327): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2336): warning C4047: '==' : 'int' differs in levels of indirection from 'void *'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2346): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2347): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2354): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2355): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2362): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2363): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2369): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2370): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2392): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2240): warning C4047: '!=' : 'int' differs in levels of indirection from 'void *'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2257): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
           c:\program files\microsoft visual studio 12.0\vc\include\conio.h(131) : see declaration of 'getch'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2416): warning C4013: 'removeItemShop' undefined; assuming extern returning int
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2420): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2266): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
           c:\program files\microsoft visual studio 12.0\vc\include\conio.h(131) : see declaration of 'getch'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2431): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2389): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2390): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2396): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2397): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2404): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2405): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2412): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2413): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2420): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2421): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2428): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2429): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2435): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2436): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2443): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2444): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2451): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2452): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2459): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2460): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2464): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2465): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2474): warning C4047: '==' : 'int' differs in levels of indirection from 'void *'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2481): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2482): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2491): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2492): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2497): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2498): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2502): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2503): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2512): warning C4047: '==' : 'int' differs in levels of indirection from 'void *'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2522): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2523): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2530): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2531): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2538): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2539): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2545): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2546): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2568): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
           c:\program files\microsoft visual studio 12.0\vc\include\conio.h(131) : see declaration of 'getch'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2174): warning C4101: 'temp' : unreferenced local variable
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2175): warning C4101: 'k' : unreferenced local variable
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2175): warning C4101: 'tempInt' : unreferenced local variable
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2492): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2493): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2500): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2501): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2508): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2509): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2516): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2517): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2524): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2525): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2531): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2532): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2539): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2540): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2547): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2548): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2555): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2556): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2560): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2561): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2570): warning C4047: '==' : 'int' differs in levels of indirection from 'void *'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2577): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2578): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2587): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2588): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2592): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2593): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2602): warning C4047: '==' : 'int' differs in levels of indirection from 'void *'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2612): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2613): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2620): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2621): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2628): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2629): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2638): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2639): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2643): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2644): warning C4018: '<' : signed/unsigned mismatch
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2666): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
-          c:\program files\microsoft visual studio 12.0\vc\include\conio.h(131) : see declaration of 'getch'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2702): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2590): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
           c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
-\\psf\home\documents\stim-reloaded\game_1\graphics.c(2454): warning C4101: 'k' : unreferenced local variable
-  Generating Code...
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2597): warning C4013: 'removeItemShop' undefined; assuming extern returning int
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2601): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\conio.h(131) : see declaration of 'getch'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2613): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\conio.h(131) : see declaration of 'getch'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2350): warning C4101: 'temp' : unreferenced local variable
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2351): warning C4101: 'k' : unreferenced local variable
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2351): warning C4101: 'tempInt' : unreferenced local variable
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2676): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2677): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2683): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2684): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2691): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2692): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2699): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2700): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2707): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2708): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2715): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2716): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2722): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2723): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2730): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2731): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2738): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2739): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2746): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2747): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2751): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2752): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2761): warning C4047: '==' : 'int' differs in levels of indirection from 'void *'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2768): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2769): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2778): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2779): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2784): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2785): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2789): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2790): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2799): warning C4047: '==' : 'int' differs in levels of indirection from 'void *'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2809): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2810): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2817): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2818): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2825): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2826): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2832): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(356) : see declaration of 'sprintf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2833): warning C4018: '<' : signed/unsigned mismatch
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2855): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\conio.h(131) : see declaration of 'getch'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2877): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+          c:\program files\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2889): warning C4244: '+=' : conversion from 'double' to 'int', possible loss of data
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2637): warning C4101: 'temp' : unreferenced local variable
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2638): warning C4101: 'k' : unreferenced local variable
+\\psf\home\documents\stim-reloaded\game_1\graphics.c(2638): warning C4101: 'tempInt' : unreferenced local variable
 \\psf\home\documents\stim-reloaded\game_1\graphics.c(372): warning C4715: 'titleScreen' : not all control paths return a value
-\\psf\home\documents\stim-reloaded\game_1\stim.c(126): warning C4716: 'character_select' : must return a value
-\\psf\home\documents\stim-reloaded\game_1\stim.c(197): warning C4716: 'lv1_pick_monster' : must return a value
 Link:
   C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"\\psf\Home\Documents\STim-Reloaded\Debug\Game_1.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"\\psf\Home\Documents\STim-Reloaded\Debug\Game_1.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"\\psf\Home\Documents\STim-Reloaded\Debug\Game_1.lib" /MACHINE:X86 Debug\Graphics.obj
   Debug\InventoryLinkedList.obj
@@ -556,4 +479,4 @@ Done Building Project "\\psf\Home\Documents\STim-Reloaded\Game_1\Game_1.vcxproj"
 
 Build succeeded.
 
-Time Elapsed 00:00:03.75
+Time Elapsed 00:00:02.15

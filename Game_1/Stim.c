@@ -878,18 +878,40 @@ void addItem(Player user, PotionPtr POTION, int QUANTITY, WeaponPtr WEAPON){
 void removeItem(Player user, int quantity, ItemPtr it){
 
 	//it->next = it->prev;
-	if (it == user->INVENTORY->head)
-		user->INVENTORY->head = it->next;
-	else if (it->next == NULL)
-		it->prev = NULL;
-	else{
-		it->prev->next = it->next;
-		it->next->prev = it->prev;
+	if (quantity > 1){
+		it->QUANTITY -= quantity;
+
+		if (it->QUANTITY == 0){
+			if (it == user->INVENTORY->head)
+				user->INVENTORY->head = it->next;
+			else if (it->next == NULL)
+				it->prev = NULL;
+			else{
+				it->prev->next = it->next;
+				it->next->prev = it->prev;
+			}
+			user->INVENTORY->size--;
+
+			free(it);
+
+		}
 	}
+	else{
 
-	user->INVENTORY->size--;
 
-	free(it);
+		if (it == user->INVENTORY->head)
+			user->INVENTORY->head = it->next;
+		else if (it->next == NULL)
+			it->prev = NULL;
+		else{
+			it->prev->next = it->next;
+			it->next->prev = it->prev;
+		}
+
+		user->INVENTORY->size--;
+
+		free(it);
+	}
 }
 
 int countPotions(Player user){
@@ -981,9 +1003,24 @@ void removeItemShop(SalesMan user, int quantity, ItemPtr it){
 
 	//it->next = it->prev;
 	if (it->QUANTITY > 1){
-		it->QUANTITY--;
+		it->QUANTITY -= quantity;
+		if (it->QUANTITY == 0){
+			if (it == user->INVENTORY->head)
+				user->INVENTORY->head = it->next;
+			else if (it->next == NULL)
+				it->prev = NULL;
+			else{
+				it->prev->next = it->next;
+				it->next->prev = it->prev;
+			}
+			user->INVENTORY->size--;
+
+			free(it);
+
+		}
 	}
 	else{
+
 		if (it == user->INVENTORY->head)
 			user->INVENTORY->head = it->next;
 		else if (it->next == NULL)
