@@ -1,3 +1,14 @@
+<<<<<<< HEAD
+﻿Build started 4/27/2015 12:26:59 PM.
+     1>Project "C:\Users\ccapt_000\Desktop\STim-Reloaded\Game_1\Game_1.vcxproj" on node 2 (Build target(s)).
+     1>Link:
+         Game_1.vcxproj -> C:\Users\ccapt_000\Desktop\STim-Reloaded\Debug\Game_1.exe
+     1>Done Building Project "C:\Users\ccapt_000\Desktop\STim-Reloaded\Game_1\Game_1.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.12
+=======
 ﻿Build started 4/27/2015 1:40:56 PM.
 Project "\\psf\Home\Documents\STim-Reloaded\Game_1\Game_1.vcxproj" on node 2 (Build target(s)).
 ClCompile:
@@ -111,3 +122,4 @@ Done Building Project "\\psf\Home\Documents\STim-Reloaded\Game_1\Game_1.vcxproj"
 Build succeeded.
 
 Time Elapsed 00:00:01.51
+>>>>>>> origin/master
