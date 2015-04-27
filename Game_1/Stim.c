@@ -216,15 +216,20 @@ void enemy_attack(Enemy en, Player user)
 }
 void encounter(Enemy en, Player user, char** screen)
 {
-	char temp[30];
+	char temp[64];
+	char c;
 	int i;
 	int coins;
 
 	//surpise attack
 	for (;;)
 	{
-		clear_buffer();
+		
 		hpBars(user, en);
+		//fscanf(stdin,"%*[^\n]%*c");
+		fgets(temp,64,stdin);
+		//clear_buffer();
+		updateScreen();
 		your_attack(en, user);
 		hpBars(user, en);
 		enemy_attack(en, user);
@@ -347,6 +352,7 @@ void combat(Enemy en, Player user)
 void clear_buffer(void)
 {
 	char c;
+	
 	scanf("%c", &c);
 	while (c != '\n')
 	{

@@ -4,76 +4,12 @@
 #include <math.h>
 #include <time.h>
 #include <Windows.h>
-#include "Stim.h"
 #include <conio.h>
 #include <dos.h>
 #include <mmsystem.h>  /* multimedia functions (such as MIDI) for Windows */
 #include <sys/types.h>
 #include <errno.h>
-
-
-
-int titleScreen(Player user);
-void setWindow();
-void battleSequence(Enemy en, Player user);
-
-void updateScreen();
-
-void addAnimation(AnimationPtr animate, int x, int y);
-
-void updatePlayerPosition(Player user);
-
-void updateEnemyPosition(Enemy en, Player user);
-
-void warriornextlevel(Player user);
-
-void titleMusic();
-
-char** loadArt(char* filename);
-
-SalesMan addSalesman();
-
-void moveSalesman(SalesMan storeman);
-
-void menuGraphics(Player user);
-
-AnimationPtr initAnimation(frames, x, y);
-void initPlayer();
-WeaponPtr initWeapon(char* name, double weaponMod, double weaponMult, double attackModMin, double attackModMax, double AccMod, int isPhysical, char* DESCRIPTION, char* fileName,int price);
-
-PotionPtr initPotion(char* NAME, int MAXHPRAISE, int HPRAISE, int ATKRAISE, int DEFRAISE, int MATKRAISE, int MDEFRAISE, int ACCRAISE, int LCKRAISE, char* DESCRIPTION, char* fileName,int price);
-
-ItemPtr initItem(PotionPtr POTION, int QUANTITY, WeaponPtr WEAPON);
-
-void itemBox(Player user, ItemPtr it, int* exit, int* removedItem);
-
-void inventoryGraphics(Player user);
-
-void useItem(Player user, ItemPtr it);
-
-void playerStats(Player user);
-
-void findSaveFile(Player user);
-
-void saveGame(Player user);
-
-void loadGame(Player user);
-
-void initGame(Player mainChar);
-
-void hpBars(Player user, Enemy en);
-
-void lv1drops(Player user);
-
-void Shop(Player user, SalesMan shopkeeper);
-
-void Buy(Player user, SalesMan shopkeeper);
-
-void Sell(Player user, SalesMan shopkeeper);
-
-void buyBox(Player user, SalesMan shopkeeper, ItemPtr it);
-
-void sellBox(Player user, SalesMan shopkeeper, ItemPtr it);
+#include "Graphics.h"
 
 char screen[20][80] = { { 176 } };
 int playerPosition[2][2] = { 0 };
@@ -89,6 +25,7 @@ PotionPtr* potions;
 int potionsSize = 0;
 SalesMan storeman;
 char** title;
+int storemanInt = 0;
 
 HANDLE wHnd;    // Handle to write to the console.
 HANDLE rHnd;    // Handle to read from the console.
@@ -407,7 +344,7 @@ void updatePlayerPosition(Player user){
 	if (user->Position[1][1] < 0)
 		user->Position[1][1] = 0;
 
-	if (user->Position[1][0] > 20)
+	if (user->Position[1][0] > 19)
 		user->Position[1][0] = 19;
 	if (user->Position[1][1] > 78)
 		user->Position[1][1] = 78;
@@ -421,8 +358,8 @@ void updatePlayerPosition(Player user){
 
 		}
 	}
-	if (rand() % 100 == 0 && storeman == NULL)
-		storeman = addSalesman();
+	if (rand() % 100 == 0 && storemanInt == 0)
+		storeman = addSalesman(user);
 
 
 	screen[user->Position[0][0]][user->Position[0][1]] = ground;
@@ -440,18 +377,18 @@ void updateEnemyPosition(Enemy* en, Player user){
 	for (i = 0; i<3; i++){
 		if (en[i] != NULL){
 			en[i]->LEVEL = user->BATTLES;
-			if ((rand() % 2) == 1){
-				if (user->Position[1][0] > en[i]->Position[1][0])
-					en[i]->Position[1][0] ++;
-				else if (user->Position[1][0] < en[i]->Position[1][0])
-					en[i]->Position[1][0] --;
-			}
-			else{
-				if (user->Position[1][1] > en[i]->Position[1][1])
-					en[i]->Position[1][1] ++;
-				else if (user->Position[1][1] < en[i]->Position[1][1])
-					en[i]->Position[1][1] --;
-			}
+				if ((rand() % 2) == 1){
+					if (user->Position[1][0] > en[i]->Position[1][0])
+						en[i]->Position[1][0] ++;
+					else if (user->Position[1][0] < en[i]->Position[1][0])
+						en[i]->Position[1][0] --;
+				}
+				else{
+					if (user->Position[1][1] > en[i]->Position[1][1])
+						en[i]->Position[1][1] ++;
+					else if (user->Position[1][1] < en[i]->Position[1][1])
+						en[i]->Position[1][1] --;
+				}
 
 
 			if (en[i]->Position[1][0] < 0)
@@ -464,11 +401,27 @@ void updateEnemyPosition(Enemy* en, Player user){
 			if (en[i]->Position[1][1] > 78)
 				en[i]->Position[1][1] = 78;
 
-
-
+			for (j = 0; en[j] != NULL && j<3; j++){
+				if (j != i){
+					if (en[i]->Position[1][0] == en[j]->Position[1][0] && en[i]->Position[1][1] == en[j]->Position[1][1]){
+						en[i]->Position[1][0] = en[i]->Position[0][0];
+						en[i]->Position[1][1] = en[i]->Position[0][1];
+					}
+						
+				}
+			}
+			if (storemanInt == 1){
+				if (en[i]->Position[1][0] == storeman->Position[1][0] && en[i]->Position[1][1] == storeman->Position[1][1]){
+					en[i]->Position[1][0] = en[i]->Position[0][0];
+					en[i]->Position[1][1] = en[i]->Position[0][1];
+				}
+			}
+		
 
 			screen[en[i]->Position[0][0]][en[i]->Position[0][1]] = ground;
 			screen[en[i]->Position[1][0]][en[i]->Position[1][1]] = 233;
+
+			
 
 			if (user->Position[1][0] == en[i]->Position[1][0] && user->Position[1][1] == en[i]->Position[1][1]){
 				for (j = 0; j < 20; j++){
@@ -623,6 +576,7 @@ void battleSequence(Enemy en, Player user){
 		Sleep(20);
 	}
 	Sleep(500);
+	updateScreen();
 	
 
 	for (i = 0; playerSprite[i] != NULL && i < 10; i++){
@@ -702,53 +656,76 @@ WeaponPtr initWeapon(char* name, double weaponMod,double weaponMult, double atta
 }
 
 void moveSalesman(SalesMan storeman, Player user){
-	if (storeman != NULL && user != NULL){
+	int i = 0;
+	if (storemanInt == 1 && storeman != NULL && user != NULL){
 
 		if (user->Position[1][0] == storeman->Position[1][0] && user->Position[1][1] == storeman->Position[1][1]){
 			Shop(user, storeman);
+			storemanInt = 0;
 		}
-
-		int r = rand() % 4;
-		if (r == 0)
-			storeman->Position[1][1]++;
-		if (r == 1)
-			storeman->Position[1][1]--;
-		if (r == 2)
-			storeman->Position[1][0]++;
-		if (r == 3)
-			storeman->Position[1][0]--;
-
-
-
-
-		if (storeman->Position[1][0] < 0)
-			storeman->Position[1][0] = 0;
-		if (storeman->Position[1][1] < 0)
-			storeman->Position[1][1] = 0;
-
-		if (storeman->Position[1][0] > 20)
-			storeman->Position[1][0] = 19;
-		if (storeman->Position[1][1] > 78)
-			storeman->Position[1][1] = 78;
+		else{
+			int r = rand() % 4;
+			if (r == 0)
+				storeman->Position[1][1]++;
+			if (r == 1)
+				storeman->Position[1][1]--;
+			if (r == 2)
+				storeman->Position[1][0]++;
+			if (r == 3)
+				storeman->Position[1][0]--;
 
 
 
 
-		screen[storeman->Position[0][0]][storeman->Position[0][1]] = ground;
-		screen[storeman->Position[1][0]][storeman->Position[1][1]] = '$';
+			if (storeman->Position[1][0] < 0)
+				storeman->Position[1][0] = 0;
+			if (storeman->Position[1][1] < 0)
+				storeman->Position[1][1] = 0;
+
+			if (storeman->Position[1][0] > 19)
+				storeman->Position[1][0] = 19;
+			if (storeman->Position[1][1] > 78)
+				storeman->Position[1][1] = 78;
+
+			if (user->Position[1][0] == storeman->Position[1][0] && user->Position[1][1] == storeman->Position[1][1]){
+				storeman->Position[1][0] = storeman->Position[0][0];
+				storeman->Position[1][1] = storeman->Position[0][1];
+			}
+			while (enemies[i] != NULL && i<3){
+				if (enemies[i]->Position[1][0] == storeman->Position[1][0] && enemies[i]->Position[1][1] == storeman->Position[1][1]){
+					storeman->Position[1][0] = storeman->Position[0][0];
+					storeman->Position[1][1] = storeman->Position[0][1];
+				}
+				i++;
+			}
 
 		
 
 
-		storeman->Position[0][0] = storeman->Position[1][0];
-		storeman->Position[0][1] = storeman->Position[1][1];
+			screen[storeman->Position[0][0]][storeman->Position[0][1]] = ground;
+			screen[storeman->Position[1][0]][storeman->Position[1][1]] = '$';
+
+
+
+
+			storeman->Position[0][0] = storeman->Position[1][0];
+			storeman->Position[0][1] = storeman->Position[1][1];
+
+			
+		}
 	}
 }
 
-SalesMan addSalesman(){
+SalesMan addSalesman(Player user){
 	SalesMan temp = malloc(sizeof(SalesManSize));
-	temp->Position[1][0] = rand() % 20;
-	temp->Position[1][1] = rand() % 80;
+	storemanInt = 1;
+	do{
+		temp->Position[1][0] = rand() % 20;
+		temp->Position[1][1] = rand() % 80;
+	} while (temp->Position[1][0] != user->Position[1][0] && temp->Position[1][1] != user->Position[1][1]);
+
+
+
 
 	temp->Position[0][0] = temp->Position[1][0];
 	temp->Position[0][1] = temp->Position[1][1];
@@ -814,6 +791,12 @@ void menuGraphics(Player user){
 	{
 		screen[8][i + 5] = temp[i];
 	}
+
+	sprintf(temp, "Quit", user->NAME);
+	for (i = 0; i < strlen(temp); i++)
+	{
+		screen[10][i + 5] = temp[i];
+	}
 	updateScreen();
 
 	cursor[0] = 4;
@@ -835,7 +818,7 @@ void menuGraphics(Player user){
 				cursor[0] -= 2;
 				cursor[2] --;
 			}
-			if (key_code == 's' && cursor[2] < 2){
+			if (key_code == 's' && cursor[2] < 3){
 				screen[cursor[0]][cursor[1]] = ' ';
 				cursor[0] += 2;
 				cursor[2] ++;
@@ -854,6 +837,9 @@ void menuGraphics(Player user){
 					break;
 				case 2:
 					findSaveFile(user);
+					break;
+				case 3:
+					exit(1);
 					break;
 				}
 				screen[cursor[0]][cursor[1]] = 219;
@@ -1798,6 +1784,7 @@ void loadGame(Player user){
 	
 	fscanf(fp, "%d", &loadInt);
 	if (loadInt == 1){
+		storemanInt = 1;
 		storeman = malloc(sizeof(SalesManSize));
 		fscanf(fp, "%d", &storeman->Position[1][0]);
 		fscanf(fp, "%d", &storeman->Position[1][1]);
@@ -1897,7 +1884,7 @@ void lv1drops(Player user)
 		printf("It dropped nothing!\n");
 	if (roll >= 5 && roll < 9)
 	{
-		itm = rand() % 5;
+		itm = (rand() % (weaponSize-2)) +1;
 		do{
 			updateScreen();
 			printf("Enemy dropped a %s\n", weapons[itm]->NAME);
