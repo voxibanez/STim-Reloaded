@@ -97,6 +97,9 @@
     <Text Include="Cog_Head.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="Shop_n.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="Save.s">
