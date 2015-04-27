@@ -93,6 +93,14 @@
     <Text Include="A_Cog_Sprite.txt" />
     <Text Include="Cdagger.txt" />
     <Text Include="Firune.txt" />
+    <Text Include="Frame1.txt" />
+    <Text Include="Frame2.txt" />
+    <Text Include="Frame3.txt" />
+    <Text Include="Frame4.txt" />
+    <Text Include="Frame5.txt" />
+    <Text Include="Frame6.txt" />
+    <Text Include="Frame7.txt" />
+    <Text Include="Frame8.txt" />
     <Text Include="Frrune.txt" />
     <Text Include="Game_info.txt" />
     <Text Include="Goblin.txt" />

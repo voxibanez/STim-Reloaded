@@ -59,7 +59,7 @@ int main(int argc, char* argv[]){
 	weapons = malloc(sizeof(WeaponPtr*) * 7);
 	potions = malloc(sizeof(PotionPtr*) * 1);
 	
-	ripHead = malloc(sizeof(char**) * 8);
+	ripHead = malloc(sizeof(char*) * 8);
 	
 	
 
@@ -108,14 +108,15 @@ int main(int argc, char* argv[]){
 
 	title = loadArt("TitleArt.txt");
 
-	ripHead[0] = loadArt("Frame1");
-	ripHead[1] = loadArt("Frame2");
-	ripHead[2] = loadArt("Frame3");
-	ripHead[3] = loadArt("Frame4");
-	ripHead[4] = loadArt("Frame5");
-	ripHead[5] = loadArt("Frame6");
-	ripHead[6] = loadArt("Frame7");
-	ripHead[7] = loadArt("Frame8");
+	ripHead[0] = loadArt("Frame1.txt");
+
+	ripHead[1] = loadArt("Frame2.txt");
+	ripHead[2] = loadArt("Frame3.txt");
+	ripHead[3] = loadArt("Frame4.txt");
+	ripHead[4] = loadArt("Frame5.txt");
+	ripHead[5] = loadArt("Frame6.txt");
+	ripHead[6] = loadArt("Frame7.txt");
+	ripHead[7] = loadArt("Frame8.txt");
 
 
 	shopKeeperFaces[0] = loadArt("Shop_n.txt");
@@ -3080,20 +3081,13 @@ void bossBattle(Player user, Enemy en){
 	user->isInBattle = 1;
 	maxOffset = 51;
 	enemyIndex = 5;
-	for (k = 0; k < 8; k++){
-		for (i = 0; ripHead[k][i] != NULL && i < 20; i++){
-			for (j = 0; ripHead[k][i][j] != NULL && i < 78; j++){
-				if (ripHead[k][i][j] != NULL && ripHead[k][i][j] != NULL != '\n' && characters[k][i][j] != ' ')
-					screen[i][j] = ripHead[k][i][j];
 
-			}
-		}
-		updateScreen();
-		for (i = 0; i < 20; i++){
-			for (j = 0; j < 80; j++)
-				screen[i][j] = ' ';
-		}
-}
+	for (i = 0; i < 20; i++){
+		for (j = 0; j < 80; j++)
+			screen[i][j] = ' ';
+	}
+	
+	
 
 
 
@@ -3121,13 +3115,21 @@ void bossBattle(Player user, Enemy en){
 
 		offsetX++;
 	}
+	for (i = 0; playerSprite[i] != NULL && i < 10; i++){
+		for (j = 0; playerSprite[i][j] != NULL && j < 78; j++){
+			if (playerSprite[i][j] != NULL && playerSprite[i][j] != NULL != '\n' && playerSprite[i][j] != ' ')
+				screen[i + 10][j] = playerSprite[i][j];
 
+		}
+
+	}
 	sprintf(temp, "%s: ", en->NAME);
 	for (i = 0; i < strlen(temp); i++){
 		screen[1][i + 3] = temp[i];
 		updateScreen();
 		Sleep(20);
 	}
+	Sleep(500);
 	sprintf(temp, "The end is near...");
 	for (i = 0; i < strlen(temp); i++){
 		screen[2][i + 3] = temp[i];
@@ -3148,14 +3150,43 @@ void bossBattle(Player user, Enemy en){
 		Sleep(20);
 	}
 	Sleep(1000);
+
+	for (k = 0; k < 8; k++){
+		for (i = 0; i < 20; i++){
+			for (j = 0; j < 80; j++)
+				screen[i][j] = ' ';
+		}
+		for (i = 0; ripHead[k][i] != NULL && i < 20; i++){
+			for (j = 0; ripHead[k][i][j] != NULL && j < 78; j++){
+				screen[i][j] = ripHead[k][i][j];
+			}
+		}
+		updateScreen();
+		if (k == 0)
+			Sleep(1000);
+		else
+			Sleep(100);
+		
+	}
+	Sleep(1000);
+	printf("Press enter to continue...");
+	clear_buffer();
+
+	for (i = 0; i < 20; i++){
+		for (j = 0; j < 80; j++)
+			screen[i][j] = ' ';
+	}
+
 	for (i = 0; playerSprite[i] != NULL && i < 10; i++){
-		for (j = 0; playerSprite[i][j] != NULL && i < 78; j++){
+		for (j = 0; playerSprite[i][j] != NULL && j < 78; j++){
 			if (playerSprite[i][j] != NULL && playerSprite[i][j] != NULL != '\n' && playerSprite[i][j] != ' ')
 				screen[i + 10][j] = playerSprite[i][j];
 
 		}
 
 	}
+
+
 
 	maxOffset = 33;
 
@@ -3192,9 +3223,9 @@ void bossBattle(Player user, Enemy en){
 		updateScreen();
 		Sleep(20);
 	}
-	clear_buffer();
+	
 	printf("Press enter to continue...");
-	getch();
+	clear_buffer();
 
 
 	for (i = 0; i < 20; i++){
@@ -3220,9 +3251,6 @@ void bossBattle(Player user, Enemy en){
 
 	}
 
-
-
-	
 	updateScreen();
 
 	sprintf(temp, "%s", en->NAME);
@@ -3239,11 +3267,17 @@ void bossBattle(Player user, Enemy en){
 		updateScreen();
 		Sleep(20);
 	}
-	Sleep(500);
+	Sleep(1000);
 	updateScreen();
 
 	for (i = 0; i < strlen(temp); i++)
 		screen[1][i + 3] = ground;
+
+	for (i = 0; i < 10;i++)
+		screen[0][i] = ' ';
+	for (i = 0; i < 10; i++)
+		screen[2][i] = ' ';
+	
 	updateScreen();
 
 	encounter(en, user, screen);
