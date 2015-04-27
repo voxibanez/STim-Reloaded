@@ -101,6 +101,7 @@
     <Text Include="Player.txt" />
     <Text Include="Potion.txt" />
     <Text Include="Save.txt" />
+    <Text Include="Shop_n.txt" />
     <Text Include="Skeleton.txt" />
     <Text Include="TitleArt.txt" />
     <Text Include="Troll.txt" />

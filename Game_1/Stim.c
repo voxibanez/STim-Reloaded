@@ -883,11 +883,10 @@ void addItem(Player user, PotionPtr POTION, int QUANTITY, WeaponPtr WEAPON){
 
 void removeItem(Player user, int quantity, ItemPtr it){
 
-	//it->next = it->prev;
-	if (quantity > 1){
+
 		it->QUANTITY -= quantity;
 
-		if (it->QUANTITY == 0){
+		if (it->QUANTITY <= 0){
 			if (it == user->INVENTORY->head)
 				user->INVENTORY->head = it->next;
 			else if (it->next == NULL)
@@ -901,23 +900,8 @@ void removeItem(Player user, int quantity, ItemPtr it){
 			free(it);
 
 		}
-	}
-	else{
-
-
-		if (it == user->INVENTORY->head)
-			user->INVENTORY->head = it->next;
-		else if (it->next == NULL)
-			it->prev = NULL;
-		else{
-			it->prev->next = it->next;
-			it->next->prev = it->prev;
-		}
-
-		user->INVENTORY->size--;
-
-		free(it);
-	}
+	
+	
 }
 
 int countPotions(Player user){
@@ -982,13 +966,13 @@ void addItemShop(SalesMan user, PotionPtr POTION, int QUANTITY, WeaponPtr WEAPON
 		temp = user->INVENTORY->head;
 		for (i = 0; i < user->INVENTORY->size; i++){
 			if (it->POTION != NULL && temp->POTION != NULL){
-				if (it->POTION->NAME == temp->POTION->NAME){
+				if (it->POTION->index == temp->POTION->index){
 					temp->QUANTITY += it->QUANTITY;
 					return;
 				}
 			}
 			if (it->WEAPON != NULL && temp->WEAPON != NULL){
-				if (it->WEAPON->NAME == temp->WEAPON->NAME){
+				if (it->WEAPON->index == temp->WEAPON->index){
 					temp->QUANTITY += it->QUANTITY;
 					return;
 				}
@@ -1007,26 +991,9 @@ void addItemShop(SalesMan user, PotionPtr POTION, int QUANTITY, WeaponPtr WEAPON
 
 void removeItemShop(SalesMan user, int quantity, ItemPtr it){
 
-	//it->next = it->prev;
-	if (it->QUANTITY > 1){
-		it->QUANTITY -= quantity;
-		if (it->QUANTITY == 0){
-			if (it == user->INVENTORY->head)
-				user->INVENTORY->head = it->next;
-			else if (it->next == NULL)
-				it->prev = NULL;
-			else{
-				it->prev->next = it->next;
-				it->next->prev = it->prev;
-			}
-			user->INVENTORY->size--;
+	it->QUANTITY -= quantity;
 
-			free(it);
-
-		}
-	}
-	else{
-
+	if (it->QUANTITY <= 0){
 		if (it == user->INVENTORY->head)
 			user->INVENTORY->head = it->next;
 		else if (it->next == NULL)
@@ -1035,9 +1002,9 @@ void removeItemShop(SalesMan user, int quantity, ItemPtr it){
 			it->prev->next = it->next;
 			it->next->prev = it->prev;
 		}
-
 		user->INVENTORY->size--;
 
 		free(it);
+
 	}
 }
