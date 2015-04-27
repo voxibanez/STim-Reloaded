@@ -19,6 +19,7 @@ char*** characters;
 char*** shopKeeperFaces;
 char** playerSprite;
 char** bossSprite;
+char*** ripHead;
 Enemy* enemies;
 int enemiesSize = 0;
 WeaponPtr* weapons;
@@ -58,6 +59,7 @@ int main(int argc, char* argv[]){
 	weapons = malloc(sizeof(WeaponPtr*) * 7);
 	potions = malloc(sizeof(PotionPtr*) * 1);
 	
+	ripHead = malloc(sizeof(char**) * 8);
 	
 	
 
@@ -105,6 +107,16 @@ int main(int argc, char* argv[]){
 	bossSprite = loadArt("A_Cog_Sprite.txt");
 
 	title = loadArt("TitleArt.txt");
+
+	ripHead[0] = loadArt("Frame1");
+	ripHead[1] = loadArt("Frame2");
+	ripHead[2] = loadArt("Frame3");
+	ripHead[3] = loadArt("Frame4");
+	ripHead[4] = loadArt("Frame5");
+	ripHead[5] = loadArt("Frame6");
+	ripHead[6] = loadArt("Frame7");
+	ripHead[7] = loadArt("Frame8");
+
 
 	shopKeeperFaces[0] = loadArt("Shop_n.txt");
 	storeman = NULL;
@@ -3068,6 +3080,21 @@ void bossBattle(Player user, Enemy en){
 	user->isInBattle = 1;
 	maxOffset = 51;
 	enemyIndex = 5;
+	for (k = 0; k < 8; k++){
+		for (i = 0; ripHead[k][i] != NULL && i < 20; i++){
+			for (j = 0; ripHead[k][i][j] != NULL && i < 78; j++){
+				if (ripHead[k][i][j] != NULL && ripHead[k][i][j] != NULL != '\n' && characters[k][i][j] != ' ')
+					screen[i][j] = ripHead[k][i][j];
+
+			}
+		}
+		updateScreen();
+		for (i = 0; i < 20; i++){
+			for (j = 0; j < 80; j++)
+				screen[i][j] = ' ';
+		}
+}
+
 
 
 	while (offsetX < maxOffset){
