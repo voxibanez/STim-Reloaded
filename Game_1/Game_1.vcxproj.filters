@@ -85,6 +85,18 @@
     <Text Include="Save.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="TitleArt.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="A_Cog.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="A_Cog_Sprite.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Cog_Head.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="Save.s">

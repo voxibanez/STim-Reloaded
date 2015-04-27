@@ -63,3 +63,5 @@ void Sell(Player user, SalesMan shopkeeper);
 void buyBox(Player user, SalesMan shopkeeper, ItemPtr it);
 
 void sellBox(Player user, SalesMan shopkeeper, ItemPtr it);
+
+void bossBattle(Player user, Enemy en);

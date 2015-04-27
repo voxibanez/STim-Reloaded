@@ -88,6 +88,9 @@
     <ClCompile Include="Stim.c" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="A_Cog.txt" />
+    <Text Include="Cog_Head.txt" />
+    <Text Include="A_Cog_Sprite.txt" />
     <Text Include="Cdagger.txt" />
     <Text Include="Firune.txt" />
     <Text Include="Frrune.txt" />
@@ -99,6 +102,7 @@
     <Text Include="Potion.txt" />
     <Text Include="Save.txt" />
     <Text Include="Skeleton.txt" />
+    <Text Include="TitleArt.txt" />
     <Text Include="Troll.txt" />
     <Text Include="Unknown.txt" />
     <Text Include="Wsword.txt" />

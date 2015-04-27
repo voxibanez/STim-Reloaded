@@ -130,4 +130,5 @@ void your_armor();
 void who_are_you();
 int dumb_user(int select, int upper, int lower, int i);
 char dumb_user_yn(char answer, int i);
-
+void bossBattleInitiate(Player user);
+void bossBattleRoom(Player user);

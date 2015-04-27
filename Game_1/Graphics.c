@@ -17,6 +17,7 @@ int screenCounter;
 char ground;
 char*** characters;
 char** playerSprite;
+char** bossSprite;
 Enemy* enemies;
 int enemiesSize = 0;
 WeaponPtr* weapons;
@@ -30,6 +31,8 @@ int storemanInt = 0;
 HANDLE wHnd;    // Handle to write to the console.
 HANDLE rHnd;    // Handle to read from the console.
 AnimationPtr boxes;
+AnimationPtr spiral;
+AnimationPtr flash;
 
 int main(int argc, char* argv[]){
 	int i, j, k;
@@ -50,7 +53,7 @@ int main(int argc, char* argv[]){
 	mainChar->weaponLeft = malloc(sizeof(Weapon));
 	mainChar->weaponRight = malloc(sizeof(Weapon));
 
-	characters = malloc(5 * sizeof(char*));
+	characters = malloc(7 * sizeof(char*));
 	weapons = malloc(sizeof(WeaponPtr*) * 7);
 	potions = malloc(sizeof(PotionPtr*) * 1);
 	
@@ -58,20 +61,49 @@ int main(int argc, char* argv[]){
 	
 
 	boxes = initAnimation(80, 20, 80);
-
+	spiral = initAnimation(210, 20, 20);
+	flash = initAnimation(6, 20, 40);
+	spiral->speed = 20;
+	flash->speed = 200;
 	for (i = 0; i < 20; i++){
 		for (j = 0; j < 80; j++)
 			screen[i][j] = ' ';
 	}
 
+	i = 0;
+	j = 20;
+	k = 0;
+	for (k = 0; k < 20; k++){
+		for (i = 0; i < j; i++){
+			if (j % 4 == 0)
+				spiral->frames[i][20-j][i] = 219;
+			else if (j % 4 == 3)
+				spiral->frames[i][i][j] = 219;
+			else if (j % 4 == 2)
+				spiral->frames[i][j][i] = 219;
+			else if (j % 4 == 1)
+				spiral->frames[i][i][20-j] = 219;
+
+
+		}
+		j--;
+	}
+
+	
 
 	characters[0] = loadArt("Unknown.txt");
 	characters[1] = loadArt("Skeleton.txt");
 	characters[2] = loadArt("Goblin.txt");
 	characters[3] = loadArt("Orc.txt");
 	characters[4] = loadArt("Troll.txt");
+	characters[5] = loadArt("A_Cog.txt");
+	characters[6] = loadArt("Cog_Head.txt");
 
 	playerSprite = loadArt("Player.txt");
+
+	bossSprite = loadArt("A_Cog_Sprite.txt");
+
+	title = loadArt("TitleArt.txt");
 
 	storeman = NULL;
 
@@ -151,8 +183,15 @@ int main(int argc, char* argv[]){
 
 
 		system("cls");
-		printf("\n\n\n\n\t\t\t%s, Your journey begins here...\n", mainChar->NAME);
+		printf("\n\n\n\n\t\tYour brother has been missing for a long time\n");
+		Sleep(2000);
+		printf("\t\t\t%s, Your quest is to find him\n", mainChar->NAME);
+		Sleep(1500);
+		printf("\n\n\t\t\t     (w,a,s,d to move)\n");
+		//printf("\n\n\n\n\t\t\t%s, Your journey begins here...\n", mainChar->NAME);
 		Sleep(1000);
+		printf("\n\n\t\t\tPress enter to continue...");
+		getch();
 		system("cls");
 
 		tempItem = malloc(sizeof(Item));
@@ -191,14 +230,18 @@ int main(int argc, char* argv[]){
 
 	
 	updatePlayerPosition(mainChar);
+	if (mainChar->BATTLES > 10)
+		bossBattleInitiate(mainChar);
 	moveSalesman(storeman, mainChar);
 	updateScreen();
 
 	while (1){
+		
 		//getch();
 		//if (kbhit()){
 		mainChar->isInBattle = 0;
 		key_code = getch();
+
 		if (key_code == 'w')
 			mainChar->Position[1][0] --;
 		if (key_code == 's')
@@ -212,6 +255,8 @@ int main(int argc, char* argv[]){
 			updatePlayerPosition(mainChar);
 			moveSalesman(storeman, mainChar);
 			updateEnemyPosition(enemies, mainChar);
+			if (mainChar->BATTLES > 10)
+				bossBattleInitiate(mainChar);
 			updateScreen();
 
 		}
@@ -253,8 +298,13 @@ int titleScreen(Player user){
 		if (i < 19)
 			system("cls");
 	}
+	getch();
 	system("cls");
-
+	for (i = 0; i < 7; i++){
+		for (j = 0; j < 30; j++)
+			screen[i + 1][j + 20] = title[i][j];
+	}
+	updateScreen();
 	
 	sprintf(temp, "Start");
 	for (j = 0; j < strlen(temp); j++){
@@ -430,6 +480,7 @@ void updateEnemyPosition(Enemy* en, Player user){
 				}
 				ground = ' ';
 				addAnimation(boxes, 0, 0);
+				//addAnimation(spiral, 0, 20);
 				battleSequence(en[i], user);
 				for (j = 0; j < 20; j++){
 					for (k = 0; k < 80; k++)
@@ -600,7 +651,7 @@ void battleSequence(Enemy en, Player user){
 }
 
 char** loadArt(char* filename){
-	int i, j, k, l;
+	int i, j, k, l,m;
 	char** temp;
 	char tempChar[80];
 	FILE* fp;
@@ -2130,7 +2181,7 @@ void Buy(Player user, SalesMan shopkeeper){
 				for (i = 0; i < cursor[2]; i++){
 					tempItem = tempItem->next;
 				}
-				buyBox(user, storeman, tempItem, &exit, &removedItem);
+				buyBox(user, storeman, tempItem);
 				for (i = 0; i < 20; i++){
 					for (j = 0; j < 80; j++)
 						screen[i][j] = tempScreen[i][j];
@@ -2577,6 +2628,8 @@ void buyBox(Player user,SalesMan shopkeeper, ItemPtr it){
 						scanf("%d", &toBuy);
 					} while (toBuy > it->QUANTITY && toBuy < 1);
 				}
+				else
+					toBuy = 1;
 				if (it->POTION != NULL){
 					if (user->CURRENCY >= it->POTION->price * toBuy){
 						user->CURRENCY -= it->POTION->price * toBuy;
@@ -2891,4 +2944,268 @@ void sellBox(Player user, SalesMan shopkeeper, ItemPtr it){
 	}
 	free(tempchar);
 	return;
+}
+
+void bossBattleInitiate(Player player){
+	int i;
+	screen[1][39] = ' ';
+	screen[0][39] = ' ';
+	screen[1][40] = ' ';
+	screen[0][40] = ' ';
+
+	if ((player->Position[1][1] == 39 && player->Position[1][0] == 0) || (player->Position[1][1] == 40 && player->Position[1][0] == 0) || (player->Position[1][1] == 39 && player->Position[1][0] == 1) || (player->Position[1][1] == 40 && player->Position[1][0] == 1))
+		bossBattleRoom(player);
+}
+
+void bossBattleRoom(Player user){
+	int i, j,k;
+	int key_code = 0;
+	Enemy boss = malloc(sizeof(EnemySize));
+	boss->NAME = "A Cognate Pig Sloth";
+
+	boss->ATK = 50;
+	boss->DEF = 50;
+	boss->ACC = 80;
+	boss->HP = 100;
+	boss->MAXHP = 100;
+	boss->LCK = 50;
+	boss->MATK = 50;
+	boss->MDEF = 50;
+	boss->LEVEL = 20;
+
+	//addAnimation(spiral, 1, 1);
+
+	user->Position[1][0] = 20;
+	user->Position[1][1] = 40;
+
+	
+
+	ground = ' ';
+	for (i = 0; i < 20; i++){
+		for (j = 0; j < 80; j++)
+			screen[i][j] = ' ';
+		updateScreen();
+		Sleep(20);
+	}
+
+	for (i = 0; i < 5; i++){
+		for (j = 0; j < 5; j++)
+			screen[i][j + 35] = bossSprite[i][j];
+	}
+
+	updatePlayerPosition(user);
+	updateScreen();
+
+	while (1){
+
+		//getch();
+		//if (kbhit()){
+		user->isInBattle = 0;
+		key_code = getch();
+
+		if (key_code == 'w')
+			user->Position[1][0] --;
+		if (key_code == 's')
+			user->Position[1][0] ++;
+
+		if (key_code == 'a')
+			user->Position[1][1] --;
+		if (key_code == 'd')
+			user->Position[1][1] ++;
+		if (key_code == 'w' || key_code == 'a' || key_code == 's' || key_code == 'd'){
+			updatePlayerPosition(user);
+			//updateScreen();
+
+		}
+		if (key_code == 27)
+			menuGraphics(user);
+		updatePlayerPosition(user);
+
+		for (i = 0; i < 5; i++){
+			for (j = 35; j < 40; j++){
+				if (user->Position[1][0] == i && user->Position[1][1] == j){
+					bossBattle(user, boss);
+				}
+			}
+
+		}
+		updateScreen();
+
+		key_code = NULL;
+
+
+
+		//}
+		//else
+		//continue;
+	}
+
+
+}
+
+void bossBattle(Player user, Enemy en){
+	int i, j, k;
+	int enemyIndex;
+	char temp[64];
+	int offsetX = 0;
+	int offsetY = 0;
+	int maxOffset = 1;
+
+	user->isInBattle = 1;
+	maxOffset = 51;
+	enemyIndex = 5;
+
+
+	while (offsetX < maxOffset){
+		for (i = 0; characters[enemyIndex][i] != NULL && i < 20; i++){
+			for (j = 0; characters[enemyIndex][i][j] != NULL && i < 78; j++){
+				if (characters[enemyIndex][i][j] != NULL && characters[enemyIndex][i][j] != NULL != '\n' && characters[enemyIndex][i][j] != ' ')
+					screen[i][j + offsetX] = characters[enemyIndex][i][j];
+
+			}
+
+		}
+		updateScreen();
+		Sleep(20);
+		if (offsetX > 0 && offsetX < maxOffset - 1){
+			for (i = 0; characters[enemyIndex][i] != NULL && i < 20; i++){
+				for (j = 0; characters[enemyIndex][i][j] != NULL && i < 78; j++){
+					screen[i][j + offsetX - 1] = ground;
+
+				}
+			}
+
+		}
+
+
+		offsetX++;
+	}
+
+	sprintf(temp, "%s: ", en->NAME);
+	for (i = 0; i < strlen(temp); i++){
+		screen[1][i + 3] = temp[i];
+		updateScreen();
+		Sleep(20);
+	}
+	sprintf(temp, "The end is near...");
+	for (i = 0; i < strlen(temp); i++){
+		screen[2][i + 3] = temp[i];
+		updateScreen();
+		Sleep(20);
+	}
+	Sleep(1000);
+	sprintf(temp, "You will end up just like!");
+	for (i = 0; i < strlen(temp); i++){
+		screen[3][i + 3] = temp[i];
+		updateScreen();
+		Sleep(20);
+	}
+	sprintf(temp, "your brother!");
+	for (i = 0; i < strlen(temp); i++){
+		screen[4][i + 3] = temp[i];
+		updateScreen();
+		Sleep(20);
+	}
+	Sleep(1000);
+	for (i = 0; playerSprite[i] != NULL && i < 10; i++){
+		for (j = 0; playerSprite[i][j] != NULL && i < 78; j++){
+			if (playerSprite[i][j] != NULL && playerSprite[i][j] != NULL != '\n' && playerSprite[i][j] != ' ')
+				screen[i + 10][j] = playerSprite[i][j];
+
+		}
+
+	}
+
+	maxOffset = 33;
+
+
+	
+	for (i = 0; characters[enemyIndex][i] != NULL && i < 20; i++){
+		for (j = 0; characters[enemyIndex][i][j] != NULL && i < 78; j++){
+			screen[i][j + offsetX - 1] = ground;
+
+		}
+	}
+
+	enemyIndex = 6;
+	for (i = 0; characters[enemyIndex][i] != NULL && i < 20; i++){
+		for (j = 0; characters[enemyIndex][i][j] != NULL && i < 78; j++){
+			if (characters[enemyIndex][i][j] != NULL && characters[enemyIndex][i][j] != NULL != '\n' && characters[enemyIndex][i][j] != ' ')
+				screen[i][j + maxOffset] = characters[enemyIndex][i][j];
+
+		}
+
+	}
+	updateScreen();
+	Sleep(2000);
+	sprintf(temp, "YOU MONSTER!");
+	for (i = 0; i < strlen(temp); i++){
+		screen[13][i + 15] = temp[i];
+		updateScreen();
+		Sleep(20);
+	}
+	Sleep(1500);
+	sprintf(temp, "HAHAHAHAHAHAHAHA!!!");
+	for (i = 0; i < strlen(temp); i++){
+		screen[6][i + 3] = temp[i];
+		updateScreen();
+		Sleep(20);
+	}
+	clear_buffer();
+	printf("Press enter to continue...");
+	getch();
+
+
+	for (i = 0; i < 20; i++){
+		for (j = 0; j < 80; j++)
+			screen[i][j] = ' ';
+	}
+
+	for (i = 0; characters[enemyIndex][i] != NULL && i < 20; i++){
+		for (j = 0; characters[enemyIndex][i][j] != NULL && i < 78; j++){
+			if (characters[enemyIndex][i][j] != NULL && characters[enemyIndex][i][j] != NULL != '\n' && characters[enemyIndex][i][j] != ' ')
+				screen[i][j + maxOffset] = characters[enemyIndex][i][j];
+
+		}
+
+	}
+
+	for (i = 0; playerSprite[i] != NULL && i < 10; i++){
+		for (j = 0; playerSprite[i][j] != NULL && i < 78; j++){
+			if (playerSprite[i][j] != NULL && playerSprite[i][j] != NULL != '\n' && playerSprite[i][j] != ' ')
+				screen[i + 10][j] = playerSprite[i][j];
+
+		}
+
+	}
+
+
+
+	
+	updateScreen();
+
+	sprintf(temp, "%s", en->NAME);
+	for (i = 0; i < strlen(temp); i++){
+		screen[0][i + 3] = temp[i];
+		updateScreen();
+		Sleep(20);
+	}
+	Sleep(500);
+
+	sprintf(temp, "Level: ???");
+	for (i = 0; i < strlen(temp); i++){
+		screen[2][i + 3] = temp[i];
+		updateScreen();
+		Sleep(20);
+	}
+	Sleep(500);
+	updateScreen();
+
+	for (i = 0; i < strlen(temp); i++)
+		screen[1][i + 3] = ground;
+	updateScreen();
+
+	encounter(en, user, screen);
+
+	user->isInBattle = 0;
 }
