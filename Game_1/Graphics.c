@@ -59,7 +59,7 @@ int main(int argc, char* argv[]){
 	weapons = malloc(sizeof(WeaponPtr*) * 7);
 	potions = malloc(sizeof(PotionPtr*) * 1);
 	
-	ripHead = malloc(sizeof(char*) * 8);
+	ripHead = malloc(sizeof(char*) * 12);
 	
 	
 
@@ -117,6 +117,10 @@ int main(int argc, char* argv[]){
 	ripHead[5] = loadArt("Frame6.txt");
 	ripHead[6] = loadArt("Frame7.txt");
 	ripHead[7] = loadArt("Frame8.txt");
+	ripHead[8] = loadArt("Frame9.txt");
+	ripHead[9] = loadArt("Frame10.txt");
+	ripHead[10] = loadArt("Frame11.txt");
+	ripHead[11] = loadArt("Frame12.txt");
 
 
 	shopKeeperFaces[0] = loadArt("Shop_n.txt");
@@ -500,6 +504,14 @@ void updateEnemyPosition(Enemy* en, Player user){
 				addAnimation(boxes, 0, 0);
 				//addAnimation(spiral, 0, 20);
 				battleSequence(en[i], user);
+				user->ATK += 2;
+				user->ACC += 1;
+				user->HP += 2;
+				user->MAXHP += 2;
+				user->DEF += 1;
+				user->MATK += 1;
+				user->MDEF += 1;
+				user->LCK += 1;
 				for (j = 0; j < 20; j++){
 					for (k = 0; k < 80; k++)
 						screen[j][k] = tempScreen[j][k];
@@ -3082,6 +3094,33 @@ void bossBattle(Player user, Enemy en){
 	maxOffset = 51;
 	enemyIndex = 5;
 
+
+	for (k = 0; k < 7; k++){
+		for (i = 0; i < 20; i++){
+			for (j = 0; j < 80; j++){
+				
+					if (k % 2 == 0){
+						if (screen[i][j] == ' ')
+							screen[i][j] = '*';
+					}
+						
+					if (k % 2 == 1){
+						if (screen[i][j] == '*')
+							screen[i][j] = ' ';
+					}
+						
+				}
+				
+				
+			}
+				
+		
+		updateScreen();
+		Sleep(100);
+	}
+	addAnimation(boxes, 0, 0);
+
+
 	for (i = 0; i < 20; i++){
 		for (j = 0; j < 80; j++)
 			screen[i][j] = ' ';
@@ -3151,7 +3190,7 @@ void bossBattle(Player user, Enemy en){
 	}
 	Sleep(1000);
 
-	for (k = 0; k < 8; k++){
+	for (k = 0; k < 12; k++){
 		for (i = 0; i < 20; i++){
 			for (j = 0; j < 80; j++)
 				screen[i][j] = ' ';
