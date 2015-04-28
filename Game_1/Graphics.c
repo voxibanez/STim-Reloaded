@@ -617,6 +617,11 @@ void battleSequence(Enemy en, Player user){
 
 	user->isInBattle = 1;
 
+	for (i = 0; i < 20; i++){
+		for (j = 0; j < 80; j++)
+			screen[i][j] = ' ';
+	}
+
 	if (en->NAME == "Skeleton"){
 		enemyIndex = 1;
 		maxOffset = 48;
@@ -640,7 +645,7 @@ void battleSequence(Enemy en, Player user){
 
 
 	while (offsetX < maxOffset){
-		for (i = 0; characters[enemyIndex][i] != NULL && i < 20; i++){
+		for (i = 0; characters[enemyIndex][i] != NULL && i < 14; i++){
 			for (j = 0; characters[enemyIndex][i][j] != NULL && i < 78; j++){
 				if (characters[enemyIndex][i][j] != NULL && characters[enemyIndex][i][j] != NULL != '\n' && characters[enemyIndex][i][j] != ' ')
 					screen[i][j + offsetX] = characters[enemyIndex][i][j];
@@ -674,7 +679,7 @@ void battleSequence(Enemy en, Player user){
 	updateScreen();
 
 
-	for (i = 0; playerSprite[i] != NULL && i < 10; i++){
+	for (i = 0; playerSprite[i] != NULL && i < 15; i++){
 		for (j = 0; playerSprite[i][j] != NULL && i < 78; j++){
 			if (playerSprite[i][j] != NULL && playerSprite[i][j] != NULL != '\n' && playerSprite[i][j] != ' ')
 				screen[i + 10][j] = playerSprite[i][j];
@@ -717,14 +722,20 @@ char** loadArt(char* filename){
 
 	j = 0;
 
-	while (j < i && j<20){
+	while (j <= i && j<20){
 
-		temp[j] = malloc(80 * sizeof(char *));
-		temp[j][0] = NULL;
+		temp[j] = malloc(80 * sizeof(char));
+		for (m = 0; m < 80; m++)
+			temp[j][m] = '\0';
+		
 		fscanf(fp, "%78[^\n]", temp[j]);
 		fscanf(fp, "%c");
 
 		//fgets(temp[j], 78, fp);
+		j++;
+	}
+	if (j < 20){
+		temp[j] = NULL;
 		j++;
 	}
 
@@ -3150,7 +3161,7 @@ void bossBattle(Player user, Enemy en){
 
 
 	while (offsetX < maxOffset){
-		for (i = 0; characters[enemyIndex][i] != NULL && i < 20; i++){
+		for (i = 0; characters[enemyIndex][i] != NULL && i < 14; i++){
 			for (j = 0; characters[enemyIndex][i][j] != NULL && i < 78; j++){
 				if (characters[enemyIndex][i][j] != NULL && characters[enemyIndex][i][j] != NULL != '\n' && characters[enemyIndex][i][j] != ' ')
 					screen[i][j + offsetX] = characters[enemyIndex][i][j];
