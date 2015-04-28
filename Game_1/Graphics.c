@@ -825,8 +825,6 @@ void moveSalesman(SalesMan storeman, Player user){
 SalesMan addSalesman(Player user){
 	SalesMan temp = malloc(sizeof(SalesManSize));
 
-	storeman->conversations = initSpeech();
-
 
 
 	storemanInt = 1;
@@ -1549,11 +1547,12 @@ void useItem(Player User, ItemPtr it){
 		}
 
 
-		if (it->QUANTITY > 1)
-			it->QUANTITY--;
-		else
-			removeItem(User, 1, it);
+		
 	}
+	if (it->QUANTITY > 1)
+		it->QUANTITY--;
+	else
+		removeItem(User, 1, it);
 }
 
 void playerStats(Player user){
@@ -1895,7 +1894,6 @@ void loadGame(Player user){
 	if (loadInt == 1){
 		storemanInt = 1;
 		storeman = malloc(sizeof(SalesManSize));
-		storeman->conversations = initSpeech();
 		fscanf(fp, "%d", &storeman->Position[1][0]);
 		fscanf(fp, "%d", &storeman->Position[1][1]);
 		storeman->Position[0][0] = storeman->Position[1][0];
