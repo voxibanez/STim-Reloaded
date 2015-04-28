@@ -77,3 +77,5 @@ SpeechNodePtr makeNode(SpeechDataPtr the_data);
 void readQuestion(SpeechBinTreePtr speech);
 
 SpeechBinTreePtr initSpeech();
+
+void endGame(Player user);

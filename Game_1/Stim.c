@@ -252,9 +252,7 @@ void encounter(Enemy en, Player user, char** screen)
 			
 		if (user->HP <= 0)
 		{
-			printf("\nYOU DIED\n\n\nHonor rank: %d\n", enemy_level);
-
-			exit(1);
+			gameOver(user);
 			break;
 		}
 	}
@@ -408,6 +406,8 @@ void enemy_attacks(Enemy en, Player user)
 			printf("\nThe orc coughs up blood\n\n");
 		else if (en->index == 3)
 			printf("\nThe troll spits out a tooth\n\n");
+		else if (en->index == 4)
+			printf("\nYou will die just like your weak excuse for a brother!\n\n");
 		Sleep(1000);
 	}
 	en->ATK = en->ATK*en->WMOD;
@@ -421,6 +421,8 @@ void enemy_attacks(Enemy en, Player user)
 			printf("\nThe orc deals a heavy blow!\n\n");
 		else if (en->index == 3)
 			printf("\nThe troll smashes you\n\n");
+		else if (en->index == 4)
+			printf("\nI have you now!\n\n");
 		en->ATK *= 2;
 		Sleep(1000);
 	}
