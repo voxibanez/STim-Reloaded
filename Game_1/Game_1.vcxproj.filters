@@ -124,6 +124,57 @@
     <Text Include="Frame8.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="Frame12.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Frame13.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Frame14.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Frame15.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Frame16.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Frame17.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Frame18.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Frame19.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Frame20.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Frame21.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Frame22.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Frame23.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Frame24.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Frame25.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Frame26.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Frame27.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Cog_Head2.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="Save.s">

@@ -59,7 +59,7 @@ int main(int argc, char* argv[]){
 	weapons = malloc(sizeof(WeaponPtr*) * 7);
 	potions = malloc(sizeof(PotionPtr*) * 1);
 
-	ripHead = malloc(sizeof(char*) * 12);
+	ripHead = malloc(sizeof(char*) * 27);
 
 	
 
@@ -100,7 +100,7 @@ int main(int argc, char* argv[]){
 	characters[3] = loadArt("Orc.txt");
 	characters[4] = loadArt("Troll.txt");
 	characters[5] = loadArt("A_Cog.txt");
-	characters[6] = loadArt("Cog_Head.txt");
+	characters[6] = loadArt("Cog_Head2.txt");
 
 	playerSprite = loadArt("Player.txt");
 
@@ -109,7 +109,6 @@ int main(int argc, char* argv[]){
 	title = loadArt("TitleArt.txt");
 
 	ripHead[0] = loadArt("Frame1.txt");
-
 	ripHead[1] = loadArt("Frame2.txt");
 	ripHead[2] = loadArt("Frame3.txt");
 	ripHead[3] = loadArt("Frame4.txt");
@@ -121,6 +120,21 @@ int main(int argc, char* argv[]){
 	ripHead[9] = loadArt("Frame10.txt");
 	ripHead[10] = loadArt("Frame11.txt");
 	ripHead[11] = loadArt("Frame12.txt");
+	ripHead[12] = loadArt("Frame13.txt");
+	ripHead[13] = loadArt("Frame14.txt");
+	ripHead[14] = loadArt("Frame15.txt");
+	ripHead[15] = loadArt("Frame16.txt");
+	ripHead[16] = loadArt("Frame17.txt");
+	ripHead[17] = loadArt("Frame18.txt");
+	ripHead[18] = loadArt("Frame19.txt");
+	ripHead[19] = loadArt("Frame20.txt");
+	ripHead[20] = loadArt("Frame21.txt");
+	ripHead[21] = loadArt("Frame22.txt");
+	ripHead[22] = loadArt("Frame23.txt");
+	ripHead[23] = loadArt("Frame24.txt");
+	ripHead[24] = loadArt("Frame25.txt");
+	ripHead[25] = loadArt("Frame26.txt");
+	ripHead[26] = loadArt("Frame27.txt");
 
 
 	shopKeeperFaces[0] = loadArt("Shop_n.txt");
@@ -703,7 +717,7 @@ char** loadArt(char* filename){
 
 	j = 0;
 
-	while (j < i){
+	while (j < i && j<20){
 
 		temp[j] = malloc(80 * sizeof(char *));
 		temp[j][0] = NULL;
@@ -3195,7 +3209,7 @@ void bossBattle(Player user, Enemy en){
 	}
 	Sleep(1000);
 
-	for (k = 0; k < 12; k++){
+	for (k = 0; k < 27; k++){
 		for (i = 0; i < 20; i++){
 			for (j = 0; j < 80; j++)
 				screen[i][j] = ' ';
