@@ -3035,15 +3035,15 @@ void bossBattleRoom(Player user){
 	boss->NAME = "A Cognate Pig Sloth";
 
 	boss->index = 3;
-	boss->MAXHP = 30 + (.2*enemy_level);
-	boss->ATK = 20 + (.2*enemy_level);
-	boss->DEF = 10 + (.2*enemy_level);
+	boss->MAXHP = 100 + (.2*enemy_level);
+	boss->ATK = 15 + (.2*enemy_level);
+	boss->DEF = 15 + (.2*enemy_level);
 	boss->MATK = 10 + (.2*enemy_level);
 	boss->MDEF = 6 + (.2*enemy_level);
 	boss->ACC = 85;
 	boss->LCK = 20 + (.2*enemy_level);
-	boss->HP = 30 + (.2*enemy_level);
-	boss->WMOD = 1.5;
+	boss->HP = 100 + (.2*enemy_level);
+	boss->WMOD = 1.3;
 	boss->drop_rareity = 3;
 
 	//addAnimation(spiral, 1, 1);
