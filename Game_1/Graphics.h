@@ -24,7 +24,7 @@ void moveSalesman(SalesMan storeman);
 
 void menuGraphics(Player user);
 
-AnimationPtr initAnimation(int frames,int x,int y);
+AnimationPtr initAnimation(int frames, int x, int y);
 
 void initPlayer();
 
@@ -65,3 +65,15 @@ void buyBox(Player user, SalesMan shopkeeper, ItemPtr it);
 void sellBox(Player user, SalesMan shopkeeper, ItemPtr it);
 
 void bossBattle(Player user, Enemy en);
+
+void shopTalk(Player user, SalesMan shoppkeeper);
+
+ SpeechNodePtr addChild(SpeechNodePtr parent, int leftOrRightChild, char* question, char* answerLeft, char* answerRight);
+
+ SpeechNodePtr addRoot(SpeechBinTreePtr tree, char* question, char* answerLeft, char* answerRight);
+
+SpeechNodePtr makeNode(SpeechDataPtr the_data);
+
+void readQuestion(SpeechBinTreePtr speech);
+
+SpeechBinTreePtr initSpeech();

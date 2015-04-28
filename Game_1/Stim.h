@@ -60,9 +60,26 @@ typedef struct inventory{
 	ItemPtr head;
 }Inventory, *InventoryPtr;
 
+typedef struct speechdata{
+	char* question;
+	char* leftAnswer;
+	char* rightAnswer;
+}SpeechData, *SpeechDataPtr;
+
+typedef struct speechnode{
+	SpeechDataPtr data;
+	struct speechnode * left;
+	struct speechnode * right;
+} SpeechNode, *SpeechNodePtr;
+
+typedef struct speechTree{
+	SpeechNodePtr root;
+}SpeechBinTree, *SpeechBinTreePtr;
 typedef struct salesman{
 	int Position[2][2];
 	InventoryPtr INVENTORY;
+
+	SpeechBinTreePtr conversations;
 }SalesManSize, *SalesMan;
 
 

@@ -139,27 +139,27 @@ Enemy lv1_pick_monster(int levelNum,int r)
 	temp->LEVEL = enemy_level;
 	if (r == 0){
 		temp->index = 0;
-		temp->MAXHP = 8 + (.2*enemy_level);
-		temp->ATK = 6 + (.2*enemy_level);
-		temp->DEF = 1 + (.2*enemy_level);
-		temp->MATK = 8 + (.2*enemy_level);
-		temp->MDEF + (.2*enemy_level);
+		temp->MAXHP = 15 + (enemy_level);
+		temp->ATK = 6 + (enemy_level);
+		temp->DEF = 1 + (enemy_level);
+		temp->MATK = 8 + (enemy_level);
+		temp->MDEF + (enemy_level);
 		temp->ACC = 90;
-		temp->LCK = 5 + (.2*enemy_level);
-		temp->HP = 8 + (.2*enemy_level);
+		temp->LCK = 5 + (enemy_level);
+		temp->HP = 15 + (enemy_level);
 		temp->WMOD = 1.15;
 		temp->NAME = "Goblin";
 		temp->drop_rareity = .5;
 	}
 	else if (r == 1){
 		temp->index = 1;
-		temp->MAXHP = 10 + (.2*enemy_level);
-		temp->ATK = 10 + (.2*enemy_level);
-		temp->DEF = 5 + (.2*enemy_level);
-		temp->MATK = 10 + (.2*enemy_level);
-		temp->MDEF = 5 + (.2*enemy_level);
+		temp->MAXHP = 17 + (enemy_level);
+		temp->ATK = 10 + (enemy_level);
+		temp->DEF = 5 + (enemy_level);
+		temp->MATK = 10 + (enemy_level);
+		temp->MDEF = 5 + (enemy_level);
 		temp->ACC = 80;
-		temp->LCK = 10 + (.2*enemy_level);
+		temp->LCK = 17 + (enemy_level);
 		temp->WMOD = 1.25;
 		temp->HP = temp->MAXHP;
 		temp->NAME = "Skeleton";
@@ -168,28 +168,28 @@ Enemy lv1_pick_monster(int levelNum,int r)
 
 	else if (r == 2){
 		temp->index = 2;
-		temp->MAXHP = 12 + (.2*enemy_level);
-		temp->ATK = 12 + (.2*enemy_level);
-		temp->DEF = 6 + (.2*enemy_level);
-		temp->MATK = 8 + (.2*enemy_level);
-		temp->MDEF = 4 + (.2*enemy_level);
+		temp->MAXHP = 20 + (enemy_level);
+		temp->ATK = 12 + (enemy_level);
+		temp->DEF = 6 + (enemy_level);
+		temp->MATK = 8 + (enemy_level);
+		temp->MDEF = 4 + (enemy_level);
 		temp->ACC = 75;
-		temp->LCK = 10 + (.2*enemy_level);
-		temp->HP = 12 + (.2*enemy_level);
+		temp->LCK = 10 + (enemy_level);
+		temp->HP = 20 + (enemy_level);
 		temp->WMOD = 1.25;
 		temp->NAME = "Orc";
 		temp->drop_rareity = 1.5;
 	}
 	else if (r == 3){
 		temp->index = 3;
-		temp->MAXHP = 18 + (.2*enemy_level);
-		temp->ATK = 14 + (.2*enemy_level);
-		temp->DEF = 2 + (.2*enemy_level);
-		temp->MATK = 10 + (.2*enemy_level);
-		temp->MDEF = 6 + (.2*enemy_level);
+		temp->MAXHP = 25 + (enemy_level);
+		temp->ATK = 14 + (enemy_level);
+		temp->DEF = 2 + (enemy_level);
+		temp->MATK = 10 + (enemy_level);
+		temp->MDEF = 6 + (enemy_level);
 		temp->ACC = 65;
-		temp->LCK = 10 + (.2*enemy_level);
-		temp->HP = 18 + (.2*enemy_level);
+		temp->LCK = 10 + (enemy_level);
+		temp->HP = 25 + (enemy_level);
 		temp->WMOD = 1.3;
 		temp->NAME = "Troll";
 		temp->drop_rareity = 3;
@@ -309,7 +309,7 @@ void combat(Enemy en, Player user)
 	r += 1;
 	accuracy = (user->ACC + user->weaponLeft->AccMod)/2;
 	if (r > accuracy)
-		printf("You miss!\nEnemy is at %d HP\n", en->HP);
+		printf("You miss!\n");
 	else
 	{
 		r = rand() % 100;
@@ -365,13 +365,13 @@ void enemy_combat(Enemy en, Player user)
 	int max, luck, min, r = rand() % 100;
 	r += 1;
 	if (en->NAME = "Skeleton")
-		max = en->ATK*1.2, min = en->ATK*.8;
+		max = ceil(en->ATK*1.2), min = floor(en->ATK*.8);
 	if (en->NAME == "Goblin")
-		max = en->ATK*1.1, min = en->ATK*.9;
+		max = ceil(en->ATK*1.1), floor(min = en->ATK*.9);
 	if (en->NAME == "Orc")
-		max = en->ATK*1.2, min = en->ATK*.9;
+		max = ceil(en->ATK*1.2), min = floor(en->ATK*.9);
 	if (en->NAME == "Troll")
-		max = en->ATK*1.3, min = en->ATK * 1;
+		max = ceil(en->ATK*1.3), min = floor(en->ATK * 1);
 	int roll = max - min + 1;
 	roll = rand() % roll;
 	roll += min;
@@ -382,7 +382,7 @@ void enemy_combat(Enemy en, Player user)
 	}
 	else
 	{
-		int loss = roll - user->DEF;
+		int loss = ceil(1.0*roll / (.2*user->DEF));
 		if (loss < 1)
 			loss = 1;
 		user->HP = user->HP - loss;
@@ -400,26 +400,26 @@ void enemy_attacks(Enemy en, Player user)
 	r += 1;
 	if (en->HP < half_hp)
 	{
-		if (en->NAME == "Skeleton")
+		if (en->index == 1)
 			printf("\nIt's bones are shaking\n\n");
-		else if (en->NAME == "Goblin")
+		else if (en->index == 0)
 			printf("\nThe goblin squeals for mercy\n\n");
-		else if (en->NAME == "Orc")
+		else if (en->index == 2)
 			printf("\nThe orc coughs up blood\n\n");
-		else if (en->NAME == "Troll")
+		else if (en->index == 3)
 			printf("\nThe troll spits out a tooth\n\n");
 		Sleep(1000);
 	}
 	en->ATK = en->ATK*en->WMOD;
 	if (r >= crit)
 	{
-		if (en->NAME == "Skeleton")
+		if (en->index == 1)
 			printf("\nThe skeleton cackles with glee!\n\n");
-		else if (en->NAME == "Goblin")
+		else if (en->index == 0)
 			printf("\nThe goblin is giddy\n\n");
-		else if (en->NAME == "Orc")
+		else if (en->index == 2)
 			printf("\nThe orc deals a heavy blow!\n\n");
-		else if (en->NAME == "Troll")
+		else if (en->index == 3)
 			printf("\nThe troll smashes you\n\n");
 		en->ATK *= 2;
 		Sleep(1000);

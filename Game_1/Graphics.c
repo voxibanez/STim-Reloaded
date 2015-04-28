@@ -6,7 +6,7 @@
 #include <Windows.h>
 #include <conio.h>
 #include <dos.h>
-#include <mmsystem.h>  /* multimedia functions (such as MIDI) for Windows */
+#include <mmsystem.h> 
 #include <sys/types.h>
 #include <errno.h>
 #include "Graphics.h"
@@ -45,8 +45,8 @@ int main(int argc, char* argv[]){
 	enemies = malloc(sizeof(Enemy) * 3);
 	for (i = 0; i < 3; i++)
 		enemies[i] = NULL;
-		
-	shopKeeperFaces = malloc(sizeof(char**)*3);
+
+	shopKeeperFaces = malloc(sizeof(char**) * 3);
 	mainChar->INVENTORY = malloc(sizeof(Inventory));
 	mainChar->INVENTORY->head = malloc(sizeof(Item));
 	mainChar->INVENTORY->head = NULL;
@@ -58,9 +58,9 @@ int main(int argc, char* argv[]){
 	characters = malloc(7 * sizeof(char*));
 	weapons = malloc(sizeof(WeaponPtr*) * 7);
 	potions = malloc(sizeof(PotionPtr*) * 1);
-	
+
 	ripHead = malloc(sizeof(char*) * 12);
-	
+
 	
 
 	boxes = initAnimation(80, 20, 80);
@@ -79,20 +79,20 @@ int main(int argc, char* argv[]){
 	for (k = 0; k < 20; k++){
 		for (i = 0; i < j; i++){
 			if (j % 4 == 0)
-				spiral->frames[i][20-j][i] = 219;
+				spiral->frames[i][20 - j][i] = 219;
 			else if (j % 4 == 3)
 				spiral->frames[i][i][j] = 219;
 			else if (j % 4 == 2)
 				spiral->frames[i][j][i] = 219;
 			else if (j % 4 == 1)
-				spiral->frames[i][i][20-j] = 219;
+				spiral->frames[i][i][20 - j] = 219;
 
 
 		}
 		j--;
 	}
 
-	
+
 
 	characters[0] = loadArt("Unknown.txt");
 	characters[1] = loadArt("Skeleton.txt");
@@ -128,24 +128,24 @@ int main(int argc, char* argv[]){
 
 	weapons = malloc(sizeof(WeaponPtr*) * 8);
 
-	weapons[0] = initWeapon("Empty", 0.0,0.0, 0.0, 1.0, 100, 1,"Nothing to see here",NULL,0);
+	weapons[0] = initWeapon("Empty", 0.0, 0.0, 0.0, 1.0, 100, 1, "Nothing to see here", NULL, 0);
 	weapons[0]->picture = loadArt("Unknown.txt");
-	weapons[1] = initWeapon("Wooden Sword", 1.0, 1.5, 0.85, 1.15, 90, 1, "The strongest of all wooden swords", NULL,200);
+	weapons[1] = initWeapon("Wooden Sword", 1.0, 1.5, 0.85, 1.15, 90, 1, "The strongest of all wooden swords", NULL, 200);
 	weapons[1]->picture = loadArt("Wsword.txt");
-	weapons[2] = initWeapon("Fire Rune", 2.0, 1.4, 0.9, 1.1, 70, 0,"Kindle your flame",NULL,300);
+	weapons[2] = initWeapon("Fire Rune", 2.0, 1.4, 0.9, 1.1, 70, 0, "Kindle your flame", NULL, 300);
 	weapons[2]->picture = loadArt("Firune.txt");
-	weapons[3] = initWeapon("Wood Club", 3.0, 1.0, 0.8, 1.2, 80, 1,"Politics is the skilled use of blunt objects",NULL,600);
+	weapons[3] = initWeapon("Wood Club", 3.0, 1.0, 0.8, 1.2, 80, 1, "Politics is the skilled use of blunt objects", NULL, 600);
 	weapons[3]->picture = loadArt("Wclub.txt");
-	weapons[4] = initWeapon("Chipped Dagger", -1.0, 1.1, 0.95, 1.05, 75, 1,"Excellent for spreading butter",NULL,100);
+	weapons[4] = initWeapon("Chipped Dagger", -1.0, 1.1, 0.95, 1.05, 75, 1, "Excellent for spreading butter", NULL, 100);
 	weapons[4]->picture = loadArt("Cdagger.txt");
-	weapons[5] = initWeapon("Lightning Rune", 2.0, 1.4, 0.9, 1.1, 70, 0, "ZZZZZP", NULL,300);
+	weapons[5] = initWeapon("Lightning Rune", 2.0, 1.4, 0.9, 1.1, 70, 0, "ZZZZZP", NULL, 300);
 	weapons[5]->picture = loadArt("Lrune.txt");
-	weapons[6] = initWeapon("Frost Rune", 2.0, 1.4, 0.9, 1.1, 70, 0, "Death is a dish best served cold", NULL,300);
+	weapons[6] = initWeapon("Frost Rune", 2.0, 1.4, 0.9, 1.1, 70, 0, "Death is a dish best served cold", NULL, 300);
 	weapons[6]->picture = loadArt("Frrune.txt");
 	weapons[7] = initWeapon("OP Rune", 99.0, 99.4, 99.9, 99.1, 990, 0, "Death is a dish best served OP", NULL, 300);
 	weapons[7]->picture = loadArt("Frrune.txt");
 
-	potions[0] = initPotion("Potion", 0, 5, 0, 0, 0, 0, 0, 0, "A Simple Healing Potion", "Potion.txt",50);
+	potions[0] = initPotion("Potion", 0, 5, 0, 0, 0, 0, 0, 0, "A Simple Healing Potion", "Potion.txt", 50);
 	potions[0]->picture = loadArt("Potion.txt");
 
 	srand(time(NULL));
@@ -247,7 +247,7 @@ int main(int argc, char* argv[]){
 
 	updateEnemyPosition(enemies, mainChar);
 
-	
+
 	updatePlayerPosition(mainChar);
 	if (mainChar->BATTLES > 10)
 		bossBattleInitiate(mainChar);
@@ -255,7 +255,7 @@ int main(int argc, char* argv[]){
 	updateScreen();
 
 	while (1){
-		
+
 		//getch();
 		//if (kbhit()){
 		mainChar->isInBattle = 0;
@@ -298,14 +298,14 @@ int main(int argc, char* argv[]){
 }
 
 int titleScreen(Player user){
-	int i, j,k;
+	int i, j, k;
 	char animation[51] = { ' ' };
 	char cursor[3];
 	char temp[64];
 	int key_code = 0;
 
 	animation[50] = NULL;
-	
+
 	for (i = 0; i < 20; i++){
 		animation[25 - i] = '-';
 		animation[25 + i] = '-';
@@ -324,7 +324,7 @@ int titleScreen(Player user){
 			screen[i + 1][j + 20] = title[i][j];
 	}
 	updateScreen();
-	
+
 	sprintf(temp, "Start");
 	for (j = 0; j < strlen(temp); j++){
 		screen[10][j + 31] = temp[j];
@@ -421,7 +421,7 @@ void updatePlayerPosition(Player user){
 	if (rand() % 20 == 0){
 		for (i = 0; i < 3; i++){
 			if (enemies[i] == NULL){
-				enemies[i] = lv1_pick_monster(user->BATTLES,(rand() % 4));
+				enemies[i] = lv1_pick_monster(user->BATTLES, (rand() % 4));
 				break;
 			}
 
@@ -437,30 +437,30 @@ void updatePlayerPosition(Player user){
 	user->Position[0][0] = user->Position[1][0];
 	user->Position[0][1] = user->Position[1][1];
 
-	
 
-	
+
+
 
 }
 
 void updateEnemyPosition(Enemy* en, Player user){
-	int i,j,k;
+	int i, j, k;
 	int tempScreen[20][80];
 	for (i = 0; i<3; i++){
 		if (en[i] != NULL){
 			en[i]->LEVEL = user->BATTLES;
-				if ((rand() % 2) == 1){
-					if (user->Position[1][0] > en[i]->Position[1][0])
-						en[i]->Position[1][0] ++;
-					else if (user->Position[1][0] < en[i]->Position[1][0])
-						en[i]->Position[1][0] --;
-				}
-				else{
-					if (user->Position[1][1] > en[i]->Position[1][1])
-						en[i]->Position[1][1] ++;
-					else if (user->Position[1][1] < en[i]->Position[1][1])
-						en[i]->Position[1][1] --;
-				}
+			if ((rand() % 2) == 1){
+				if (user->Position[1][0] > en[i]->Position[1][0])
+					en[i]->Position[1][0] ++;
+				else if (user->Position[1][0] < en[i]->Position[1][0])
+					en[i]->Position[1][0] --;
+			}
+			else{
+				if (user->Position[1][1] > en[i]->Position[1][1])
+					en[i]->Position[1][1] ++;
+				else if (user->Position[1][1] < en[i]->Position[1][1])
+					en[i]->Position[1][1] --;
+			}
 
 
 			if (en[i]->Position[1][0] < 0)
@@ -473,13 +473,13 @@ void updateEnemyPosition(Enemy* en, Player user){
 			if (en[i]->Position[1][1] > 78)
 				en[i]->Position[1][1] = 78;
 
-			for (j = 0; en[j] != NULL && j<3; j++){
+			for (j = 0; en[j] != NULL && j < 3; j++){
 				if (j != i){
 					if (en[i]->Position[1][0] == en[j]->Position[1][0] && en[i]->Position[1][1] == en[j]->Position[1][1]){
 						en[i]->Position[1][0] = en[i]->Position[0][0];
 						en[i]->Position[1][1] = en[i]->Position[0][1];
 					}
-						
+
 				}
 			}
 			if (storemanInt == 1){
@@ -488,12 +488,12 @@ void updateEnemyPosition(Enemy* en, Player user){
 					en[i]->Position[1][1] = en[i]->Position[0][1];
 				}
 			}
-		
+
 
 			screen[en[i]->Position[0][0]][en[i]->Position[0][1]] = ground;
 			screen[en[i]->Position[1][0]][en[i]->Position[1][1]] = 233;
 
-			
+
 
 			if (user->Position[1][0] == en[i]->Position[1][0] && user->Position[1][1] == en[i]->Position[1][1]){
 				for (j = 0; j < 20; j++){
@@ -658,7 +658,7 @@ void battleSequence(Enemy en, Player user){
 	}
 	Sleep(500);
 	updateScreen();
-	
+
 
 	for (i = 0; playerSprite[i] != NULL && i < 10; i++){
 		for (j = 0; playerSprite[i][j] != NULL && i < 78; j++){
@@ -681,7 +681,7 @@ void battleSequence(Enemy en, Player user){
 }
 
 char** loadArt(char* filename){
-	int i, j, k, l,m;
+	int i, j, k, l, m;
 	char** temp;
 	char tempChar[80];
 	FILE* fp;
@@ -709,7 +709,7 @@ char** loadArt(char* filename){
 		temp[j][0] = NULL;
 		fscanf(fp, "%78[^\n]", temp[j]);
 		fscanf(fp, "%c");
-		
+
 		//fgets(temp[j], 78, fp);
 		j++;
 	}
@@ -717,7 +717,7 @@ char** loadArt(char* filename){
 	return temp;
 }
 
-WeaponPtr initWeapon(char* name, double weaponMod,double weaponMult, double attackModMin, double attackModMax, double AccMod, int isPhysical, char* DESCRIPTION,char* fileName,int price){
+WeaponPtr initWeapon(char* name, double weaponMod, double weaponMult, double attackModMin, double attackModMax, double AccMod, int isPhysical, char* DESCRIPTION, char* fileName, int price){
 	WeaponPtr temp;
 	temp = malloc(sizeof(Weapon));
 
@@ -772,7 +772,7 @@ void moveSalesman(SalesMan storeman, Player user){
 				storeman->Position[1][0] = storeman->Position[0][0];
 				storeman->Position[1][1] = storeman->Position[0][1];
 			}
-			while (enemies[i] != NULL && i<3){
+			while (enemies[i] != NULL && i < 3){
 				if (enemies[i]->Position[1][0] == storeman->Position[1][0] && enemies[i]->Position[1][1] == storeman->Position[1][1]){
 					storeman->Position[1][0] = storeman->Position[0][0];
 					storeman->Position[1][1] = storeman->Position[0][1];
@@ -780,7 +780,7 @@ void moveSalesman(SalesMan storeman, Player user){
 				i++;
 			}
 
-		
+
 
 
 			screen[storeman->Position[0][0]][storeman->Position[0][1]] = ground;
@@ -792,13 +792,18 @@ void moveSalesman(SalesMan storeman, Player user){
 			storeman->Position[0][0] = storeman->Position[1][0];
 			storeman->Position[0][1] = storeman->Position[1][1];
 
-			
+
 		}
 	}
 }
 
 SalesMan addSalesman(Player user){
 	SalesMan temp = malloc(sizeof(SalesManSize));
+
+	storeman->conversations = initSpeech();
+
+
+
 	storemanInt = 1;
 	do{
 		temp->Position[1][0] = rand() % 20;
@@ -821,12 +826,12 @@ void menuGraphics(Player user){
 	int cursor[3];
 	int i, j, k;
 	int key_code = 0;
-	
+
 	for (i = 0; i < 20; i++){
 		for (j = 0; j < 80; j++)
 			tempScreen[i][j] = screen[i][j];
 	}
-	
+
 
 	for (i = 9; i > 0; i--){
 		for (j = 2; j < 22; j++){
@@ -887,53 +892,53 @@ void menuGraphics(Player user){
 		key_code = 0;
 
 
-	screen[cursor[0]][cursor[1]] = 219;
+		screen[cursor[0]][cursor[1]] = 219;
 
-	updateScreen();
+		updateScreen();
 
-	
+
 		key_code = getch();
-	
-			if (key_code == 'w' && cursor[2] > 0){
-				screen[cursor[0]][cursor[1]] = ' ';
-				cursor[0] -= 2;
-				cursor[2] --;
-			}
-			if (key_code == 's' && cursor[2] < 3){
-				screen[cursor[0]][cursor[1]] = ' ';
-				cursor[0] += 2;
-				cursor[2] ++;
-			}
-			if (key_code == 13){
-				for (i = 0; i < 20; i++){
-					for (j = 0; j < 80; j++)
-						tempScreen2[i][j] = screen[i][j];
-				}
-				switch (cursor[2]){
-				case 0:
-					inventoryGraphics(user);
-					break;
-				case 1:
-					playerStats(user);
-					break;
-				case 2:
-					findSaveFile(user);
-					break;
-				case 3:
-					exit(1);
-					break;
-				}
-				screen[cursor[0]][cursor[1]] = 219;
-				for (i = 0; i < 20; i++){
-					for (j = 0; j < 80; j++)
-						screen[i][j] = tempScreen2[i][j];
-				}
 
+		if (key_code == 'w' && cursor[2] > 0){
+			screen[cursor[0]][cursor[1]] = ' ';
+			cursor[0] -= 2;
+			cursor[2] --;
+		}
+		if (key_code == 's' && cursor[2] < 3){
+			screen[cursor[0]][cursor[1]] = ' ';
+			cursor[0] += 2;
+			cursor[2] ++;
+		}
+		if (key_code == 13){
+			for (i = 0; i < 20; i++){
+				for (j = 0; j < 80; j++)
+					tempScreen2[i][j] = screen[i][j];
 			}
-			
-			updateScreen();
-		
-			
+			switch (cursor[2]){
+			case 0:
+				inventoryGraphics(user);
+				break;
+			case 1:
+				playerStats(user);
+				break;
+			case 2:
+				findSaveFile(user);
+				break;
+			case 3:
+				exit(1);
+				break;
+			}
+			screen[cursor[0]][cursor[1]] = 219;
+			for (i = 0; i < 20; i++){
+				for (j = 0; j < 80; j++)
+					screen[i][j] = tempScreen2[i][j];
+			}
+
+		}
+
+		updateScreen();
+
+
 	}
 
 	for (i = 0; i < 20; i++){
@@ -949,7 +954,7 @@ void inventoryGraphics(Player user){
 	int i, j, k, l, m;
 	char tempScreen[20][80];
 	char tempScreen2[20][80];
-	char* temp = malloc(sizeof(char)*64);
+	char* temp = malloc(sizeof(char) * 64);
 	int key_code = 0;
 	int exit = 0;
 	int removedItem = 0;
@@ -966,10 +971,10 @@ void inventoryGraphics(Player user){
 	cursor[1] = 1;
 	cursor[2] = 0;
 
-	
 
-		do{
-			removedItem = 0;
+
+	do{
+		removedItem = 0;
 		tempItem = user->INVENTORY->head;
 		key_code = 0;
 		for (i = 0; i < 20; i++){
@@ -1041,19 +1046,19 @@ void inventoryGraphics(Player user){
 				cursor[1] -= 20;
 				cursor[2] --;
 			}
-			if (key_code == 'd' && cursor[1]<20 && cursor[2]+2 <= user->INVENTORY->size){
-				
-						screen[cursor[0]][cursor[1]] = ' ';
-						cursor[1] += 20;
-						cursor[2] ++;
-				
+			if (key_code == 'd' && cursor[1] < 20 && cursor[2] + 2 <= user->INVENTORY->size){
+
+				screen[cursor[0]][cursor[1]] = ' ';
+				cursor[1] += 20;
+				cursor[2] ++;
+
 			}
 			if (key_code == 's' && cursor[2] + 3 <= user->INVENTORY->size){
-					screen[cursor[0]][cursor[1]] = ' ';
-					cursor[0] += 2;
-					cursor[2] += 2;
-				
-			
+				screen[cursor[0]][cursor[1]] = ' ';
+				cursor[0] += 2;
+				cursor[2] += 2;
+
+
 			}
 
 			if (key_code == 13){
@@ -1065,7 +1070,7 @@ void inventoryGraphics(Player user){
 				for (i = 0; i < cursor[2]; i++){
 					tempItem = tempItem->next;
 				}
-				itemBox(user, tempItem,&exit,&removedItem);
+				itemBox(user, tempItem, &exit, &removedItem);
 				for (i = 0; i < 20; i++){
 					for (j = 0; j < 80; j++)
 						screen[i][j] = tempScreen[i][j];
@@ -1088,16 +1093,16 @@ void inventoryGraphics(Player user){
 
 			}
 
-			
-			
-			}
-			//screen[cursor[0]][cursor[1]] = 219;
 
 
-			updateScreen();
+		}
+		//screen[cursor[0]][cursor[1]] = 219;
 
-		
-	}while (key_code != 27 && exit == 0);
+
+		updateScreen();
+
+
+	} while (key_code != 27 && exit == 0);
 	for (i = 0; i < 20; i++){
 		for (j = 0; j < 80; j++)
 			screen[i][j] = tempScreen2[i][j];
@@ -1107,293 +1112,293 @@ void inventoryGraphics(Player user){
 	return;
 }
 
-void itemBox(Player user,ItemPtr it,int* exit,int* removedItem){
-		char* tempchar = malloc(sizeof(char)*64);
-		int cursor[3];
-		int i, j, k,tempInt;
-		int key_code = 0;
-		for (i = 0; i < 20; i++){
-			for (j = 40; j < 79; j++){
-				screen[i][j] = ' ';
-			}
+void itemBox(Player user, ItemPtr it, int* exit, int* removedItem){
+	char* tempchar = malloc(sizeof(char) * 64);
+	int cursor[3];
+	int i, j, k, tempInt;
+	int key_code = 0;
+	for (i = 0; i < 20; i++){
+		for (j = 40; j < 79; j++){
+			screen[i][j] = ' ';
 		}
+	}
 
-		for (i = 9; i > 0; i--){
-			
-			if (i == 1)
-			{
-				for (j = 40; j < 79; j++)
-					screen[0][j] = 219;
-				screen[1][40] = 219;
-				screen[1][78] = 219;
-			}
-			if (i > 1){
-				screen[18 - i][40] = 219;
-				screen[18 - i][78] = 219;
-				screen[i][40] = 219;
-				screen[i][78] = 219;
-			}
-			if (i == 1)
-			{
-				screen[17][40] = 219;
-				screen[17][78] = 219;
-				for (j = 40; j < 79; j++)
-					screen[18][j] = 219;
-			}
-			Sleep(20);
-			updateScreen();
-		}
-		
-		if (it->POTION != NULL)
+	for (i = 9; i > 0; i--){
+
+		if (i == 1)
 		{
-			i = 1;
-			if (it->POTION->ACCRAISE != 0){
-				sprintf(tempchar, "Accuracy: +%d   ", it->POTION->ACCRAISE);
-				for (j = 0; j < strlen(tempchar); j++){
-					screen[3+i][j + 41] = tempchar[j];
-					i++;
-				}
-					
-			}
-			if (it->POTION->ATKRAISE != 0){
-				sprintf(tempchar, "Attack: +%d   ", it->POTION->ATKRAISE);
-				for (j = 0; j < strlen(tempchar); j++){
-					screen[3+i][j + 41] = tempchar[j];
-					
-				}
-				i++;
-			}
-			if (it->POTION->DEFRAISE != 0){
-				sprintf(tempchar, "Defense: +%d   ", it->POTION->DEFRAISE);
-				for (j = 0; j < strlen(tempchar); j++){
-					screen[3+i][j + 41] = tempchar[j];
-					
-				}
-				i++;
-			}
-			if (it->POTION->HPRAISE != 0){
-				sprintf(tempchar, "HP: +%d   ", it->POTION->HPRAISE);
-				for (j = 0; j < strlen(tempchar); j++){
-					screen[3+i][j + 41] = tempchar[j];
-					
-				}
-				i++;
-			}
-			if (it->POTION->LCKRAISE != 0){
-				sprintf(tempchar, "Luck: +%d   ", it->POTION->LCKRAISE);
-				for (j = 0; j < strlen(tempchar); j++){
-					screen[5][j + i + 41] = tempchar[j];
-					i++;
-				}
-			}
-			if (it->POTION->MATKRAISE != 0){
-				sprintf(tempchar, "Magic Attack: +%d   ", it->POTION->MATKRAISE);
-				for (j = 0; j < strlen(tempchar); j++){
-					screen[3+i][j + i + 41] = tempchar[j];
-					
-				}
-				i++;
-			}
-			if (it->POTION->MDEFRAISE != 0){
-				sprintf(tempchar, "Magic Defense: +%d   ", it->POTION->MDEFRAISE);
-				for (j = 0; j < strlen(tempchar); j++){
-					screen[3+i][j + 41] = tempchar[j];
-					
-				}
-				i++;
-			}
-			if (it->POTION->MAXHPRAISE != 0){
-				sprintf(tempchar, "Max HP: +%d   ", it->POTION->MAXHPRAISE);
-				for (j = 0; j < strlen(tempchar); j++){
-					screen[3+i][j + 42] = tempchar[j];
-					
-				}
-				i++;
-
-			}
-			sprintf(tempchar, "%.20s", it->POTION->NAME);
-			for (i = 0; i < strlen(tempchar); i++)
-			{
-				screen[2][i + 41] = tempchar[i];
-			}
-			sprintf(tempchar, "%s", it->POTION->DESCRIPTION);
-			for (i = 0; i < strlen(tempchar); i++)
-			{
-				if (i>36)
-					screen[12][i + 41 - 37] = tempchar[i];
-				else
-					screen[11][i + 41] = tempchar[i];
-			}
-			for (i = 0; i < 10; i++){
-				for (j = 0; j < 13; j++){
-					if(it->POTION->picture[i][j] == NULL)
-						break;
-					else if (it->POTION->picture[i][j] != '\n'){
-						screen[i + 1][j + 57] = it->POTION->picture[i][j];
-					}
-				}
-			}
-			sprintf(tempchar, "Use");
-			for (i = 0; i < strlen(tempchar); i++)
-			{
-				screen[13][i + 42] = tempchar[i];
-			}
-			
+			for (j = 40; j < 79; j++)
+				screen[0][j] = 219;
+			screen[1][40] = 219;
+			screen[1][78] = 219;
 		}
-
-		if (it->WEAPON != NULL)
-		{
-			sprintf(tempchar, "%.20s", it->WEAPON->NAME);
-			for (i = 0; i < strlen(tempchar); i++)
-			{
-				screen[2][i + 41] = tempchar[i];
-			}
-			sprintf(tempchar, "%s", it->WEAPON->DESCRIPTION);
-			for (i = 0; i < strlen(tempchar); i++)
-			{
-				if (i>36)
-					screen[12][i + 41-37] = tempchar[i];
-				else
-					screen[11][i + 41] = tempchar[i];
-			}
-			for (i = 0; i < 10; i++){
-				for (j = 0; j < 13; j++){
-					if (it->WEAPON->picture[i][j] == NULL)
-						break;
-					else if (it->WEAPON->picture[i][j] != '\n'){
-						screen[i + 1][j + 57] = it->WEAPON->picture[i][j];
-					}
-				}
-			}
-
-			i = 1;
-			if (it->WEAPON->AccMod != 0){
-				sprintf(tempchar, "Accuracy: %g", it->WEAPON->AccMod);
-				for (j = 0; j < strlen(tempchar); j++){
-					screen[3 + i][j + 41] = tempchar[j];
-					
-				}
-				i++;
-			}
-			if (it->WEAPON->attackModMax != 0){
-				sprintf(tempchar, "Attack MOD: %g", it->WEAPON->attackModMax);
-				for (j = 0; j < strlen(tempchar); j++){
-					screen[3 + i][j + 41] = tempchar[j];
-
-				}
-				i++;
-			}
-			
-			sprintf(tempchar, "Equip");
-			for (i = 0; i < strlen(tempchar); i++)
-			{
-				screen[13][i + 42] = tempchar[i];
-			}
-			
-
-		}
-
-		
-		sprintf(tempchar, "Toss");
-		for (i = 0; i < strlen(tempchar); i++)
-		{
-			screen[13][i + 52] = tempchar[i];
-		}
-		sprintf(tempchar, "Cancel");
-		for (i = 0; i < strlen(tempchar); i++)
-		{
-			screen[15][i + 42] = tempchar[i];
-		}
-		
-		for (i = 0; i < 18; i++){
+		if (i > 1){
+			screen[18 - i][40] = 219;
+			screen[18 - i][78] = 219;
+			screen[i][40] = 219;
 			screen[i][78] = 219;
 		}
-		
-
+		if (i == 1)
+		{
+			screen[17][40] = 219;
+			screen[17][78] = 219;
+			for (j = 40; j < 79; j++)
+				screen[18][j] = 219;
+		}
+		Sleep(20);
 		updateScreen();
-		
+	}
 
-		cursor[0] = 13;
-		cursor[1] = 41;
-		cursor[2] = 0;
-
-		screen[cursor[0]][cursor[1]] = 219;
-
-		updateScreen();
-
-		while (key_code != 13 && key_code != 27){
-			key_code = getch();
-
-			if (key_code == 'w' && cursor[0] > 13){
-				screen[cursor[0]][cursor[1]] = ' ';
-				cursor[0] -= 2;
-				cursor[2] -= 2;
+	if (it->POTION != NULL)
+	{
+		i = 1;
+		if (it->POTION->ACCRAISE != 0){
+			sprintf(tempchar, "Accuracy: +%d   ", it->POTION->ACCRAISE);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + 41] = tempchar[j];
+				i++;
 			}
-			if (key_code == 'a' && cursor[1] >= 42){
-				screen[cursor[0]][cursor[1]] = ' ';
-				cursor[1] -= 10;
-				cursor[2] --;
+
+		}
+		if (it->POTION->ATKRAISE != 0){
+			sprintf(tempchar, "Attack: +%d   ", it->POTION->ATKRAISE);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + 41] = tempchar[j];
+
 			}
-			if (key_code == 'd' && (cursor[1] < 42 )){
-				if (!(cursor[0]>13))
-				{
-					screen[cursor[0]][cursor[1]] = ' ';
-					cursor[1] += 10;
-					cursor[2] ++;
-				}
+			i++;
+		}
+		if (it->POTION->DEFRAISE != 0){
+			sprintf(tempchar, "Defense: +%d   ", it->POTION->DEFRAISE);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + 41] = tempchar[j];
+
 			}
-			if (key_code == 's' && cursor[0] < 15 ){
-				if (!(cursor[1]>41)){
-					screen[cursor[0]][cursor[1]] = ' ';
-					cursor[0] += 2;
-					cursor[2] += 2;
-				}
+			i++;
+		}
+		if (it->POTION->HPRAISE != 0){
+			sprintf(tempchar, "HP: +%d   ", it->POTION->HPRAISE);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + 41] = tempchar[j];
+
 			}
-			if (key_code == 13){
-				switch (cursor[2]){
-				case 0:
-					if (user->isInBattle == 1)
-						*exit = 1;
-					useItem(user,it);
+			i++;
+		}
+		if (it->POTION->LCKRAISE != 0){
+			sprintf(tempchar, "Luck: +%d   ", it->POTION->LCKRAISE);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[5][j + i + 41] = tempchar[j];
+				i++;
+			}
+		}
+		if (it->POTION->MATKRAISE != 0){
+			sprintf(tempchar, "Magic Attack: +%d   ", it->POTION->MATKRAISE);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + i + 41] = tempchar[j];
+
+			}
+			i++;
+		}
+		if (it->POTION->MDEFRAISE != 0){
+			sprintf(tempchar, "Magic Defense: +%d   ", it->POTION->MDEFRAISE);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + 41] = tempchar[j];
+
+			}
+			i++;
+		}
+		if (it->POTION->MAXHPRAISE != 0){
+			sprintf(tempchar, "Max HP: +%d   ", it->POTION->MAXHPRAISE);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + 42] = tempchar[j];
+
+			}
+			i++;
+
+		}
+		sprintf(tempchar, "%.20s", it->POTION->NAME);
+		for (i = 0; i < strlen(tempchar); i++)
+		{
+			screen[2][i + 41] = tempchar[i];
+		}
+		sprintf(tempchar, "%s", it->POTION->DESCRIPTION);
+		for (i = 0; i < strlen(tempchar); i++)
+		{
+			if (i>36)
+				screen[12][i + 41 - 37] = tempchar[i];
+			else
+				screen[11][i + 41] = tempchar[i];
+		}
+		for (i = 0; i < 10; i++){
+			for (j = 0; j < 13; j++){
+				if (it->POTION->picture[i][j] == NULL)
 					break;
-				case 1:
-					if (it->QUANTITY > 1){
-						do{
-							printf("How many would you like to throw away?: ");
-							scanf("%d", &tempInt);
-							clear_buffer();
-							if (tempInt <= 0 || tempInt > it->QUANTITY)
-								printf("\nInvalid choice, please select a number between 0 and %d\n", it->QUANTITY);
-						} while (tempInt <= 0 || tempInt > it->QUANTITY);
+				else if (it->POTION->picture[i][j] != '\n'){
+					screen[i + 1][j + 57] = it->POTION->picture[i][j];
+				}
+			}
+		}
+		sprintf(tempchar, "Use");
+		for (i = 0; i < strlen(tempchar); i++)
+		{
+			screen[13][i + 42] = tempchar[i];
+		}
 
-						if (it->QUANTITY != tempInt)
-							it->QUANTITY -= tempInt;
-						else{
-							*removedItem = 1;
-							removeItem(user, 1, it);
-						}
-							
-					}
+	}
+
+	if (it->WEAPON != NULL)
+	{
+		sprintf(tempchar, "%.20s", it->WEAPON->NAME);
+		for (i = 0; i < strlen(tempchar); i++)
+		{
+			screen[2][i + 41] = tempchar[i];
+		}
+		sprintf(tempchar, "%s", it->WEAPON->DESCRIPTION);
+		for (i = 0; i < strlen(tempchar); i++)
+		{
+			if (i>36)
+				screen[12][i + 41 - 37] = tempchar[i];
+			else
+				screen[11][i + 41] = tempchar[i];
+		}
+		for (i = 0; i < 10; i++){
+			for (j = 0; j < 13; j++){
+				if (it->WEAPON->picture[i][j] == NULL)
+					break;
+				else if (it->WEAPON->picture[i][j] != '\n'){
+					screen[i + 1][j + 57] = it->WEAPON->picture[i][j];
+				}
+			}
+		}
+
+		i = 1;
+		if (it->WEAPON->AccMod != 0){
+			sprintf(tempchar, "Accuracy: %g", it->WEAPON->AccMod);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + 41] = tempchar[j];
+
+			}
+			i++;
+		}
+		if (it->WEAPON->attackModMax != 0){
+			sprintf(tempchar, "Attack MOD: %g", it->WEAPON->attackModMax);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + 41] = tempchar[j];
+
+			}
+			i++;
+		}
+
+		sprintf(tempchar, "Equip");
+		for (i = 0; i < strlen(tempchar); i++)
+		{
+			screen[13][i + 42] = tempchar[i];
+		}
+
+
+	}
+
+
+	sprintf(tempchar, "Toss");
+	for (i = 0; i < strlen(tempchar); i++)
+	{
+		screen[13][i + 52] = tempchar[i];
+	}
+	sprintf(tempchar, "Cancel");
+	for (i = 0; i < strlen(tempchar); i++)
+	{
+		screen[15][i + 42] = tempchar[i];
+	}
+
+	for (i = 0; i < 18; i++){
+		screen[i][78] = 219;
+	}
+
+
+	updateScreen();
+
+
+	cursor[0] = 13;
+	cursor[1] = 41;
+	cursor[2] = 0;
+
+	screen[cursor[0]][cursor[1]] = 219;
+
+	updateScreen();
+
+	while (key_code != 13 && key_code != 27){
+		key_code = getch();
+
+		if (key_code == 'w' && cursor[0] > 13){
+			screen[cursor[0]][cursor[1]] = ' ';
+			cursor[0] -= 2;
+			cursor[2] -= 2;
+		}
+		if (key_code == 'a' && cursor[1] >= 42){
+			screen[cursor[0]][cursor[1]] = ' ';
+			cursor[1] -= 10;
+			cursor[2] --;
+		}
+		if (key_code == 'd' && (cursor[1] < 42)){
+			if (!(cursor[0]>13))
+			{
+				screen[cursor[0]][cursor[1]] = ' ';
+				cursor[1] += 10;
+				cursor[2] ++;
+			}
+		}
+		if (key_code == 's' && cursor[0] < 15){
+			if (!(cursor[1]>41)){
+				screen[cursor[0]][cursor[1]] = ' ';
+				cursor[0] += 2;
+				cursor[2] += 2;
+			}
+		}
+		if (key_code == 13){
+			switch (cursor[2]){
+			case 0:
+				if (user->isInBattle == 1)
+					*exit = 1;
+				useItem(user, it);
+				break;
+			case 1:
+				if (it->QUANTITY > 1){
+					do{
+						printf("How many would you like to throw away?: ");
+						scanf("%d", &tempInt);
+						clear_buffer();
+						if (tempInt <= 0 || tempInt > it->QUANTITY)
+							printf("\nInvalid choice, please select a number between 0 and %d\n", it->QUANTITY);
+					} while (tempInt <= 0 || tempInt > it->QUANTITY);
+
+					if (it->QUANTITY != tempInt)
+						it->QUANTITY -= tempInt;
 					else{
 						*removedItem = 1;
 						removeItem(user, 1, it);
 					}
-					break;
-				case 2:
-					key_code = 13;
-					break;
-				}
 
+				}
+				else{
+					*removedItem = 1;
+					removeItem(user, 1, it);
+				}
+				break;
+			case 2:
+				key_code = 13;
+				break;
 			}
-			screen[cursor[0]][cursor[1]] = 219;
-			updateScreen();
 
 		}
-		free(tempchar);
-		return;
-	}
+		screen[cursor[0]][cursor[1]] = 219;
+		updateScreen();
 
-PotionPtr initPotion(char* NAME, int MAXHPRAISE, int HPRAISE, int ATKRAISE, int DEFRAISE, int MATKRAISE, int MDEFRAISE, int ACCRAISE, int LCKRAISE, char* DESCRIPTION,char* fileName,int price){
+	}
+	free(tempchar);
+	return;
+}
+
+PotionPtr initPotion(char* NAME, int MAXHPRAISE, int HPRAISE, int ATKRAISE, int DEFRAISE, int MATKRAISE, int MDEFRAISE, int ACCRAISE, int LCKRAISE, char* DESCRIPTION, char* fileName, int price){
 	int i;
 	PotionPtr temp = malloc(sizeof(Potion));
 
@@ -1435,96 +1440,96 @@ void useItem(Player User, ItemPtr it){
 	int key_code = 0;
 
 	if (it->POTION != NULL){
-				User->ACC += it->POTION->ACCRAISE;
-				User->ATK += it->POTION->ATKRAISE;
-				User->DEF += it->POTION->DEFRAISE;
-				User->HP += it->POTION->HPRAISE;
-				User->LCK += it->POTION->LCKRAISE;
-				User->MATK += it->POTION->MATKRAISE;
-				User->MAXHP += it->POTION->MAXHPRAISE;
-				User->MDEF += it->POTION->MDEFRAISE;
-			}
-			if (it->WEAPON != NULL){
-				for (i = 0; i < 20; i++){
-					for (j = 0; j < 80; j++){
-						tempScreen[i][j] = screen[i][j];
-					}
-				}
-				for (i = 2; i < 18; i++){
-					for (j = 41; j < 77; j++){
-						screen[i][j] = ' ';
-					}
-				}
-
-				sprintf(temp, "Which hand would you like to equip?");
-				for (j = 0; j < strlen(temp); j++){
-					screen[3][j + 42] = temp[j];
-				}
-				sprintf(temp, "Left");
-				for (j = 0; j < strlen(temp); j++){
-					screen[10][j + 51] = temp[j];
-				}
-				sprintf(temp, "Right");
-				for (j = 0; j < strlen(temp); j++){
-					screen[10][j + 61] = temp[j];
-				}
-				cursor[0] = 10;
-				cursor[1] = 50;
-				cursor[2] = 0;
-
-				screen[cursor[0]][cursor[1]] = 219;
-
-				updateScreen();
-
-				while (key_code != 13 && key_code != 27){
-					key_code = getch();
-
-					if (key_code == 'a' && cursor[1] >= 51){
-						screen[cursor[0]][cursor[1]] = ' ';
-						cursor[1] -= 10;
-						cursor[2] --;
-					}
-					if (key_code == 'd' && (cursor[1] < 51)){
-						if (!(cursor[0]>13))
-						{
-							screen[cursor[0]][cursor[1]] = ' ';
-							cursor[1] += 10;
-							cursor[2] ++;
-						}
-					}
-					if (key_code == 13){
-						switch (cursor[2]){
-						case 0:
-							if (User->weaponLeft->NAME != "Empty"){
-								addItem(User, NULL, 1, User->weaponLeft);
-							}
-								
-							User->weaponLeft = it->WEAPON;
-							break;
-						case 1:
-							if (User->weaponRight->NAME != "Empty")
-								addItem(User, NULL, 1, User->weaponRight);
-							User->weaponRight = it->WEAPON;
-							break;
-						}
-						for (i = 0; i < 20; i++){
-							for (j = 0; j < 80; j++){
-								screen[i][j] = tempScreen[i][j];
-							}
-						}
-					}
-					else
-						screen[cursor[0]][cursor[1]] = 219;
-					updateScreen();
-				}
-
-
-				if (it->QUANTITY > 1)
-					it->QUANTITY--;
-				else
-					removeItem(User, 1, it);
+		User->ACC += it->POTION->ACCRAISE;
+		User->ATK += it->POTION->ATKRAISE;
+		User->DEF += it->POTION->DEFRAISE;
+		User->HP += it->POTION->HPRAISE;
+		User->LCK += it->POTION->LCKRAISE;
+		User->MATK += it->POTION->MATKRAISE;
+		User->MAXHP += it->POTION->MAXHPRAISE;
+		User->MDEF += it->POTION->MDEFRAISE;
+	}
+	if (it->WEAPON != NULL){
+		for (i = 0; i < 20; i++){
+			for (j = 0; j < 80; j++){
+				tempScreen[i][j] = screen[i][j];
 			}
 		}
+		for (i = 2; i < 18; i++){
+			for (j = 41; j < 77; j++){
+				screen[i][j] = ' ';
+			}
+		}
+
+		sprintf(temp, "Which hand would you like to equip?");
+		for (j = 0; j < strlen(temp); j++){
+			screen[3][j + 42] = temp[j];
+		}
+		sprintf(temp, "Left");
+		for (j = 0; j < strlen(temp); j++){
+			screen[10][j + 51] = temp[j];
+		}
+		sprintf(temp, "Right");
+		for (j = 0; j < strlen(temp); j++){
+			screen[10][j + 61] = temp[j];
+		}
+		cursor[0] = 10;
+		cursor[1] = 50;
+		cursor[2] = 0;
+
+		screen[cursor[0]][cursor[1]] = 219;
+
+		updateScreen();
+
+		while (key_code != 13 && key_code != 27){
+			key_code = getch();
+
+			if (key_code == 'a' && cursor[1] >= 51){
+				screen[cursor[0]][cursor[1]] = ' ';
+				cursor[1] -= 10;
+				cursor[2] --;
+			}
+			if (key_code == 'd' && (cursor[1] < 51)){
+				if (!(cursor[0]>13))
+				{
+					screen[cursor[0]][cursor[1]] = ' ';
+					cursor[1] += 10;
+					cursor[2] ++;
+				}
+			}
+			if (key_code == 13){
+				switch (cursor[2]){
+				case 0:
+					if (User->weaponLeft->NAME != "Empty"){
+						addItem(User, NULL, 1, User->weaponLeft);
+					}
+
+					User->weaponLeft = it->WEAPON;
+					break;
+				case 1:
+					if (User->weaponRight->NAME != "Empty")
+						addItem(User, NULL, 1, User->weaponRight);
+					User->weaponRight = it->WEAPON;
+					break;
+				}
+				for (i = 0; i < 20; i++){
+					for (j = 0; j < 80; j++){
+						screen[i][j] = tempScreen[i][j];
+					}
+				}
+			}
+			else
+				screen[cursor[0]][cursor[1]] = 219;
+			updateScreen();
+		}
+
+
+		if (it->QUANTITY > 1)
+			it->QUANTITY--;
+		else
+			removeItem(User, 1, it);
+	}
+}
 
 void playerStats(Player user){
 	int i, j;
@@ -1545,20 +1550,20 @@ void playerStats(Player user){
 			if (playerSprite[i][j] != '\n')
 				screen[i][j] = playerSprite[i][j];
 		}
-			
+
 		updateScreen();
 		Sleep(20);
-			
+
 	}
 	Sleep(100);
 
-	sprintf(temp,"%s", user->NAME);
+	sprintf(temp, "%s", user->NAME);
 	for (j = 0; j < strlen(temp); j++)
-		screen[2][j+20] = temp[j];
+		screen[2][j + 20] = temp[j];
 	updateScreen();
 	Sleep(100);
 
-	
+
 	switch (user->CLASS){
 	case 1:
 		sprintf(temp, "Warrior", user->CLASS);
@@ -1580,25 +1585,25 @@ void playerStats(Player user){
 
 	sprintf(temp, "Attack: %d", user->ATK);
 	for (j = 0; j < strlen(temp); j++)
-		screen[4][j+30] = temp[j];
+		screen[4][j + 30] = temp[j];
 	updateScreen();
 	Sleep(100);
 
 	sprintf(temp, "Defense: %d", user->DEF);
 	for (j = 0; j < strlen(temp); j++)
-		screen[5][j+30] = temp[j];
+		screen[5][j + 30] = temp[j];
 	updateScreen();
 	Sleep(100);
 
 	sprintf(temp, "Accuracy: %d", user->ACC);
 	for (j = 0; j < strlen(temp); j++)
-		screen[6][j+30] = temp[j];
+		screen[6][j + 30] = temp[j];
 	updateScreen();
 	Sleep(100);
 
 	sprintf(temp, "Max HP: %d", user->MAXHP);
 	for (j = 0; j < strlen(temp); j++)
-		screen[7][j+30] = temp[j];
+		screen[7][j + 30] = temp[j];
 	updateScreen();
 	Sleep(100);
 
@@ -1714,17 +1719,17 @@ void findSaveFile(Player user){
 void saveGame(Player user){
 	FILE* fp;
 	ItemPtr temp = user->INVENTORY->head;
-	int i,j;
+	int i, j;
 	printf("Saving...\n\n");
 
 
 	fp = fopen("Save.s", "w");
 
 	fprintf(fp, "%s\n", user->NAME);
-	
-	fprintf(fp,"%d\n", user->CLASS);
-	fprintf(fp,"%d\n", user->ATK);
-	fprintf(fp,"%d\n", user->DEF);
+
+	fprintf(fp, "%d\n", user->CLASS);
+	fprintf(fp, "%d\n", user->ATK);
+	fprintf(fp, "%d\n", user->DEF);
 	fprintf(fp, "%d\n", user->ACC);
 	fprintf(fp, "%d\n", user->LCK);
 	fprintf(fp, "%d\n", user->MATK);
@@ -1775,7 +1780,7 @@ void saveGame(Player user){
 
 	fclose(fp);
 
-	
+
 	Sleep(1000);
 	printf("Save complete");
 }
@@ -1783,7 +1788,7 @@ void saveGame(Player user){
 void loadGame(Player user){
 	FILE* fp;
 	ItemPtr temp = user->INVENTORY->head;
-	int loadInt,tempSize,loadInt2;
+	int loadInt, tempSize, loadInt2;
 	char loadChar[64];
 	int i, j;
 
@@ -1824,13 +1829,13 @@ void loadGame(Player user){
 
 	fscanf(fp, "%d", &tempSize);
 
-	
+
 	user->INVENTORY->size = 0;
 
 	for (i = 0; i < tempSize; i++){
 		//fgets(loadChar, 64, fp);
-		fscanf(fp,"%s%*c",loadChar);
-		if (strcmp(loadChar,"Potion",1) == 0){
+		fscanf(fp, "%s%*c", loadChar);
+		if (strcmp(loadChar, "Potion", 1) == 0){
 			fgets(loadChar, 64, fp);
 			fscanf(fp, "%d", &loadInt);
 
@@ -1839,7 +1844,7 @@ void loadGame(Player user){
 					addItem(user, potions[j], loadInt, NULL);
 			}
 		}
-			
+
 		else if (strcmp(loadChar, "Weapon", 1) == 0){
 			fgets(loadChar, 64, fp);
 			fscanf(fp, "%d", &loadInt);
@@ -1851,7 +1856,7 @@ void loadGame(Player user){
 		}
 	}
 
-	
+
 	fscanf(fp, "%d", &j);
 	for (i = 0; i < j; i++){
 		fscanf(fp, "%d", &loadInt);
@@ -1859,12 +1864,13 @@ void loadGame(Player user){
 		enemies[i] = lv1_pick_monster(loadInt2, loadInt);
 		fscanf(fp, "%d", &enemies[i]->Position[1][0]);
 		fscanf(fp, "%d", &enemies[i]->Position[1][1]);
-		}
-	
+	}
+
 	fscanf(fp, "%d", &loadInt);
 	if (loadInt == 1){
 		storemanInt = 1;
 		storeman = malloc(sizeof(SalesManSize));
+		storeman->conversations = initSpeech();
 		fscanf(fp, "%d", &storeman->Position[1][0]);
 		fscanf(fp, "%d", &storeman->Position[1][1]);
 		storeman->Position[0][0] = storeman->Position[1][0];
@@ -1876,10 +1882,10 @@ void loadGame(Player user){
 
 void initGame(Player mainChar){
 	int i, j, k, l;
-	
-	
-	
-	
+
+
+
+
 }
 
 void hpBars(Player user, Enemy en){
@@ -1892,20 +1898,20 @@ void hpBars(Player user, Enemy en){
 	for (i = 0; i <= 20; i++)
 		screen[0][i + 10] = ' ';
 
-	sprintf(temp, "Enemy Hp %d/%d",en->HP,en->MAXHP);
+	sprintf(temp, "Enemy Hp %d/%d", en->HP, en->MAXHP);
 	for (i = 0; i < strlen(temp); i++)
 		screen[0][i + 10] = temp[i];
 	j = 0;
 
-	for (i = 0; i <= (((double)en->HP*100) / ((double)en->MAXHP*10))*4;i++){
+	for (i = 0; i <= (((double)en->HP * 100) / ((double)en->MAXHP * 10)) * 4; i++){
 
 		if (i % 2 == 1)
-			screen[2][j+10] = 177;
+			screen[2][j + 10] = 177;
 		else{
-			screen[2][j+10] = 219;
+			screen[2][j + 10] = 219;
 			j++;
 		}
-			
+
 	}
 
 	screen[2][31] = 186;
@@ -1931,7 +1937,7 @@ void hpBars(Player user, Enemy en){
 		screen[16][i + 20] = temp[i];
 	j = 0;
 
-	for (i = 0; i <= (((double)user->HP * 100) / ((double)user->MAXHP * 10))*4; i++){
+	for (i = 0; i <= (((double)user->HP * 100) / ((double)user->MAXHP * 10)) * 4; i++){
 
 		if (i % 2 == 1)
 			screen[18][j + 20] = 177;
@@ -1963,7 +1969,7 @@ void lv1drops(Player user)
 		printf("It dropped nothing!\n");
 	if (roll >= 5 && roll < 9)
 	{
-		itm = (rand() % (weaponSize-2)) +1;
+		itm = (rand() % (weaponSize - 2)) + 1;
 		do{
 			updateScreen();
 			printf("Enemy dropped a %s\n", weapons[itm]->NAME);
@@ -1974,8 +1980,8 @@ void lv1drops(Player user)
 			}
 			clear_buffer();
 		} while (choice > 2 && choice < 1);
-		
-		
+
+
 	}
 }
 
@@ -1986,7 +1992,7 @@ void Shop(Player user, SalesMan shopkeeper){
 	int key_code = 0;
 	char tempScreen[20][80];
 	int exit = 0;
-	
+
 
 	shopkeeper->INVENTORY = malloc(sizeof(Inventory));
 	shopkeeper->INVENTORY->size = 0;
@@ -1998,14 +2004,14 @@ void Shop(Player user, SalesMan shopkeeper){
 		addItemShop(shopkeeper, NULL, 1, weapons[i]);
 
 
-	
+
 
 
 
 	cursor[0] = 10;
 	cursor[1] = 20;
-	cursor[2] = 0;	
-	
+	cursor[2] = 0;
+
 	while (exit == 0){
 		key_code = 0;
 
@@ -2020,7 +2026,7 @@ void Shop(Player user, SalesMan shopkeeper){
 			for (j = 0; shopKeeperFaces[0][i][j] != NULL && j < 80; j++)
 				screen[i][j + 5] = shopKeeperFaces[0][i][j];
 		}
-		
+
 
 		sprintf(temp, "Hello, welcome to my shop");
 		for (j = 0; j < strlen(temp); j++){
@@ -2038,7 +2044,7 @@ void Shop(Player user, SalesMan shopkeeper){
 		for (j = 0; j < strlen(temp); j++){
 			screen[12][j + 21] = temp[j];
 		}
-		sprintf(temp, "Cancel");
+		sprintf(temp, "Exit");
 		for (j = 0; j < strlen(temp); j++){
 			screen[12][j + 31] = temp[j];
 		}
@@ -2083,13 +2089,12 @@ void Shop(Player user, SalesMan shopkeeper){
 					Sell(user, shopkeeper);
 					break;
 				case 2:
+					shopTalk(user, shopkeeper);
 					break;
 				case 3:
 					exit = 1;
 					break;
 				}
-				
-			
 			}
 			else
 				screen[cursor[0]][cursor[1]] = 219;
@@ -2372,7 +2377,7 @@ void Sell(Player user, SalesMan shopkeeper){
 				for (i = 0; i < cursor[2]; i++){
 					tempItem = tempItem->next;
 				}
-				sellBox(user,shopkeeper, tempItem);
+				sellBox(user, shopkeeper, tempItem);
 				for (i = 0; i < 20; i++){
 					for (j = 0; j < 80; j++)
 						screen[i][j] = tempScreen[i][j];
@@ -2414,7 +2419,7 @@ void Sell(Player user, SalesMan shopkeeper){
 	return;
 }
 
-void buyBox(Player user,SalesMan shopkeeper, ItemPtr it){
+void buyBox(Player user, SalesMan shopkeeper, ItemPtr it){
 	char* tempchar = malloc(sizeof(char) * 64);
 	int cursor[3];
 	int toBuy;
@@ -2460,14 +2465,14 @@ void buyBox(Player user,SalesMan shopkeeper, ItemPtr it){
 		sprintf(tempchar, "Price: %d coins", it->POTION->price);
 		for (j = 0; j < strlen(tempchar); j++){
 			screen[3 + i][j + 41] = tempchar[j];
-			
+
 		}
-		i+=2;
+		i += 2;
 		if (it->POTION->ACCRAISE != 0){
 			sprintf(tempchar, "Accuracy: +%d", it->POTION->ACCRAISE);
 			for (j = 0; j < strlen(tempchar); j++){
 				screen[3 + i][j + 41] = tempchar[j];
-				
+
 			}
 			i++;
 		}
@@ -2562,9 +2567,9 @@ void buyBox(Player user,SalesMan shopkeeper, ItemPtr it){
 		sprintf(tempchar, "Price: %d coins", it->WEAPON->price);
 		for (j = 0; j < strlen(tempchar); j++){
 			screen[1 + i][j + 41] = tempchar[j];
-			
+
 		}
-		i+=2;
+		i += 2;
 		sprintf(tempchar, "%.20s", it->WEAPON->NAME);
 		for (i = 0; i < strlen(tempchar); i++)
 		{
@@ -2651,7 +2656,7 @@ void buyBox(Player user,SalesMan shopkeeper, ItemPtr it){
 				cursor[2] ++;
 			}
 		}
-		
+
 		if (key_code == 13){
 			switch (cursor[2]){
 			case 0:
@@ -2660,7 +2665,7 @@ void buyBox(Player user,SalesMan shopkeeper, ItemPtr it){
 						printf("How many would you like to buy?: ");
 						while (scanf("%d", &toBuy) != 1)
 							clear_buffer();
-						
+
 					} while (toBuy > it->QUANTITY && toBuy < 1);
 				}
 				else
@@ -2679,7 +2684,7 @@ void buyBox(Player user,SalesMan shopkeeper, ItemPtr it){
 				else if (it->WEAPON != NULL){
 					if (user->CURRENCY >= it->WEAPON->price * toBuy){
 						user->CURRENCY -= it->WEAPON->price * toBuy;
-						addItem(user,NULL , toBuy, weapons[it->WEAPON->index]);
+						addItem(user, NULL, toBuy, weapons[it->WEAPON->index]);
 						removeItemShop(shopkeeper, toBuy, it);
 					}
 					else{
@@ -2688,7 +2693,7 @@ void buyBox(Player user,SalesMan shopkeeper, ItemPtr it){
 						getch();
 					}
 				}
-				
+
 
 				break;
 			case 1:
@@ -2748,7 +2753,7 @@ void sellBox(Player user, SalesMan shopkeeper, ItemPtr it){
 	{
 		i = 1;
 
-		sprintf(tempchar, "Sell Price: %d coins", it->POTION->price/2);
+		sprintf(tempchar, "Sell Price: %d coins", it->POTION->price / 2);
 		for (j = 0; j < strlen(tempchar); j++){
 			screen[3 + i][j + 41] = tempchar[j];
 
@@ -2850,7 +2855,7 @@ void sellBox(Player user, SalesMan shopkeeper, ItemPtr it){
 
 	if (it->WEAPON != NULL)
 	{
-		sprintf(tempchar, "Sell Price: %d coins", it->WEAPON->price*(2/3));
+		sprintf(tempchar, "Sell Price: %d coins", it->WEAPON->price*(2 / 3));
 		for (j = 0; j < strlen(tempchar); j++){
 			screen[1 + i][j + 41] = tempchar[j];
 
@@ -2956,15 +2961,15 @@ void sellBox(Player user, SalesMan shopkeeper, ItemPtr it){
 				else if (it->QUANTITY == 1)
 					toSell = 1;
 				if (it->POTION != NULL){
-					
-						user->CURRENCY += it->POTION->price/2*toSell;
-						addItemShop(shopkeeper, potions[it->POTION->index], toSell, NULL);
-						removeItem(user, toSell, it);
+
+					user->CURRENCY += it->POTION->price / 2 * toSell;
+					addItemShop(shopkeeper, potions[it->POTION->index], toSell, NULL);
+					removeItem(user, toSell, it);
 				}
 				else if (it->WEAPON != NULL){
-						user->CURRENCY += (it->WEAPON->price*(2.0 / 3.0)*toSell);
-						addItemShop(shopkeeper, NULL, toSell, weapons[it->WEAPON->index]);
-						removeItem(user, toSell, it);
+					user->CURRENCY += (it->WEAPON->price*(2.0 / 3.0)*toSell);
+					addItemShop(shopkeeper, NULL, toSell, weapons[it->WEAPON->index]);
+					removeItem(user, toSell, it);
 				}
 
 				break;
@@ -2994,7 +2999,7 @@ void bossBattleInitiate(Player player){
 }
 
 void bossBattleRoom(Player user){
-	int i, j,k;
+	int i, j, k;
 	int enemy_level = 20;
 	int key_code = 0;
 	Enemy boss = malloc(sizeof(EnemySize));
@@ -3017,7 +3022,7 @@ void bossBattleRoom(Player user){
 	user->Position[1][0] = 20;
 	user->Position[1][1] = 40;
 
-	
+
 
 	ground = ' ';
 	for (i = 0; i < 20; i++){
@@ -3098,23 +3103,23 @@ void bossBattle(Player user, Enemy en){
 	for (k = 0; k < 7; k++){
 		for (i = 0; i < 20; i++){
 			for (j = 0; j < 80; j++){
-				
-					if (k % 2 == 0){
-						if (screen[i][j] == ' ')
-							screen[i][j] = '*';
-					}
-						
-					if (k % 2 == 1){
-						if (screen[i][j] == '*')
-							screen[i][j] = ' ';
-					}
-						
+
+				if (k % 2 == 0){
+					if (screen[i][j] == ' ')
+						screen[i][j] = '*';
 				}
-				
-				
+
+				if (k % 2 == 1){
+					if (screen[i][j] == '*')
+						screen[i][j] = ' ';
+				}
+
 			}
-				
-		
+
+
+		}
+
+
 		updateScreen();
 		Sleep(100);
 	}
@@ -3125,8 +3130,8 @@ void bossBattle(Player user, Enemy en){
 		for (j = 0; j < 80; j++)
 			screen[i][j] = ' ';
 	}
-	
-	
+
+
 
 
 
@@ -3205,7 +3210,7 @@ void bossBattle(Player user, Enemy en){
 			Sleep(1000);
 		else
 			Sleep(100);
-		
+
 	}
 	Sleep(1000);
 	printf("Press enter to continue...");
@@ -3230,7 +3235,7 @@ void bossBattle(Player user, Enemy en){
 	maxOffset = 33;
 
 
-	
+
 	for (i = 0; characters[enemyIndex][i] != NULL && i < 20; i++){
 		for (j = 0; characters[enemyIndex][i][j] != NULL && i < 78; j++){
 			screen[i][j + offsetX - 1] = ground;
@@ -3262,7 +3267,7 @@ void bossBattle(Player user, Enemy en){
 		updateScreen();
 		Sleep(20);
 	}
-	
+
 	printf("Press enter to continue...");
 	clear_buffer();
 
@@ -3312,14 +3317,233 @@ void bossBattle(Player user, Enemy en){
 	for (i = 0; i < strlen(temp); i++)
 		screen[1][i + 3] = ground;
 
-	for (i = 0; i < 10;i++)
+	for (i = 0; i < 10; i++)
 		screen[0][i] = ' ';
 	for (i = 0; i < 10; i++)
 		screen[2][i] = ' ';
-	
+
 	updateScreen();
 
 	encounter(en, user, screen);
 
 	user->isInBattle = 0;
+}
+
+void shopTalk(Player user, SalesMan shoppkeeper){
+	int i, j, k;
+	char temp[80];
+	int key_code = 0;
+	int cursor[3];
+
+	for (i = 0; i < 20; i++){
+		for (j = 0; j < 80; j++)
+			screen[i][j] = ' ';
+	}
+
+	sprintf(temp, "What would you like to ask me?");
+	for (i = 0; i < strlen(temp); i++)
+	{
+		screen[2][i + 15] = temp[i];
+	}
+	sprintf(temp, "What weapon should I get?", user->NAME);
+	for (i = 0; i < strlen(temp); i++)
+	{
+		screen[4][i + 15] = temp[i];
+	}
+	sprintf(temp, "Kill me", user->NAME);
+	for (i = 0; i < strlen(temp); i++)
+	{
+		screen[6][i + 15] = temp[i];
+	}
+	
+
+	cursor[0] = 4;
+	cursor[1] = 14;
+	cursor[2] = 0;
+	while (key_code != 13){
+		key_code = 0;
+
+
+		screen[cursor[0]][cursor[1]] = 219;
+
+		updateScreen();
+
+
+		key_code = getch();
+
+		if (key_code == 'w' && cursor[2] > 0){
+			screen[cursor[0]][cursor[1]] = ' ';
+			cursor[0] -= 2;
+			cursor[2] --;
+		}
+		if (key_code == 's' && cursor[2] < 1){
+			screen[cursor[0]][cursor[1]] = ' ';
+			cursor[0] += 2;
+			cursor[2] ++;
+		}
+		if (key_code == 13){
+			switch (cursor[2]){
+			case 0:
+				readQuestion(initSpeech());
+				break;
+			case 1:
+				
+				break;
+			}
+			screen[cursor[0]][cursor[1]] = 219;
+		}
+
+		updateScreen();
+	}
+}
+
+SpeechNodePtr addRoot(SpeechBinTreePtr tree, char* question, char* leftAnswer, char* rightAnswer){
+	SpeechDataPtr the_data = malloc(sizeof(SpeechData));
+
+	the_data->question = question;
+	the_data->leftAnswer = leftAnswer;
+	the_data->rightAnswer = rightAnswer;
+
+	tree->root = makeNode(the_data);
+	return tree->root;
+}
+SpeechNodePtr addChild(SpeechNodePtr parent, int leftOrRightChild,char* question, char* leftAnswer, char* rightAnswer){
+	SpeechNodePtr temp;
+	SpeechDataPtr the_data = malloc(sizeof(SpeechData));
+
+	the_data->question = question;
+	the_data->leftAnswer = leftAnswer;
+	the_data->rightAnswer = rightAnswer;
+
+	temp = makeNode(the_data);
+
+	if (leftOrRightChild == 1){
+		parent->right = temp;
+	}
+	else if (leftOrRightChild == -1){
+		parent->left = temp;
+	}
+
+	return temp;
+}
+SpeechNodePtr makeNode(SpeechDataPtr the_data){
+	SpeechNodePtr np = malloc(sizeof(SpeechNode));
+	np->data = malloc(sizeof(SpeechData));
+	np->data->question = the_data->question;
+	np->data->leftAnswer = the_data->leftAnswer;
+	np->data->rightAnswer = the_data->rightAnswer;
+	np->left = NULL;
+	np->right = NULL;
+
+	return np;
+}
+void readQuestion(SpeechBinTreePtr speech){
+	int i, j, k;
+	int key_code = 0;
+	int cursor[3];
+	SpeechNodePtr temp = speech->root;
+
+	
+
+	for (k = 0; k < 4;k++){
+		key_code = 0;
+		for (i = 0; i < 20; i++){
+			for (j = 0; j < 80; j++)
+				screen[i][j] = ' ';
+		}
+
+		updateScreen();
+
+		for (i = 0; i < 80 && temp->data->question[i] != NULL; i++)
+		{
+			screen[2][i] = temp->data->question[i];
+			updateScreen();
+			Sleep(20);
+		}
+		
+		for (i = 0; i < 80 && temp->data->leftAnswer[i] != NULL; i++)
+		{
+			screen[4][i + 15] = temp->data->leftAnswer[i];
+		}
+
+		for (i = 0; i < 80 && temp->data->rightAnswer[i] != NULL; i++)
+		{
+			screen[6][i + 15] = temp->data->rightAnswer[i];
+		}
+
+
+		cursor[0] = 4;
+		cursor[1] = 14;
+		cursor[2] = 0;
+		while (key_code != 13){
+			key_code = 0;
+
+
+			screen[cursor[0]][cursor[1]] = 219;
+
+			updateScreen();
+
+
+			key_code = getch();
+
+			if (key_code == 'w' && cursor[2] > 0){
+				screen[cursor[0]][cursor[1]] = ' ';
+				cursor[0] -= 2;
+				cursor[2] --;
+			}
+			if (key_code == 's' && cursor[2] < 1){
+				screen[cursor[0]][cursor[1]] = ' ';
+				cursor[0] += 2;
+				cursor[2] ++;
+			}
+			if (key_code == 13){
+				switch (cursor[2]){
+				case 0:
+					temp = temp->left;
+					break;
+				case 1:
+					temp = temp->right;
+					break;
+				}
+				screen[cursor[0]][cursor[1]] = 219;
+			}
+
+			updateScreen();
+
+
+		}
+	}
+
+
+}
+SpeechBinTreePtr initSpeech(){
+	SpeechBinTreePtr temp = malloc(sizeof(SpeechBinTree));
+	SpeechNodePtr tempSpeech;
+
+
+	tempSpeech = addRoot(temp, "You find a 100 dollar bill on the ground, what do you do?", "Pick it up, it belongs to me", "Leave it there, its not mine");
+	tempSpeech = addChild(tempSpeech, 1, "You see a kid getting bullied at school, what do you do?", "Confront the bullies", "Walk away quickly");
+	tempSpeech = addChild(tempSpeech, 1, "You are invited to a party, how do you respond?", "No thanks, I'm not into parties", "YES!");
+	addChild(tempSpeech, 1, "I would recommend a Lightning Rune to compliment your quirky personality", "Thanks!", "Agdsagsag");
+	addChild(tempSpeech, -1, "I would recommend a Steel Dagger to compliment your timid personality", "Okay, I guess", "I don't think that is correct, in my opinion");
+
+	tempSpeech = temp->root;
+	tempSpeech = addChild(tempSpeech, -1, "You come across a homeless man on the street, he needs money. What do you do?", "Give him the 100 dollar bill you found", "Nothing, he looks alright to me");
+	tempSpeech = addChild(tempSpeech, -1, "You didn't study for this test what do you do?", "Take a little peek at my neighbors paper", "I would rather have a poor grade than no dignity");
+	addChild(tempSpeech, 1, "I would recommend a Great Sword to compliment your chivalrous personality", "Thank you sir", "I am grateful for your services");
+	addChild(tempSpeech, -1, "I would recommend a Chipped Dagger to compliment your selfish personality", "Wow...", "Can I have it for free?");
+
+
+	tempSpeech = temp->root->right;
+
+	tempSpeech = addChild(tempSpeech, -1, "Someone mistakes you for Guy Fieri, what do you do?", "Welcome to flavor town", "Who?");
+	addChild(tempSpeech, 1, "I would recommend a Wooden Club to compliment your uncultured personality", "Thanks", "What?");
+	addChild(tempSpeech, -1, "I would recommend a Fire Rune to compliment your spicy personality", "Some people are just born to cook and talk", "I am a filthy liar");
+
+	tempSpeech = temp->root->left;
+	tempSpeech = addChild(temp, 1, "Do you like memes?", "Absolutely!", "Memes?");
+	addChild(tempSpeech, 1, "You are lucky", "a", "a");
+	addChild(tempSpeech, -1, "I would recommend Quiting The Game to compliment your horrible personality", "Some people are just born to cook and talk", "a", "a");
+
+	return temp;
 }

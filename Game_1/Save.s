@@ -1,40 +1,47 @@
+Tim
 1
-1
+31
+23
+80
+18
+16
+22
+29
+31
 11
-13
-70
-8
-6
-12
-11
-11
-13
-1288
-2
-35
-OP Rune
+1588
+18
+34
+Chipped Dagger
 Empty
-5
+6
 Potion
 Potion
 6
 Weapon
 Fire Rune
-1
+2
 Weapon
 Wood Club
 1
 Weapon
 Chipped Dagger
-2
+1
 Weapon
 Frost Rune
 1
+Weapon
+OP Rune
 1
-1
-13
 2
-55
+2
+11
+16
+60
 1
-4
-26
+11
+18
+46
+1
+17
+34
