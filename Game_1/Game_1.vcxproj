@@ -95,6 +95,8 @@
     <Text Include="Cog_Head2.txt" />
     <Text Include="Firune.txt" />
     <Text Include="Frame1.txt" />
+    <Text Include="Frame10.txt" />
+    <Text Include="Frame11.txt" />
     <Text Include="Frame12.txt" />
     <Text Include="Frame13.txt" />
     <Text Include="Frame14.txt" />
@@ -118,6 +120,7 @@
     <Text Include="Frame6.txt" />
     <Text Include="Frame7.txt" />
     <Text Include="Frame8.txt" />
+    <Text Include="Frame9.txt" />
     <Text Include="Frrune.txt" />
     <Text Include="Game_info.txt" />
     <Text Include="Goblin.txt" />

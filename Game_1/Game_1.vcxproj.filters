@@ -175,6 +175,15 @@
     <Text Include="Cog_Head2.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="Frame9.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Frame10.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Frame11.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="Save.s">
