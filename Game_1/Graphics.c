@@ -56,7 +56,7 @@ int main(int argc, char* argv[]){
 	mainChar->weaponRight = malloc(sizeof(Weapon));
 
 	characters = malloc(7 * sizeof(char*));
-	weapons = malloc(sizeof(WeaponPtr*) * 7);
+	weapons = malloc(sizeof(WeaponPtr*) * 11);
 	potions = malloc(sizeof(PotionPtr*) * 1);
 
 	ripHead = malloc(sizeof(char*) * 27);
@@ -140,15 +140,13 @@ int main(int argc, char* argv[]){
 	shopKeeperFaces[0] = loadArt("Shop_n.txt");
 	storeman = NULL;
 
-	weapons = malloc(sizeof(WeaponPtr*) * 8);
-
 	weapons[0] = initWeapon("Empty", 0.0, 0.0, 0.0, 1.0, 100, 1, "Nothing to see here", NULL, 0);
 	weapons[0]->picture = loadArt("Unknown.txt");
 	weapons[1] = initWeapon("Wooden Sword", 1.0, 1.5, 0.85, 1.15, 90, 1, "The strongest of all wooden swords", NULL, 200);
 	weapons[1]->picture = loadArt("Wsword.txt");
 	weapons[2] = initWeapon("Fire Rune", 2.0, 1.4, 0.9, 1.1, 70, 0, "Kindle your flame", NULL, 300);
 	weapons[2]->picture = loadArt("Firune.txt");
-	weapons[3] = initWeapon("Wood Club", 3.0, 1.0, 0.8, 1.2, 80, 1, "Politics is the skilled use of blunt objects", NULL, 600);
+	weapons[3] = initWeapon("Wood Club", 3.0, 1.0, 0.8, 1.2, 80, 1, "Politics is the skilled use of blunt objects", NULL, 500);
 	weapons[3]->picture = loadArt("Wclub.txt");
 	weapons[4] = initWeapon("Chipped Dagger", -1.0, 1.1, 0.95, 1.05, 75, 1, "Excellent for spreading butter", NULL, 100);
 	weapons[4]->picture = loadArt("Cdagger.txt");
@@ -156,12 +154,14 @@ int main(int argc, char* argv[]){
 	weapons[5]->picture = loadArt("Lrune.txt");
 	weapons[6] = initWeapon("Frost Rune", 2.0, 1.4, 0.9, 1.1, 70, 0, "Death is a dish best served cold", NULL, 300);
 	weapons[6]->picture = loadArt("Frrune.txt");
-	weapons[7] = initWeapon("OP Rune", 99.0, 99.4, 99.9, 99.1, 990, 0, "Death is a dish best served OP", NULL, 300);
-	weapons[7]->picture = loadArt("Frrune.txt");
-
+	weapons[7] = initWeapon("Greatsword", 5.0, 1.3, .6, 1.2, 60, 1, "Size Matters.", NULL, 1000);
+	weapons[7]->picture = loadArt("Gsword.txt");
+	weapons[8] = initWeapon("Steel Sword", 2.0, 1.75, .85, 1.15, 90, 1, "Slay your foes!", NULL, 750);
+	weapons[8]->picture = loadArt("Ssword.txt");
+	weapons[9] = initWeapon("Steel Dagger", 0, 1.55, .9, 1.1, 80, 1, "Great for stabbing!", NULL, 600);
+	weapons[9]->picture = loadArt("Sdagger.txt");
 	potions[0] = initPotion("Potion", 0, 5, 0, 0, 0, 0, 0, 0, "A Simple Healing Potion", "Potion.txt", 50);
 	potions[0]->picture = loadArt("Potion.txt");
-
 	srand(time(NULL));
 
 
@@ -233,12 +233,10 @@ int main(int argc, char* argv[]){
 		tempItem->next = NULL;
 
 		addItem(mainChar, potions[0], 3, NULL);
-		addItem(mainChar, potions[0], 3, NULL);
-		addItem(mainChar, NULL, 1, weapons[2]);
-		addItem(mainChar, NULL, 1, weapons[3]);
 		addItem(mainChar, NULL, 1, weapons[4]);
-		addItem(mainChar, NULL, 1, weapons[6]);
 		addItem(mainChar, NULL, 1, weapons[7]);
+		addItem(mainChar, NULL, 1, weapons[8]);
+		addItem(mainChar, NULL, 1, weapons[9]);
 		warriornextlevel(mainChar);
 	}
 	else
@@ -1303,8 +1301,16 @@ void itemBox(Player user, ItemPtr it, int* exit, int* removedItem){
 			}
 			i++;
 		}
-		if (it->WEAPON->attackModMax != 0){
-			sprintf(tempchar, "Attack MOD: %g", it->WEAPON->attackModMax);
+		if (it->WEAPON->weaponMod != 0){
+			sprintf(tempchar, "Attack MOD: %g", it->WEAPON->weaponMod);
+			for (j = 0; j < strlen(tempchar); j++){
+				screen[3 + i][j + 41] = tempchar[j];
+
+			}
+			i++;
+		}
+		if (it->WEAPON->weaponMult != 0){
+			sprintf(tempchar, "Attack Mult: %g", it->WEAPON->weaponMult);
 			for (j = 0; j < strlen(tempchar); j++){
 				screen[3 + i][j + 41] = tempchar[j];
 
@@ -1599,7 +1605,7 @@ void playerStats(Player user){
 		sprintf(temp, "Mage", user->CLASS);
 		break;
 	case 4:
-		sprintf(temp, "Rouge", user->CLASS);
+		sprintf(temp, "Rogue", user->CLASS);
 		break;
 	}
 	for (j = 0; j < strlen(temp); j++)

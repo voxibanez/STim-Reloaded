@@ -124,13 +124,16 @@
     <Text Include="Frrune.txt" />
     <Text Include="Game_info.txt" />
     <Text Include="Goblin.txt" />
+    <Text Include="Gsword.txt" />
     <Text Include="Lrune.txt" />
     <Text Include="Orc.txt" />
     <Text Include="Player.txt" />
     <Text Include="Potion.txt" />
     <Text Include="Save.txt" />
+    <Text Include="Sdagger.txt" />
     <Text Include="Shop_n.txt" />
     <Text Include="Skeleton.txt" />
+    <Text Include="Ssword.txt" />
     <Text Include="TitleArt.txt" />
     <Text Include="Troll.txt" />
     <Text Include="Unknown.txt" />

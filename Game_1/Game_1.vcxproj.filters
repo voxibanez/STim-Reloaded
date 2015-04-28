@@ -184,6 +184,15 @@
     <Text Include="Frame11.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="Gsword.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Sdagger.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Ssword.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="Save.s">
