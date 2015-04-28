@@ -1,4 +1,19 @@
+<<<<<<< HEAD
 ﻿Build started 4/27/2015 10:56:37 PM.
+=======
+<<<<<<< HEAD
+﻿Build started 4/27/2015 2:49:27 PM.
+     1>Project "C:\Users\ccapt_000\Desktop\STim-Reloaded\Game_1\Game_1.vcxproj" on node 2 (Build target(s)).
+     1>Link:
+         Game_1.vcxproj -> C:\Users\ccapt_000\Desktop\STim-Reloaded\Debug\Game_1.exe
+     1>Done Building Project "C:\Users\ccapt_000\Desktop\STim-Reloaded\Game_1\Game_1.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.10
+=======
+﻿Build started 4/27/2015 3:02:30 PM.
+>>>>>>> origin/master
 Project "\\psf\Home\Documents\STim-Reloaded\Game_1\Game_1.vcxproj" on node 2 (Build target(s)).
 ClCompile:
   C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"\\psf\Home\Documents\STim-Reloaded\Game_1" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt Graphics.c
@@ -559,4 +574,9 @@ Done Building Project "\\psf\Home\Documents\STim-Reloaded\Game_1\Game_1.vcxproj"
 
 Build succeeded.
 
+<<<<<<< HEAD
 Time Elapsed 00:00:02.58
+=======
+Time Elapsed 00:00:01.82
+>>>>>>> origin/master
+>>>>>>> origin/master
