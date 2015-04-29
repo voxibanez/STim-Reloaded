@@ -80,6 +80,7 @@ typedef struct salesman{
 	InventoryPtr INVENTORY;
 
 	SpeechBinTreePtr conversations;
+	int shopkeeperFace;
 }SalesManSize, *SalesMan;
 
 

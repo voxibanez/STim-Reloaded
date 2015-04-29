@@ -193,6 +193,12 @@
     <Text Include="Ssword.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="Shop_h.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Shop_s.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="Save.s">

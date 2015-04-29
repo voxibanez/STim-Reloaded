@@ -30,8 +30,8 @@ SalesMan storeman;
 char** title;
 int storemanInt = 0;
 
-HANDLE wHnd;    // Handle to write to the console.
-HANDLE rHnd;    // Handle to read from the console.
+HANDLE wHnd;   
+HANDLE rHnd;    
 AnimationPtr boxes;
 AnimationPtr spiral;
 AnimationPtr flash;
@@ -57,7 +57,7 @@ int main(int argc, char* argv[]){
 
 	characters = malloc(7 * sizeof(char*));
 	weapons = malloc(sizeof(WeaponPtr*) * 11);
-	potions = malloc(sizeof(PotionPtr*) * 1);
+	potions = malloc(sizeof(PotionPtr*) * 3);
 
 	ripHead = malloc(sizeof(char*) * 27);
 
@@ -138,6 +138,9 @@ int main(int argc, char* argv[]){
 
 
 	shopKeeperFaces[0] = loadArt("Shop_n.txt");
+	shopKeeperFaces[1] = loadArt("Shop_h.txt");
+	shopKeeperFaces[2] = loadArt("Shop_s.txt");
+
 	storeman = NULL;
 
 	weapons[0] = initWeapon("Empty", 0.0, 0.0, 0.0, 1.0, 100, 1, "Nothing to see here", NULL, 0);
@@ -154,14 +157,19 @@ int main(int argc, char* argv[]){
 	weapons[5]->picture = loadArt("Lrune.txt");
 	weapons[6] = initWeapon("Frost Rune", 2.0, 1.4, 0.9, 1.1, 70, 0, "Death is a dish best served cold", NULL, 300);
 	weapons[6]->picture = loadArt("Frrune.txt");
-	weapons[7] = initWeapon("Greatsword", 5.0, 1.3, .6, 1.2, 60, 1, "Size Matters.", NULL, 1000);
+	weapons[7] = initWeapon("Great Sword", 5.0, 1.3, .6, 1.2, 60, 1, "Size Matters.", NULL, 1000);
 	weapons[7]->picture = loadArt("Gsword.txt");
 	weapons[8] = initWeapon("Steel Sword", 2.0, 1.75, .85, 1.15, 90, 1, "Slay your foes!", NULL, 750);
 	weapons[8]->picture = loadArt("Ssword.txt");
 	weapons[9] = initWeapon("Steel Dagger", 0, 1.55, .9, 1.1, 80, 1, "Great for stabbing!", NULL, 600);
 	weapons[9]->picture = loadArt("Sdagger.txt");
-	potions[0] = initPotion("Potion", 0, 5, 0, 0, 0, 0, 0, 0, "A Simple Healing Potion", "Potion.txt", 50);
+
+	potions[0] = initPotion("Healing Potion", 0, 5, 0, 0, 0, 0, 0, 0, "A Simple Healing Potion", "Potion.txt", 50);
 	potions[0]->picture = loadArt("Potion.txt");
+	potions[1] = initPotion("Defense Potion", 0, 0, 0, 2, 0, 0, 0, 0, "Increases your defense", "Potion.txt", 200);
+	potions[1]->picture = loadArt("Potion.txt");
+	potions[2] = initPotion("Attack Potion", 0, 0, 3, 0, 0, 0, 0, 0, "Increases your attack", "Potion.txt", 200);
+	potions[2]->picture = loadArt("Potion.txt");
 	srand(time(NULL));
 
 
@@ -227,17 +235,9 @@ int main(int argc, char* argv[]){
 		getch();
 		system("cls");
 
-		tempItem = malloc(sizeof(Item));
-		tempItem->POTION = potions[0];
-		tempItem->QUANTITY = 3;
-		tempItem->next = NULL;
-
+		
 		addItem(mainChar, potions[0], 3, NULL);
-		addItem(mainChar, NULL, 1, weapons[4]);
-		addItem(mainChar, NULL, 1, weapons[7]);
-		addItem(mainChar, NULL, 1, weapons[8]);
-		addItem(mainChar, NULL, 1, weapons[9]);
-		warriornextlevel(mainChar);
+		initPlayerPosition(mainChar);
 	}
 	else
 	{
@@ -546,7 +546,7 @@ void updateEnemyPosition(Enemy* en, Player user){
 
 }
 
-void warriornextlevel(Player user)
+void initPlayerPosition(Player user)
 {
 	user->Position[0][0] = 15;
 	user->Position[0][1] = 15;
@@ -1473,7 +1473,7 @@ void useItem(Player User, ItemPtr it){
 		User->ATK += it->POTION->ATKRAISE;
 		User->DEF += it->POTION->DEFRAISE;
 		User->MAXHP += it->POTION->MAXHPRAISE;
-		if (User->HP == User->MAXHP){
+		if (User->HP == User->MAXHP && it->POTION->HPRAISE > 0){
 			printf("You are already at max health\n");
 			printf("Press enter to continue...\n");
 			clear_buffer();
@@ -2033,7 +2033,7 @@ void Shop(Player user, SalesMan shopkeeper){
 	int key_code = 0;
 	char tempScreen[20][80];
 	int exit = 0;
-
+	shopkeeper->shopkeeperFace = 0;
 
 	shopkeeper->INVENTORY = malloc(sizeof(Inventory));
 	shopkeeper->INVENTORY->size = 0;
@@ -2043,11 +2043,6 @@ void Shop(Player user, SalesMan shopkeeper){
 
 	for (i = 1; i < weaponSize; i++)
 		addItemShop(shopkeeper, NULL, 1, weapons[i]);
-
-
-
-
-
 
 	cursor[0] = 10;
 	cursor[1] = 20;
@@ -2063,9 +2058,9 @@ void Shop(Player user, SalesMan shopkeeper){
 			}
 		}
 
-		for (i = 0; shopKeeperFaces[0][i] != NULL && i < 20; i++){
-			for (j = 0; shopKeeperFaces[0][i][j] != NULL && j < 80; j++)
-				screen[i][j + 5] = shopKeeperFaces[0][i][j];
+		for (i = 0; shopKeeperFaces[shopkeeper->shopkeeperFace][i] != NULL && i < 20; i++){
+			for (j = 0; shopKeeperFaces[shopkeeper->shopkeeperFace][i][j] != NULL && j < 80; j++)
+				screen[i][j + 5] = shopKeeperFaces[shopkeeper->shopkeeperFace][i][j];
 		}
 
 
@@ -2711,30 +2706,35 @@ void buyBox(Player user, SalesMan shopkeeper, ItemPtr it){
 				}
 				else
 					toBuy = 1;
-				if (it->POTION != NULL){
-					if (user->CURRENCY >= it->POTION->price * toBuy){
-						user->CURRENCY -= it->POTION->price * toBuy;
-						addItem(user, potions[it->POTION->index], toBuy, NULL);
-						removeItemShop(shopkeeper, toBuy, it);
+				if (toBuy > 0){
+					if (shopkeeper->shopkeeperFace == 2)
+						shopkeeper->shopkeeperFace = 0;
+					else
+						shopkeeper->shopkeeperFace == 1;
+					if (it->POTION != NULL){
+						if (user->CURRENCY >= it->POTION->price * toBuy){
+							user->CURRENCY -= it->POTION->price * toBuy;
+							addItem(user, potions[it->POTION->index], toBuy, NULL);
+							removeItemShop(shopkeeper, toBuy, it);
+						}
+						else{
+							printf("Not enough currency");
+							getch();
+						}
 					}
-					else{
-						printf("Not enough currency");
-						getch();
+					else if (it->WEAPON != NULL){
+						if (user->CURRENCY >= it->WEAPON->price * toBuy){
+							user->CURRENCY -= it->WEAPON->price * toBuy;
+							addItem(user, NULL, toBuy, weapons[it->WEAPON->index]);
+							removeItemShop(shopkeeper, toBuy, it);
+						}
+						else{
+							printf("Not enough currency\n");
+							printf("Press enter to continue...");
+							getch();
+						}
 					}
 				}
-				else if (it->WEAPON != NULL){
-					if (user->CURRENCY >= it->WEAPON->price * toBuy){
-						user->CURRENCY -= it->WEAPON->price * toBuy;
-						addItem(user, NULL, toBuy, weapons[it->WEAPON->index]);
-						removeItemShop(shopkeeper, toBuy, it);
-					}
-					else{
-						printf("Not enough currency\n");
-						printf("Press enter to continue...");
-						getch();
-					}
-				}
-
 
 				break;
 			case 1:
@@ -2794,7 +2794,7 @@ void sellBox(Player user, SalesMan shopkeeper, ItemPtr it){
 	{
 		i = 1;
 
-		sprintf(tempchar, "Sell Price: %d coins", it->POTION->price / 2);
+		sprintf(tempchar, "Sell Price: %d", (int)ceil(it->POTION->price / 2.0));
 		for (j = 0; j < strlen(tempchar); j++){
 			screen[3 + i][j + 41] = tempchar[j];
 
@@ -2896,7 +2896,7 @@ void sellBox(Player user, SalesMan shopkeeper, ItemPtr it){
 
 	if (it->WEAPON != NULL)
 	{
-		sprintf(tempchar, "Sell Price: %d coins", it->WEAPON->price*(2 / 3));
+		sprintf(tempchar, "Sell Price: %d", (int)ceil(it->WEAPON->price*(2.0 / 3.0)));
 		for (j = 0; j < strlen(tempchar); j++){
 			screen[1 + i][j + 41] = tempchar[j];
 
@@ -2993,26 +2993,31 @@ void sellBox(Player user, SalesMan shopkeeper, ItemPtr it){
 			switch (cursor[2]){
 			case 0:
 				if (it->QUANTITY > 1){
+					if (shopkeeper->shopkeeperFace == 1)
+						shopkeeper->shopkeeperFace = 0;
+					else
+						shopkeeper->shopkeeperFace == 2;
 					do{
 						printf("How many would you like to sell?: ");
 						while (scanf("%d", &toSell) == 0)
 							clear_buffer();
-					} while (toSell > it->QUANTITY && toSell < 1);
+					} while (toSell > it->QUANTITY && toSell < 0);
 				}
 				else if (it->QUANTITY == 1)
 					toSell = 1;
-				if (it->POTION != NULL){
+				if (toSell > 0){
+					if (it->POTION != NULL){
 
-					user->CURRENCY += it->POTION->price / 2 * toSell;
-					addItemShop(shopkeeper, potions[it->POTION->index], toSell, NULL);
-					removeItem(user, toSell, it);
+						user->CURRENCY += (int)ceil(it->POTION->price / 2.0 * toSell);
+						addItemShop(shopkeeper, potions[it->POTION->index], toSell, NULL);
+						removeItem(user, toSell, it);
+					}
+					else if (it->WEAPON != NULL){
+						user->CURRENCY += (int)ceil(it->WEAPON->price*(2.0 / 3.0)*toSell);
+						addItemShop(shopkeeper, NULL, toSell, weapons[it->WEAPON->index]);
+						removeItem(user, toSell, it);
+					}
 				}
-				else if (it->WEAPON != NULL){
-					user->CURRENCY += (it->WEAPON->price*(2.0 / 3.0)*toSell);
-					addItemShop(shopkeeper, NULL, toSell, weapons[it->WEAPON->index]);
-					removeItem(user, toSell, it);
-				}
-
 				break;
 			case 1:
 				key_code = 13;
@@ -3235,7 +3240,7 @@ void bossBattle(Player user, Enemy en){
 	}
 	Sleep(1000);
 
-	for (k = 0; k < 27; k++){
+	for (k = 0; k < 19; k++){
 		for (i = 0; i < 20; i++){
 			for (j = 0; j < 80; j++)
 				screen[i][j] = ' ';
@@ -3248,17 +3253,92 @@ void bossBattle(Player user, Enemy en){
 		updateScreen();
 		if (k == 0)
 			Sleep(1000);
+		else if (k == 12){
+			sprintf(temp, "Goodbye... Brot");
+			for (i = 0; i < strlen(temp); i++){
+				screen[13][i + 12] = temp[i];
+				updateScreen();
+				if (i == 7 || i == 8 || i == 9)
+					Sleep(300);
+				else if (i != strlen(temp)-1)
+					Sleep(150);
+					
+				
+			}
+			
+		}
+		else if (k == 13){
+			sprintf(temp, "Goodbye... Broth");
+			for (i = 0; i < strlen(temp); i++)
+				screen[13][i + 12] = temp[i];
+			updateScreen();
+			Sleep(600);
+			screen[13][15 + 13] = '.';
+			updateScreen();
+			Sleep(200);
+			screen[13][15 + 14] = '.';
+			updateScreen();
+			Sleep(1000);
+		}
 		else
-			Sleep(100);
+			Sleep(200);
 
 	}
-	Sleep(1000);
-	printf("Press enter to continue...");
-	clear_buffer();
 
-	for (i = 0; i < 20; i++){
-		for (j = 0; j < 80; j++)
-			screen[i][j] = ' ';
+
+	while (!kbhit())
+	{
+		k = rand() % 4 + 19;
+		for (i = 0; i < 20; i++){
+			for (j = 0; j < 80; j++)
+				screen[i][j] = ' ';
+		}
+		for (i = 0; ripHead[k][i] != NULL && i < 20; i++){
+			for (j = 0; ripHead[k][i][j] != NULL && j < 78; j++){
+				screen[i][j] = ripHead[k][i][j];
+			}
+		}
+		Sleep(200);
+		updateScreen();
+		printf("Press any key to continue...");
+	}
+	
+	
+	for (k = 20; k < 27;k++){
+		for (i = 0; i < 20; i++){
+			for (j = 0; j < 80; j++)
+				screen[i][j] = ' ';
+		}
+		for (i = 0; ripHead[k][i] != NULL && i < 20; i++){
+			for (j = 0; ripHead[k][i][j] != NULL && j < 78; j++){
+				screen[i][j] = ripHead[k][i][j];
+			}
+		}
+		Sleep(200);
+		updateScreen();
+	}
+	
+	maxOffset = 33;
+	offsetX = 0;
+	enemyIndex = 6;
+
+	while (offsetX <= maxOffset){
+		for (i = 0; i < 20; i++){
+			for (j = 0; j < 80; j++)
+				screen[i][j] = ' ';
+		}
+		for (i = 0; characters[enemyIndex][i] != NULL && i < 14; i++){
+			for (j = 0; characters[enemyIndex][i][j] != NULL && i < 78; j++){
+				if (characters[enemyIndex][i][j] != NULL && characters[enemyIndex][i][j] != NULL != '\n' && characters[enemyIndex][i][j] != ' ')
+					screen[i][j + offsetX] = characters[enemyIndex][i][j];
+
+			}
+
+
+		}
+		Sleep(20);
+		updateScreen();
+		offsetX++;
 	}
 
 	for (i = 0; playerSprite[i] != NULL && i < 10; i++){
@@ -3268,22 +3348,15 @@ void bossBattle(Player user, Enemy en){
 
 		}
 
+
 	}
 
 
 
-	maxOffset = 33;
+	
 
 
-
-	for (i = 0; characters[enemyIndex][i] != NULL && i < 20; i++){
-		for (j = 0; characters[enemyIndex][i][j] != NULL && i < 78; j++){
-			screen[i][j + offsetX - 1] = ground;
-
-		}
-	}
-
-	enemyIndex = 6;
+	
 	for (i = 0; characters[enemyIndex][i] != NULL && i < 20; i++){
 		for (j = 0; characters[enemyIndex][i][j] != NULL && i < 78; j++){
 			if (characters[enemyIndex][i][j] != NULL && characters[enemyIndex][i][j] != NULL != '\n' && characters[enemyIndex][i][j] != ' ')
@@ -3293,7 +3366,7 @@ void bossBattle(Player user, Enemy en){
 
 	}
 	updateScreen();
-	Sleep(2000);
+	Sleep(1000);
 	sprintf(temp, "YOU MONSTER!");
 	for (i = 0; i < strlen(temp); i++){
 		screen[13][i + 15] = temp[i];
@@ -3307,7 +3380,7 @@ void bossBattle(Player user, Enemy en){
 		updateScreen();
 		Sleep(20);
 	}
-
+	Sleep(1000);
 	printf("Press enter to continue...");
 	clear_buffer();
 
@@ -3437,7 +3510,6 @@ void bossBattle(Player user, Enemy en){
 		for (j = 0; playerSprite[i][j] != NULL && i < 78; j++){
 			if (playerSprite[i][j] != NULL && playerSprite[i][j] != NULL != '\n' && playerSprite[i][j] != ' ')
 				screen[i + 10][j] = playerSprite[i][j];
-
 		}
 
 	}
@@ -3521,7 +3593,7 @@ void shopTalk(Player user, SalesMan shoppkeeper){
 	{
 		screen[4][i + 15] = temp[i];
 	}
-	sprintf(temp, "Kill me", user->NAME);
+	sprintf(temp, "I need information", user->NAME);
 	for (i = 0; i < strlen(temp); i++)
 	{
 		screen[6][i + 15] = temp[i];
@@ -3555,10 +3627,13 @@ void shopTalk(Player user, SalesMan shoppkeeper){
 		if (key_code == 13){
 			switch (cursor[2]){
 			case 0:
+				printf("Alright, now I'm going to ask you some personal question, please answer honestly\n");
+				printf("Press enter to continue...");
+				getch();
 				readQuestion(initSpeech());
 				break;
 			case 1:
-				
+				readQuestion(initSpeech2());
 				break;
 			}
 			screen[cursor[0]][cursor[1]] = 219;
@@ -3578,6 +3653,7 @@ SpeechNodePtr addRoot(SpeechBinTreePtr tree, char* question, char* leftAnswer, c
 	tree->root = makeNode(the_data);
 	return tree->root;
 }
+
 SpeechNodePtr addChild(SpeechNodePtr parent, int leftOrRightChild,char* question, char* leftAnswer, char* rightAnswer){
 	SpeechNodePtr temp;
 	SpeechDataPtr the_data = malloc(sizeof(SpeechData));
@@ -3597,17 +3673,20 @@ SpeechNodePtr addChild(SpeechNodePtr parent, int leftOrRightChild,char* question
 
 	return temp;
 }
+
 SpeechNodePtr makeNode(SpeechDataPtr the_data){
 	SpeechNodePtr np = malloc(sizeof(SpeechNode));
-	np->data = malloc(sizeof(SpeechData));
+	/*np->data = malloc(sizeof(SpeechData));
 	np->data->question = the_data->question;
 	np->data->leftAnswer = the_data->leftAnswer;
-	np->data->rightAnswer = the_data->rightAnswer;
+	np->data->rightAnswer = the_data->rightAnswer;*/
+	np->data = the_data;
 	np->left = NULL;
 	np->right = NULL;
 
 	return np;
 }
+
 void readQuestion(SpeechBinTreePtr speech){
 	int i, j, k;
 	int key_code = 0;
@@ -3687,6 +3766,7 @@ void readQuestion(SpeechBinTreePtr speech){
 
 
 }
+
 SpeechBinTreePtr initSpeech(){
 	SpeechBinTreePtr temp = malloc(sizeof(SpeechBinTree));
 	SpeechNodePtr tempSpeech;
@@ -3704,7 +3784,6 @@ SpeechBinTreePtr initSpeech(){
 	addChild(tempSpeech, 1, "I would recommend a Great Sword to compliment your chivalrous personality", "Thank you sir", "I am grateful for your services");
 	addChild(tempSpeech, -1, "I would recommend a Chipped Dagger to compliment your selfish personality", "Wow...", "Can I have it for free?");
 
-
 	tempSpeech = temp->root->right;
 
 	tempSpeech = addChild(tempSpeech, -1, "Someone mistakes you for Guy Fieri, what do you do?", "Welcome to flavor town", "Who?");
@@ -3712,9 +3791,40 @@ SpeechBinTreePtr initSpeech(){
 	addChild(tempSpeech, -1, "I would recommend a Fire Rune to compliment your spicy personality", "Some people are just born to cook and talk", "I am a filthy liar");
 
 	tempSpeech = temp->root->left;
-	tempSpeech = addChild(temp, 1, "Do you like memes?", "Absolutely!", "Memes?");
-	addChild(tempSpeech, 1, "You are lucky", "a", "a");
-	addChild(tempSpeech, -1, "I would recommend Quiting The Game to compliment your horrible personality", "Some people are just born to cook and talk", "a", "a");
+	tempSpeech = addChild(tempSpeech, 1, "Do you like memes?", "Absolutely!", "Memes?");
+	addChild(tempSpeech, 1, "You are lucky", "What?", "I guess I am");
+	addChild(tempSpeech, -1, "I would recommend Quiting The Game to compliment your horrible personality", "Wot", "But my memes...");
+
+	return temp;
+}
+
+SpeechBinTreePtr initSpeech2(){
+	SpeechBinTreePtr temp = malloc(sizeof(SpeechBinTree));
+	SpeechNodePtr tempSpeech;
+
+
+	tempSpeech = addRoot(temp, "What do you want to hear?", "Give me some rumors please", "Can I have some tips?");
+	tempSpeech = addChild(tempSpeech, 1, "Sure thing, what kind of tip do you want?", "Weapons", "Gameplay");
+	tempSpeech = addChild(tempSpeech, 1, "Did you know enemies level up after each battle?", "No I didn't", "Yes thats common knowledge");
+	addChild(tempSpeech, 1, "Oh, well I guess you know how to play this game already", "Yea...", "Don't be so rude");
+	addChild(tempSpeech, -1, "Great! I'm so great, aren't I?", "I guess...", "Please don't speak to me again");
+
+	tempSpeech = temp->root;
+	tempSpeech = addChild(tempSpeech, -1, "Alright, do you want to hear about your brother?", "Please tell me!", "No, thats boring");
+	tempSpeech = addChild(tempSpeech, -1, "Well, I heard that a OCT took your brother and is holding him captive", "How do I get him!?", "Oh wow, thanks");
+	addChild(tempSpeech, 1, "No problem, come visit anytime", "Thank you!", "You are very helpful");
+	addChild(tempSpeech, -1, "I've heard that you have to prove your worth in combat, and the monster will reveal itself", "Wow", "Thank you!");
+
+	tempSpeech = temp->root->right;
+
+	tempSpeech = addChild(tempSpeech, -1, "You need a good balanced weapon that compliments your stats", "Well thats obvious...", "Thanks!");
+	addChild(tempSpeech, 1, "Well I didn't ask for your opinion", "Oh", "Fine");
+	addChild(tempSpeech, -1, "No problem, have a nice day", "You too!", "You're the best");
+
+	tempSpeech = temp->root->left;
+	tempSpeech = addChild(tempSpeech, 1, "Well, did you know that you level up with each battle you complete?", "Yup", "No");
+	addChild(tempSpeech, 1, "You're welcome for the tip", "Thank you", "Have a nice day");
+	addChild(tempSpeech, -1, "Well then I guess you can just leave", "Oh...", "I didn't like you anyways");
 
 	return temp;
 }
@@ -3840,3 +3950,4 @@ void gameOver(Player user){
 	//getch();
 	system("cls");
 }
+

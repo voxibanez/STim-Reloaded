@@ -12,7 +12,7 @@ void updatePlayerPosition(Player user);
 
 void updateEnemyPosition(Enemy en, Player user);
 
-void warriornextlevel(Player user);
+void initPlayerPosition(Player user);
 
 void titleMusic();
 
@@ -79,3 +79,5 @@ void readQuestion(SpeechBinTreePtr speech);
 SpeechBinTreePtr initSpeech();
 
 void endGame(Player user);
+
+SpeechBinTreePtr initSpeech2();

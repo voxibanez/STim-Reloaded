@@ -120,7 +120,7 @@ int character_select(Player user)
 		user->MATK = 9;
 		user->MDEF = 9;
 		user->ACC = 90;
-		user->LCK = 1665;
+		user->LCK = 20;
 		break;
 	}
 }
