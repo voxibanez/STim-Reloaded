@@ -1,12 +1,4 @@
-/*PATCH 1.1 NOTES
 
-Fixes:
-Mage reroll works correctly
-
-New Content:
-your mom
-
-*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -16,22 +8,13 @@ your mom
 #include "Stim.h"
 
 
-int wooden_sword[] = { 0, 0 }, fire_rune[] = { 0, 0 }, wood_club[] = { 0, 0 }, chipped_dagger[] = { 1, 0 };
-int potions = 3;
-int light_armor[] = { 0 }, heavy_armor[] = { 0 }, dual = 0, isrune = 0, ismace = 0, issword = 0, isdagger = 0;
-int ismain_hand = 1, isoff_hand = 0, isarmor = 0, is_magic_main = 0, is_magic_off = 0, is_physical_main = 1, is_physical_off = 0;
-int mage_roll = 0, HP, MAX_HP, ATK, DEF, MATK, MDEF, ACC, LCK, iswarrior = 0, isrogue = 0, ismage = 0, iscleric = 0;
+int is_magic_main = 0, is_magic_off = 0, is_physical_main = 1, is_physical_off = 0,dual;
+int mage_roll = 0, HP, MAX_HP, ATK, DEF, MATK, MDEF, ACC, LCK;
 double DMG, eDMG, WMOD1, WMOD2, WMULT1, WMULT2;
-//calculate damage split
-
-int isskeleton = 0, istroll = 0, isgoblin = 0, isorc = 0;
 int eHP, temp_eHP, eATK, eDEF, eMATK, eMDEF, eACC, eLCK, eWMOD, enemy_level = 1, enemy = 1, drop_rarity;
 void enemy_combat(Enemy en, Player user);
 int drop_roll();
 void damage_range(Enemy en, Player user);
-void pickup_weapon(int*weapon);
-void pickup_potion();
-void pickup_misc(int * misc);
 //to make different potion types, just make an array and each space will represent a type
 Enemy lv1_pick_monster(int levelNum,int r);
 void your_attack(Enemy en, Player user);
@@ -42,25 +25,11 @@ void stance(void);
 void mage_reroll(Player user);
 //work on meditate
 void clear_buffer(void);
-void skeleton(void);
 void enemy_attacks(Enemy en, Player user);
-void goblin(void);
-void orc(void);
-void troll(void);
 void addItem(Player user, PotionPtr POTION, int QUANTITY, WeaponPtr);
 void removeItem(Player user, int quantity, ItemPtr it);
 int countPotions(Player user);
 //int saveGame(Player user);
-
-
-int main2(int argc, char* argv[])
-{
-	srand(time(NULL));
-	//character_select();
-	for (;;)
-		menu();
-	return 0;
-}
 
 
 int character_select(Player user)
@@ -71,7 +40,7 @@ int character_select(Player user)
 	printf("%s, Choose your character: \n\n", user->NAME);
 	printf("(1) Warrior\n(2) Cleric\n(3) Mage\n(4) Rogue\n\n");
 	i = scanf("%d", &pick);
-	pick = dumb_user(pick, up, low, i);
+	pick = choice_user(pick, up, low, i);
 	user->CLASS = pick;
 	user->CURRENCY = 200;
 	
@@ -205,12 +174,7 @@ void enemy_attack(Enemy en, Player user)
 	}
 	else
 	{
-		switch (enemy)
-		{
-		case 1:
 			enemy_attacks(en, user);
-			break;
-		}
 	}
 
 }
@@ -243,7 +207,7 @@ void encounter(Enemy en, Player user, char** screen)
 				user->CURRENCY += coins;
 			}
 			else
-				printf("Enemy killed", coins);
+				printf("Enemy killed");
 		
 			printf("\n\nPress enter to continue...");
 			getch();
@@ -266,7 +230,7 @@ void your_attack(Enemy en, Player user)
 	damage_range(en,user);
 	printf("(2) Inventory\n");
 	i = scanf("%d", &attack);
-	attack = dumb_user(attack, up, low, i);
+	attack = choice_user(attack, up, low, i);
 	switch (attack)
 	{
 		// attacks are determined by weapons multiplier: sword with str*.2
@@ -298,7 +262,6 @@ void combat(Enemy en, Player user)
 		DMG = (user->MATK + user->weaponLeft->weaponMod)*user->weaponLeft->weaponMult;
 	min = floor(min*DMG);
 	max = ceil(max*DMG);
-	//should I incorporate luck?
 	//damage range is taking into account DMG as the average damage
 	roll = max - min + 1;
 	roll = rand() % roll;
@@ -315,7 +278,7 @@ void combat(Enemy en, Player user)
 		if (r >= luck)
 		{
 			printf("\nYou score a critical hit!\n");
-			roll*=2;
+			roll*=1.5;
 		}
 		//could implement critical modifier on weapons
 		if (user->weaponLeft->isPhysical == 1)
@@ -359,7 +322,6 @@ void clear_buffer(void)
 }
 void enemy_combat(Enemy en, Player user)
 {
-	//figure out enemy ranges
 	int max, luck, min, r = rand() % 100;
 	int roll;
 	r += 1;
@@ -432,61 +394,8 @@ void enemy_attacks(Enemy en, Player user)
 	if (r >= en->LCK)
 		en->ATK /= 2;
 }
-void menu(void)
-{
-	int select, up = 6, low = 1, i;
-	printf("What would you like to do?\n");
-	printf("(2)Check your inventory\n(3)Check your stats\n(4)Meditate\n(5)Save\n(6)Quit\n");
-	i = scanf("%d", &select);
-	select = dumb_user(select, up, low, i);
-	switch (select)
-	{
-	case 1:
-		system("cls");
-		//encounter(en, user);
-		break;
-	case 2:
-		system("cls");
-		//inventory();
-		break;
-	case 3:
-		system("cls");
-		stats();
-		break;
-	case 4:
-		system("cls");
-		stance();
-		break;
-	case 5:
-		system("cls");
-		save();
-		break;
-	case 6:
-		system("cls");
-		quit();
-		break;
-	}
-}
-void stats()
-{
-	printf("HP: %d/%d\nATK: %d\nDEF: %d\nMATK: %d\nMDEF: %d\nACC: %d\nLCK: %d\n\n", HP, MAX_HP, ATK, DEF, MATK, MDEF, ACC, LCK);
-	printf("Main hand: ");
-	main_hand();
-	printf("\nOff hand: ");
-	off_hand();
-	printf("\nArmor: ");
-	armor();
-	printf("\n\n");
-}
-void save()
-{
-	exit(1);
-}
-void quit()
-{
-	exit(1);
-}
-int dumb_user(int select, int upper, int lower, int i)
+
+int choice_user(int select, int upper, int lower, int i)
 {
 	for (;;)
 	{
@@ -507,35 +416,7 @@ int dumb_user(int select, int upper, int lower, int i)
 	}
 	return select;
 }
-void main_hand()
-{
-	if (wooden_sword[0] == 1)
-		printf("Wooden Sword (+0 ATK, 1.5 MOD)");
-	if (fire_rune[0] == 1)
-		printf("Fire Rune (+2 MATK, 1.2 MOD)");
-	if (wood_club[0] == 1)
-		printf("Wood Club (+3 ATK, 1 MOD)");
-	if (chipped_dagger[0] == 1)
-		printf("Chipped Dagger (-1 ATK, 1.1 MOD)");
-}
-void off_hand()
-{
-	if (wooden_sword[1] == 1)
-		printf("Wooden Sword (+0 ATK, 1.5 MOD)");
-	if (fire_rune[1] == 1)
-		printf("Fire Rune (+2 MATK, 1.2 MOD)");
-	if (wood_club[1] == 1)
-		printf("Wood Club (+3 ATK, 1 MOD)");
-	if (chipped_dagger[1] == 1)
-		printf("Chipped Dagger (-1 ATK, 1.1 MOD)");
-}
-void armor()
-{
-	if (light_armor[0] == 1)
-		printf("Light Armor (+1 DEF, +2 MDEF,+1 HP,+5 ACC)");
-	if (heavy_armor[0] == 1)
-		printf("Heavy Armor (+2 DEF, +1 MDEF,+3HP)");
-}
+
 int drop_roll()
 {
 	int r = rand() % 30;
@@ -543,69 +424,7 @@ int drop_roll()
 	return bonus;
 }
 
-void pickup_weapon(int* weapon)
-{
-	int i, answer1, answer2, answer3;
-	printf("Your main hand: ");
-	main_hand();
-	printf("\nYour off Hand: ");
-	off_hand();
-	printf("\nWould you like to pick it up?\n(1) Yes\n(2) No\n");
-	i = scanf(" %d", &answer1);
-	answer1 = dumb_user(answer1, 2, 1, i);
-	if (answer1 == 1)
-	{
-		if (ismain_hand == 1 && isoff_hand == 1)
-		{
-			printf("\nWould you like to equip it to your main hand(1) or off hand(2)?\n");
-			clear_buffer();
-			i = scanf("%d", &answer2);
-			answer2 = dumb_user(answer2, 2, 1, i);
-			if (answer2 == 1)
-			{
-				drop_main_weapon();
-				weapon[0] = 1;
-				ismain_hand = 1;
-			}
-
-			else
-			{
-				drop_off_weapon();
-				weapon[1] = 1;
-			}
-
-		}
-		//use else if () for other drop types				
-	}
-}
-void pickup_potion()
-{
-	int i, answer1, answer2, answer3;
-	printf("\nWould you like to pick it up?\n(1) Yes\n(2) No\n");
-	i = scanf(" %d", &answer1);
-	answer1 = dumb_user(answer1, 2, 1, i);
-	if (answer1 == 1)
-	{
-		printf("The potion is yours! Huzzah!\n");
-		potions++;
-	}
-}
-void pickup_misc(int* misc)
-{
-	int i, answer1;
-	printf("Your armor: ");
-	armor();
-	printf("\nWould you like to pick it up?\n(1) Yes\n(2) No\n");
-	i = scanf(" %d", &answer1);
-	answer1 = dumb_user(answer1, 2, 1, i);
-	if (answer1 == 1)
-	{
-		drop_armor();
-		misc[0] = 1;
-		isarmor = 1;
-	}
-}
-char dumb_user_yn(char answer, int i)
+char user_yn(char answer, int i)
 {
 	for (;;)
 	{
@@ -647,114 +466,7 @@ double calc_dmg()
 		DMG = (MATK / 2 + WMOD2)*WMULT2;
 	return DMG;
 }
-void your_armor()
-{
-	if (light_armor[0] == 1)
-	{
-		DEF += 1;
-		MDEF += 2;
-		MAX_HP += 1;
-		ACC += 5;
-	}
 
-	if (heavy_armor[0] == 1)
-	{
-		DEF += 2;
-		MDEF += 1;
-		MAX_HP += 3;
-	}
-}
-void your_main_weapon()
-{
-	if (wooden_sword[0] == 1)
-	{
-		WMOD1 = 0, WMULT1 = 1.5;
-		is_magic_main = 0;
-		is_physical_main = 1;
-		issword = 1;
-	}
-	if (fire_rune[0] == 1)
-	{
-		WMOD1 = 2, WMULT1 = 1.2;
-		is_magic_main = 1;
-		is_physical_main = 0;
-		isrune = 1;
-	}
-	if (wood_club[0] == 1)
-	{
-		WMOD1 = 3, WMULT1 = 1;
-		is_magic_main = 0;
-		is_physical_main = 1;
-		ismace = 1;
-	}
-	if (chipped_dagger[0] == 1)
-	{
-		WMOD1 = -1, WMULT1 = 1.1;
-		is_magic_main = 0;
-		is_physical_main = 1;
-		isdagger = 1;
-	}
-}
-void your_off_weapon()
-{
-	if (wooden_sword[1] == 1)
-	{
-		WMOD2 = 0, WMULT2 = 1.5;
-		is_magic_off = 0;
-		is_physical_off = 1;
-		issword = 1;
-	}
-	if (fire_rune[1] == 1)
-	{
-		WMOD2 = 2, WMULT2 = 1.2;
-		is_magic_off = 1;
-		is_physical_off = 0;
-		isrune = 1;
-	}
-	if (wood_club[1] == 1)
-	{
-		WMOD2 = 3, WMULT2 = 1;
-		is_magic_off = 0;
-		is_physical_off = 1;
-		ismace = 1;
-	}
-	if (chipped_dagger[1] == 1)
-	{
-		WMOD2 = -1, WMULT2 = 1.1;
-		is_magic_off = 0;
-		is_physical_off = 1;
-		isdagger = 1;
-	}
-}
-void drop_main_weapon()
-{
-	if (wooden_sword[0] == 1)
-		wooden_sword[0] = 0;
-	if (fire_rune[0] == 1)
-		fire_rune[0] = 0;
-	if (wood_club[0] == 1)
-		wood_club[0] = 0;
-	if (chipped_dagger[0] == 1)
-		chipped_dagger[0] = 0;
-}
-void drop_off_weapon()
-{
-	if (wooden_sword[1] == 1)
-		wooden_sword[1] = 0;
-	if (fire_rune[1] == 1)
-		fire_rune[1] = 0;
-	if (wood_club[1] == 1)
-		wood_club[1] = 0;
-	if (chipped_dagger[1] == 1)
-		chipped_dagger[1] = 0;
-}
-void drop_armor()
-{
-	if (light_armor[0] == 1)
-		light_armor[0] = 0;
-	if (heavy_armor[0] == 1)
-		heavy_armor[0] = 0;
-}
 void isdual()
 {
 	if (is_physical_main == 1 && is_magic_off == 1)
@@ -781,24 +493,6 @@ void isdual()
 	//this might be a huge nerf to accuracy
 }
 
-void use_potion()
-{
-	system("cls");
-	if (potions > 0)
-	{
-		int temp = MAX_HP;
-		int heal;
-		if (iscleric == 1)
-			heal = MAX_HP*.75;
-		else
-			heal = MAX_HP*.5;
-		HP += heal;
-		if (HP > temp)
-			HP = temp;
-		printf("You healed for %d HP!\n", heal);
-		potions--;
-	}
-}
 void mage_reroll(Player user)
 {
 	int i, answer;
@@ -807,7 +501,7 @@ void mage_reroll(Player user)
 		clear_buffer();
 		printf("\nWould you like to pick it up?\n(1) Yes\n(2) No\n");
 		i = scanf(" %d", &answer);
-		answer = dumb_user(answer, 2, 1, i);
+		answer = choice_user(answer, 2, 1, i);
 		mage_roll = 0;
 		if (answer == 1)
 			lv1drops(user);
@@ -819,7 +513,7 @@ void stance(void)
 	printf("You take time to ready yourself\n"
 		"(1) One Hand a weapon\n(2) Dual Wield your weapons\n(3) Two-hand a weapon\n");
 	i = scanf(" %d", &answer);
-	answer = dumb_user(answer, 3, 1, i);
+	answer = choice_user(answer, 3, 1, i);
 	switch (answer)
 	{
 	case 1:

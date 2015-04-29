@@ -12,7 +12,6 @@
 #include "Graphics.h"
 
 char screen[20][80] = { { 176 } };
-int playerPosition[2][2] = { 0 };
 int screenCounter;
 char ground;
 char*** characters;
@@ -55,7 +54,7 @@ int main(int argc, char* argv[]){
 	mainChar->weaponLeft = malloc(sizeof(Weapon));
 	mainChar->weaponRight = malloc(sizeof(Weapon));
 
-	characters = malloc(7 * sizeof(char*));
+	characters = malloc(sizeof(char**)*7);
 	weapons = malloc(sizeof(WeaponPtr*) * 11);
 	potions = malloc(sizeof(PotionPtr*) * 3);
 
@@ -93,83 +92,83 @@ int main(int argc, char* argv[]){
 	}
 
 
+	
+	characters[0] = loadArt(fopen("Unknown.txt","r"));
+	characters[1] = loadArt(fopen("Skeleton.txt", "r"));
+	characters[2] = loadArt(fopen("Goblin.txt", "r"));
+	characters[3] = loadArt(fopen("Orc.txt", "r"));
+	characters[4] = loadArt(fopen("Troll.txt", "r"));
+	characters[5] = loadArt(fopen("A_Cog.txt", "r"));
+	characters[6] = loadArt(fopen("Cog_Head2.txt", "r"));
 
-	characters[0] = loadArt("Unknown.txt");
-	characters[1] = loadArt("Skeleton.txt");
-	characters[2] = loadArt("Goblin.txt");
-	characters[3] = loadArt("Orc.txt");
-	characters[4] = loadArt("Troll.txt");
-	characters[5] = loadArt("A_Cog.txt");
-	characters[6] = loadArt("Cog_Head2.txt");
+	playerSprite = loadArt(fopen("Player.txt", "r"));
 
-	playerSprite = loadArt("Player.txt");
+	bossSprite = loadArt(fopen("A_Cog_Sprite.txt", "r"));
 
-	bossSprite = loadArt("A_Cog_Sprite.txt");
+	title = loadArt(fopen("TitleArt.txt", "r"));
 
-	title = loadArt("TitleArt.txt");
-
-	ripHead[0] = loadArt("Frame1.txt");
-	ripHead[1] = loadArt("Frame2.txt");
-	ripHead[2] = loadArt("Frame3.txt");
-	ripHead[3] = loadArt("Frame4.txt");
-	ripHead[4] = loadArt("Frame5.txt");
-	ripHead[5] = loadArt("Frame6.txt");
-	ripHead[6] = loadArt("Frame7.txt");
-	ripHead[7] = loadArt("Frame8.txt");
-	ripHead[8] = loadArt("Frame9.txt");
-	ripHead[9] = loadArt("Frame10.txt");
-	ripHead[10] = loadArt("Frame11.txt");
-	ripHead[11] = loadArt("Frame12.txt");
-	ripHead[12] = loadArt("Frame13.txt");
-	ripHead[13] = loadArt("Frame14.txt");
-	ripHead[14] = loadArt("Frame15.txt");
-	ripHead[15] = loadArt("Frame16.txt");
-	ripHead[16] = loadArt("Frame17.txt");
-	ripHead[17] = loadArt("Frame18.txt");
-	ripHead[18] = loadArt("Frame19.txt");
-	ripHead[19] = loadArt("Frame20.txt");
-	ripHead[20] = loadArt("Frame21.txt");
-	ripHead[21] = loadArt("Frame22.txt");
-	ripHead[22] = loadArt("Frame23.txt");
-	ripHead[23] = loadArt("Frame24.txt");
-	ripHead[24] = loadArt("Frame25.txt");
-	ripHead[25] = loadArt("Frame26.txt");
-	ripHead[26] = loadArt("Frame27.txt");
+	ripHead[0] = loadArt(fopen("Frame1.txt", "r"));
+	ripHead[1] = loadArt(fopen("Frame2.txt", "r"));
+	ripHead[2] = loadArt(fopen("Frame3.txt", "r"));
+	ripHead[3] = loadArt(fopen("Frame4.txt", "r"));
+	ripHead[4] = loadArt(fopen("Frame5.txt", "r"));
+	ripHead[5] = loadArt(fopen("Frame6.txt", "r"));
+	ripHead[6] = loadArt(fopen("Frame7.txt", "r"));
+	ripHead[7] = loadArt(fopen("Frame8.txt", "r"));
+	ripHead[8] = loadArt(fopen("Frame9.txt", "r"));
+	ripHead[9] = loadArt(fopen("Frame10.txt", "r"));
+	ripHead[10] = loadArt(fopen("Frame11.txt", "r"));
+	ripHead[11] = loadArt(fopen("Frame12.txt", "r"));
+	ripHead[12] = loadArt(fopen("Frame13.txt", "r"));
+	ripHead[13] = loadArt(fopen("Frame14.txt", "r"));
+	ripHead[14] = loadArt(fopen("Frame15.txt", "r"));
+	ripHead[15] = loadArt(fopen("Frame16.txt", "r"));
+	ripHead[16] = loadArt(fopen("Frame17.txt", "r"));
+	ripHead[17] = loadArt(fopen("Frame18.txt", "r"));
+	ripHead[18] = loadArt(fopen("Frame19.txt", "r"));
+	ripHead[19] = loadArt(fopen("Frame20.txt", "r"));
+	ripHead[20] = loadArt(fopen("Frame21.txt", "r"));
+	ripHead[21] = loadArt(fopen("Frame22.txt", "r"));
+	ripHead[22] = loadArt(fopen("Frame23.txt", "r"));
+	ripHead[23] = loadArt(fopen("Frame24.txt", "r"));
+	ripHead[24] = loadArt(fopen("Frame25.txt", "r"));
+	ripHead[25] = loadArt(fopen("Frame26.txt", "r"));
+	ripHead[26] = loadArt(fopen("Frame27.txt", "r"));
 
 
-	shopKeeperFaces[0] = loadArt("Shop_n.txt");
-	shopKeeperFaces[1] = loadArt("Shop_h.txt");
-	shopKeeperFaces[2] = loadArt("Shop_s.txt");
+	shopKeeperFaces[0] = loadArt(fopen("Shop_n.txt", "r"));
+	shopKeeperFaces[1] = loadArt(fopen("Shop_h.txt", "r"));
+	shopKeeperFaces[2] = loadArt(fopen("Shop_s.txt", "r"));
 
 	storeman = NULL;
 
 	weapons[0] = initWeapon("Empty", 0.0, 0.0, 0.0, 1.0, 100, 1, "Nothing to see here", NULL, 0);
-	weapons[0]->picture = loadArt("Unknown.txt");
+	weapons[0]->picture = loadArt(fopen("Unknown.txt", "r"));
 	weapons[1] = initWeapon("Wooden Sword", 1.0, 1.5, 0.85, 1.15, 90, 1, "The strongest of all wooden swords", NULL, 200);
-	weapons[1]->picture = loadArt("Wsword.txt");
+	weapons[1]->picture = loadArt(fopen("Wsword.txt", "r"));
 	weapons[2] = initWeapon("Fire Rune", 2.0, 1.4, 0.9, 1.1, 70, 0, "Kindle your flame", NULL, 300);
-	weapons[2]->picture = loadArt("Firune.txt");
+	weapons[2]->picture = loadArt(fopen("Firune.txt", "r"));
 	weapons[3] = initWeapon("Wood Club", 3.0, 1.0, 0.8, 1.2, 80, 1, "Politics is the skilled use of blunt objects", NULL, 500);
-	weapons[3]->picture = loadArt("Wclub.txt");
+	weapons[3]->picture = loadArt(fopen("Wclub.txt", "r"));
 	weapons[4] = initWeapon("Chipped Dagger", -1.0, 1.1, 0.95, 1.05, 75, 1, "Excellent for spreading butter", NULL, 100);
-	weapons[4]->picture = loadArt("Cdagger.txt");
+	weapons[4]->picture = loadArt(fopen("Cdagger.txt", "r"));
 	weapons[5] = initWeapon("Lightning Rune", 2.0, 1.4, 0.9, 1.1, 70, 0, "ZZZZZP", NULL, 300);
-	weapons[5]->picture = loadArt("Lrune.txt");
+	weapons[5]->picture = loadArt(fopen("Lrune.txt", "r"));
 	weapons[6] = initWeapon("Frost Rune", 2.0, 1.4, 0.9, 1.1, 70, 0, "Death is a dish best served cold", NULL, 300);
-	weapons[6]->picture = loadArt("Frrune.txt");
+	weapons[6]->picture = loadArt(fopen("Frrune.txt", "r"));
 	weapons[7] = initWeapon("Great Sword", 5.0, 1.3, .6, 1.2, 60, 1, "Size Matters.", NULL, 1000);
-	weapons[7]->picture = loadArt("Gsword.txt");
+	weapons[7]->picture = loadArt(fopen("Gsword.txt", "r"));
 	weapons[8] = initWeapon("Steel Sword", 2.0, 1.75, .85, 1.15, 90, 1, "Slay your foes!", NULL, 750);
-	weapons[8]->picture = loadArt("Ssword.txt");
+	weapons[8]->picture = loadArt(fopen("Ssword.txt", "r"));
 	weapons[9] = initWeapon("Steel Dagger", 0, 1.55, .9, 1.1, 80, 1, "Great for stabbing!", NULL, 600);
-	weapons[9]->picture = loadArt("Sdagger.txt");
+	weapons[9]->picture = loadArt(fopen("Sdagger.txt", "r"));
 
 	potions[0] = initPotion("Healing Potion", 0, 5, 0, 0, 0, 0, 0, 0, "A Simple Healing Potion", "Potion.txt", 50);
-	potions[0]->picture = loadArt("Potion.txt");
+	potions[0]->picture = loadArt(fopen("Potion.txt", "r"));
 	potions[1] = initPotion("Defense Potion", 0, 0, 0, 2, 0, 0, 0, 0, "Increases your defense", "Potion.txt", 200);
-	potions[1]->picture = loadArt("Potion.txt");
+	potions[1]->picture = loadArt(fopen("Potion.txt", "r"));
 	potions[2] = initPotion("Attack Potion", 0, 0, 3, 0, 0, 0, 0, 0, "Increases your attack", "Potion.txt", 200);
-	potions[2]->picture = loadArt("Potion.txt");
+	potions[2]->picture = loadArt(fopen("Potion.txt", "r"));
 	srand(time(NULL));
 
 
@@ -696,15 +695,11 @@ void battleSequence(Enemy en, Player user){
 	user->isInBattle = 0;
 }
 
-char** loadArt(char* filename){
+char** loadArt(FILE* fp){
 	int i, j, k, l, m;
 	char** temp;
 	char tempChar[80];
-	FILE* fp;
 
-
-
-	fp = fopen(filename, "r");
 	if (fp == NULL)
 		printf("Not");
 
@@ -714,7 +709,7 @@ char** loadArt(char* filename){
 
 	rewind(fp);
 
-	temp = malloc(sizeof(char) * 20);
+	temp = malloc(sizeof(char*) * 20);
 
 
 	j = 0;
@@ -2037,7 +2032,7 @@ void Shop(Player user, SalesMan shopkeeper){
 	shopkeeper->INVENTORY = malloc(sizeof(Inventory));
 	shopkeeper->INVENTORY->size = 0;
 
-	for (i = 0; i < potionsSize; i++)
+	for (i = 0; i < potionsSize && i<3; i++)
 		addItemShop(shopkeeper, potions[i], 5, NULL);
 
 	for (i = 1; i < weaponSize; i++)
@@ -3270,7 +3265,7 @@ void bossBattle(Player user, Enemy en){
 			
 		}
 		else if (k == 13){
-			sprintf(temp, "Goodbye... Broth");
+			sprintf(temp, "Goodbye... Brot");
 			for (i = 0; i < strlen(temp); i++)
 				screen[13][i + 12] = temp[i];
 			updateScreen();
@@ -3353,12 +3348,6 @@ void bossBattle(Player user, Enemy en){
 
 	}
 
-
-
-	
-
-
-	
 	for (i = 0; characters[enemyIndex][i] != NULL && i < 20; i++){
 		for (j = 0; characters[enemyIndex][i][j] != NULL && i < 78; j++){
 			if (characters[enemyIndex][i][j] != NULL && characters[enemyIndex][i][j] != NULL != '\n' && characters[enemyIndex][i][j] != ' ')
@@ -3630,7 +3619,7 @@ void shopTalk(Player user, SalesMan shoppkeeper){
 		if (key_code == 13){
 			switch (cursor[2]){
 			case 0:
-				printf("Alright, now I'm going to ask you some personal question, please answer honestly\n");
+				printf("Alright, now I'm going to ask you some questions, please answer honestly\n");
 				printf("Press enter to continue...");
 				getch();
 				readQuestion(initSpeech());
@@ -3794,9 +3783,9 @@ SpeechBinTreePtr initSpeech(){
 	addChild(tempSpeech, -1, "I would recommend a Fire Rune to compliment your spicy personality", "Some people are just born to cook and talk", "I am a filthy liar");
 
 	tempSpeech = temp->root->left;
-	tempSpeech = addChild(tempSpeech, 1, "Do you like memes?", "Absolutely!", "Memes?");
-	addChild(tempSpeech, 1, "You are lucky", "What?", "I guess I am");
-	addChild(tempSpeech, -1, "I would recommend Quiting The Game to compliment your horrible personality", "Wot", "But my memes...");
+	tempSpeech = addChild(tempSpeech, 1, "Do you like Computing 2?", "Absolutely!", "Yes!");
+	addChild(tempSpeech, 1, "That wasn't enough enthusiasm", "What?", "Sorry");
+	addChild(tempSpeech, -1, "I would recommend the Steel Sword to compliment your sharp personality", "YES!", "Sweet!");
 
 	return temp;
 }
@@ -3853,7 +3842,7 @@ void endGame(Player user){
 		updateScreen();
 	}
 
-	sprintf(temp, "Congratulations winner!");
+	sprintf(temp, "A winner is you!");
 	for (i = 0; i < strlen(temp); i++){
 		screen[5][i + 30] = temp[i];
 		updateScreen();
@@ -3862,7 +3851,7 @@ void endGame(Player user){
 
 	Sleep(500);
 	while (!kbhit()){
-		sprintf(temp, "Congratulations winner!");
+		sprintf(temp, "A winner is you!");
 		for (i = 0; i < strlen(temp); i++)
 			screen[5][i + 30] = temp[i];
 		updateScreen();
@@ -3881,15 +3870,15 @@ void gameOver(Player user){
 	char temp[64];
 	int cursor[3];
 	int key_code = 0;
+	//free(storeman);
+	//free(user->INVENTORY);
+	//for (i = 0; i < 3; i++)
+		//enemies[i] = NULL;
 
-	free(user->INVENTORY);
-	for (i = 0; i < 3; i++)
-		enemies[i] = NULL;
-
-	user->INVENTORY = malloc(sizeof(Inventory));
-	user->INVENTORY->head = malloc(sizeof(Item));
-	user->INVENTORY->head = NULL;
-	user->INVENTORY->size = 0;
+	//user->INVENTORY = malloc(sizeof(Inventory));
+	///user->INVENTORY->head = malloc(sizeof(Item));
+	//user->INVENTORY->head = NULL;
+	//user->INVENTORY->size = 0;
 
 	for (i = 0; i < 19; i++){
 		for (j = 0; j < 80; j++){
@@ -3911,7 +3900,7 @@ void gameOver(Player user){
 		Sleep(20);
 	}
 
-	sprintf(temp, "Load");
+	sprintf(temp, "Try again!");
 	for (j = 0; j < strlen(temp); j++){
 		screen[10][j + 31] = temp[j];
 	}
@@ -3946,8 +3935,7 @@ void gameOver(Player user){
 		if (key_code == 13){
 			switch (cursor[2]){
 			case 0:
-				loadGame(user);
-				main(NULL,NULL);
+				user->HP = user->MAXHP;
 				break;
 			case 1:
 				exit(1);

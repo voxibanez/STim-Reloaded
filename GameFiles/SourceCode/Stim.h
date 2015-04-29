@@ -75,6 +75,7 @@ typedef struct speechnode{
 typedef struct speechTree{
 	SpeechNodePtr root;
 }SpeechBinTree, *SpeechBinTreePtr;
+
 typedef struct salesman{
 	int Position[2][2];
 	InventoryPtr INVENTORY;
@@ -82,8 +83,6 @@ typedef struct salesman{
 	SpeechBinTreePtr conversations;
 	int shopkeeperFace;
 }SalesManSize, *SalesMan;
-
-
 
 typedef struct player{
 	int Position[2][2];
@@ -122,31 +121,15 @@ typedef struct animation{
 }Animation, *AnimationPtr;
 
 
-void warrior(void);
-void mage(void);
-void cleric(void);
-void rogue(void);
+
 int character_select(Player user);
-void menu(void);
-void stats();
-void save();
-void quit();
 void meditate();
-void drop_main_weapon();
-void drop_off_weapon();
-void drop_armor();
 void isdual();
 void use_potion();
 void damage_range();
-void main_hand();
-void off_hand();
-void armor();
 double calc_dmg();
-void your_main_weapon();
-void your_off_weapon();
-void your_armor();
 void who_are_you();
-int dumb_user(int select, int upper, int lower, int i);
-char dumb_user_yn(char answer, int i);
+int choice_user(int select, int upper, int lower, int i);
+char user_yn(char answer, int i);
 void bossBattleInitiate(Player user);
 void bossBattleRoom(Player user);

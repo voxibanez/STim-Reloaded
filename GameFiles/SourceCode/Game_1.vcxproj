@@ -77,14 +77,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="bass.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stim.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graphics.c" />
-    <ClCompile Include="InventoryLinkedList.c" />
     <ClCompile Include="Stim.c" />
   </ItemGroup>
   <ItemGroup>

@@ -3619,7 +3619,7 @@ void shopTalk(Player user, SalesMan shoppkeeper){
 		if (key_code == 13){
 			switch (cursor[2]){
 			case 0:
-				printf("Alright, now I'm going to ask you some personal question, please answer honestly\n");
+				printf("Alright, now I'm going to ask you some questions, please answer honestly\n");
 				printf("Press enter to continue...");
 				getch();
 				readQuestion(initSpeech());

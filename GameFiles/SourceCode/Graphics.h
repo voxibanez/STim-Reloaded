@@ -1,7 +1,9 @@
 #include "Stim.h"
 
 int titleScreen(Player user);
+
 void setWindow();
+
 void battleSequence(Enemy en, Player user);
 
 void updateScreen();
@@ -16,7 +18,7 @@ void initPlayerPosition(Player user);
 
 void titleMusic();
 
-char** loadArt(char* filename);
+char** loadArt(FILE* fp);
 
 SalesMan addSalesman(Player user);
 

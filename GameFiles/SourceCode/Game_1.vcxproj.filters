@@ -21,9 +21,6 @@
     <ClInclude Include="Stim.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="bass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Graphics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -33,9 +30,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Graphics.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InventoryLinkedList.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
