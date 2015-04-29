@@ -3842,7 +3842,7 @@ void endGame(Player user){
 		updateScreen();
 	}
 
-	sprintf(temp, "Congratulations winner!");
+	sprintf(temp, "A winner is you!");
 	for (i = 0; i < strlen(temp); i++){
 		screen[5][i + 30] = temp[i];
 		updateScreen();
@@ -3851,7 +3851,7 @@ void endGame(Player user){
 
 	Sleep(500);
 	while (!kbhit()){
-		sprintf(temp, "Congratulations winner!");
+		sprintf(temp, "A winner is you!");
 		for (i = 0; i < strlen(temp); i++)
 			screen[5][i + 30] = temp[i];
 		updateScreen();

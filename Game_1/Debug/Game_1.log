@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿Build started 4/28/2015 11:20:04 PM.
 Project "\\psf\Home\Documents\STim-Reloaded\Game_1\Game_1.vcxproj" on node 2 (Build target(s)).
 ClCompile:
@@ -711,3 +712,78 @@ Done Building Project "\\psf\Home\Documents\STim-Reloaded\Game_1\Game_1.vcxproj"
 Build succeeded.
 
 Time Elapsed 00:00:02.18
+=======
+﻿Build started 4/28/2015 11:11:42 PM.
+     1>Project "C:\Users\ccapt_000\Desktop\STim-Reloaded\Game_1\Game_1.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"\\psf\Home\Documents\STim-Reloaded\Game_1" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt Stim.c
+         Stim.c
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(39): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(42): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(115): warning C4552: '+' : operator has no effect; expected operator with side-effect
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(119): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(121): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(132): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(148): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(150): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(162): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(173): warning C4013: 'lv1drops' undefined; assuming extern returning int
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(192): warning C4013: 'hpBars' undefined; assuming extern returning int
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(196): warning C4013: 'updateScreen' undefined; assuming extern returning int
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(213): warning C4013: 'getch' undefined; assuming extern returning int
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(219): warning C4013: 'gameOver' undefined; assuming extern returning int
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(185): warning C4101: 'i' : unreferenced local variable
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(184): warning C4101: 'c' : unreferenced local variable
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(232): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(239): warning C4087: 'combat' : declared with 'void' parameter list
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(242): warning C4013: 'inventoryGraphics' undefined; assuming extern returning int
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(251): warning C4027: function declared without formal parameter list
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(260): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(262): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(266): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(268): warning C4244: '+=' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(269): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(271): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(281): warning C4244: '*=' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(299): warning C4244: '+=' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(317): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(320): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(329): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(331): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(333): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(335): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(339): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(346): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(360): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(406): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(412): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(423): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(435): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(443): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(491): warning C4244: '*=' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(503): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(515): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(283) : see declaration of 'scanf'
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(642): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(166): warning C4716: 'lv1_pick_monster' : must return a value
+     1>c:\users\ccapt_000\desktop\stim-reloaded\game_1\stim.c(95): warning C4716: 'character_select' : must return a value
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\ccapt_000\Desktop\STim-Reloaded\Debug\Game_1.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\ccapt_000\Desktop\STim-Reloaded\Debug\Game_1.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\ccapt_000\Desktop\STim-Reloaded\Debug\Game_1.lib" /MACHINE:X86 Debug\Graphics.obj
+         Debug\Stim.obj
+         Game_1.vcxproj -> C:\Users\ccapt_000\Desktop\STim-Reloaded\Debug\Game_1.exe
+     1>Done Building Project "C:\Users\ccapt_000\Desktop\STim-Reloaded\Game_1\Game_1.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.46
+>>>>>>> origin/master
