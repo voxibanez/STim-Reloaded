@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{37C73E00-4B91-4035-A286-CECD06838718}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Game_1</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>\\psf\Home\Documents\STim-Reloaded\Game_1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="bass.h" />
+    <ClInclude Include="Graphics.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Stim.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Graphics.c" />
+    <ClCompile Include="InventoryLinkedList.c" />
+    <ClCompile Include="Stim.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="A_Cog.txt" />
+    <Text Include="Cog_Head.txt" />
+    <Text Include="A_Cog_Sprite.txt" />
+    <Text Include="Cdagger.txt" />
+    <Text Include="Cog_Head2.txt" />
+    <Text Include="Firune.txt" />
+    <Text Include="Frame1.txt" />
+    <Text Include="Frame10.txt" />
+    <Text Include="Frame11.txt" />
+    <Text Include="Frame12.txt" />
+    <Text Include="Frame13.txt" />
+    <Text Include="Frame14.txt" />
+    <Text Include="Frame15.txt" />
+    <Text Include="Frame16.txt" />
+    <Text Include="Frame17.txt" />
+    <Text Include="Frame18.txt" />
+    <Text Include="Frame19.txt" />
+    <Text Include="Frame2.txt" />
+    <Text Include="Frame20.txt" />
+    <Text Include="Frame21.txt" />
+    <Text Include="Frame22.txt" />
+    <Text Include="Frame23.txt" />
+    <Text Include="Frame24.txt" />
+    <Text Include="Frame25.txt" />
+    <Text Include="Frame26.txt" />
+    <Text Include="Frame27.txt" />
+    <Text Include="Frame3.txt" />
+    <Text Include="Frame4.txt" />
+    <Text Include="Frame5.txt" />
+    <Text Include="Frame6.txt" />
+    <Text Include="Frame7.txt" />
+    <Text Include="Frame8.txt" />
+    <Text Include="Frame9.txt" />
+    <Text Include="Frrune.txt" />
+    <Text Include="Game_info.txt" />
+    <Text Include="Goblin.txt" />
+    <Text Include="Gsword.txt" />
+    <Text Include="Lrune.txt" />
+    <Text Include="Orc.txt" />
+    <Text Include="Player.txt" />
+    <Text Include="Potion.txt" />
+    <Text Include="Save.txt" />
+    <Text Include="Sdagger.txt" />
+    <Text Include="Shop_h.txt" />
+    <Text Include="Shop_s.txt" />
+    <Text Include="Shop_n.txt" />
+    <Text Include="Skeleton.txt" />
+    <Text Include="Ssword.txt" />
+    <Text Include="TitleArt.txt" />
+    <Text Include="Troll.txt" />
+    <Text Include="Unknown.txt" />
+    <Text Include="Wsword.txt" />
+    <Text Include="Wclub.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Save.s" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

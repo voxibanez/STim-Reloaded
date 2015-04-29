@@ -211,7 +211,6 @@ int main(int argc, char* argv[]){
 	setWindow();
 	initGame(mainChar);
 	system("cls");
-	getch();
 
 	if (titleScreen(mainChar) == 0){
 		system("cls");
@@ -329,7 +328,7 @@ int titleScreen(Player user){
 		if (i < 19)
 			system("cls");
 	}
-	getch();
+	
 	system("cls");
 	for (i = 0; i < 7; i++){
 		for (j = 0; j < 30; j++)
@@ -2038,7 +2037,7 @@ void Shop(Player user, SalesMan shopkeeper){
 	shopkeeper->INVENTORY = malloc(sizeof(Inventory));
 	shopkeeper->INVENTORY->size = 0;
 
-	for (i = 0; i < potionsSize; i++)
+	for (i = 0; i < potionsSize && i<3; i++)
 		addItemShop(shopkeeper, potions[i], 5, NULL);
 
 	for (i = 1; i < weaponSize; i++)
@@ -2120,11 +2119,14 @@ void Shop(Player user, SalesMan shopkeeper){
 				switch (cursor[2]){
 				case 0:
 					Buy(user, shopkeeper);
+					shopkeeper->shopkeeperFace = 1;
 					break;
 				case 1:
 					Sell(user, shopkeeper);
+					shopkeeper->shopkeeperFace = 2;
 					break;
 				case 2:
+					shopkeeper->shopkeeperFace = 0;
 					shopTalk(user, shopkeeper);
 					break;
 				case 3:
@@ -3473,7 +3475,7 @@ void bossBattle(Player user, Enemy en){
 	for (i = 0; i < 7; i++){
 		screen[4][i + 3] = temp[i];
 		updateScreen();
-		Sleep(20);
+		Sleep(30);
 	}
 
 	Sleep(500);
@@ -3482,13 +3484,13 @@ void bossBattle(Player user, Enemy en){
 	for (; i < 13; i++){
 		screen[4][i + 3] = temp[i];
 		updateScreen();
-		Sleep(20);
+		Sleep(80);
 	}
 	Sleep(800);
 	for (; i < strlen(temp); i++){
 		screen[4][i + 3] = temp[i];
 		updateScreen();
-		Sleep(20);
+		Sleep(150);
 	}
 	Sleep(1000);
 
@@ -3563,9 +3565,10 @@ void bossBattle(Player user, Enemy en){
 		}
 		
 
-
+		Sleep(2000);
 	printf("Press enter to continue...");
 	clear_buffer();
+	
 
 	user->isInBattle = 0;
 
@@ -3850,16 +3853,25 @@ void endGame(Player user){
 		updateScreen();
 	}
 
-	Sleep(500);
-
-	sprintf(temp, "You are victorious!");
+	sprintf(temp, "Congratulations winner!");
 	for (i = 0; i < strlen(temp); i++){
 		screen[5][i + 30] = temp[i];
 		updateScreen();
 		Sleep(20);
 	}
 
-	getch();
+	Sleep(500);
+	while (!kbhit()){
+		sprintf(temp, "Congratulations winner!");
+		for (i = 0; i < strlen(temp); i++)
+			screen[5][i + 30] = temp[i];
+		updateScreen();
+		Sleep(1000);
+		for (i = 0; i < strlen(temp); i++)
+			screen[5][i + 30] = ' ';
+		updateScreen();
+		Sleep(1000);
+	}
 
 	exit(1);
 }
@@ -3935,6 +3947,7 @@ void gameOver(Player user){
 			switch (cursor[2]){
 			case 0:
 				loadGame(user);
+				main(NULL,NULL);
 				break;
 			case 1:
 				exit(1);
