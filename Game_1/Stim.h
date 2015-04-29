@@ -75,6 +75,7 @@ typedef struct speechnode{
 typedef struct speechTree{
 	SpeechNodePtr root;
 }SpeechBinTree, *SpeechBinTreePtr;
+
 typedef struct salesman{
 	int Position[2][2];
 	InventoryPtr INVENTORY;
@@ -82,8 +83,6 @@ typedef struct salesman{
 	SpeechBinTreePtr conversations;
 	int shopkeeperFace;
 }SalesManSize, *SalesMan;
-
-
 
 typedef struct player{
 	int Position[2][2];

@@ -12,7 +12,6 @@
 #include "Graphics.h"
 
 char screen[20][80] = { { 176 } };
-int playerPosition[2][2] = { 0 };
 int screenCounter;
 char ground;
 char*** characters;
@@ -3349,12 +3348,6 @@ void bossBattle(Player user, Enemy en){
 
 	}
 
-
-
-	
-
-
-	
 	for (i = 0; characters[enemyIndex][i] != NULL && i < 20; i++){
 		for (j = 0; characters[enemyIndex][i][j] != NULL && i < 78; j++){
 			if (characters[enemyIndex][i][j] != NULL && characters[enemyIndex][i][j] != NULL != '\n' && characters[enemyIndex][i][j] != ' ')
@@ -3790,9 +3783,9 @@ SpeechBinTreePtr initSpeech(){
 	addChild(tempSpeech, -1, "I would recommend a Fire Rune to compliment your spicy personality", "Some people are just born to cook and talk", "I am a filthy liar");
 
 	tempSpeech = temp->root->left;
-	tempSpeech = addChild(tempSpeech, 1, "Do you like memes?", "Absolutely!", "Memes?");
-	addChild(tempSpeech, 1, "You are lucky", "What?", "I guess I am");
-	addChild(tempSpeech, -1, "I would recommend Quiting The Game to compliment your horrible personality", "Wot", "But my memes...");
+	tempSpeech = addChild(tempSpeech, 1, "Do you like Computing 2?", "Absolutely!", "Yes!");
+	addChild(tempSpeech, 1, "That wasn't enough enthusiasm", "What?", "Sorry");
+	addChild(tempSpeech, -1, "I would recommend the Steel Sword to compliment your sharp personality", "YES!", "Sweet!");
 
 	return temp;
 }
@@ -3877,15 +3870,15 @@ void gameOver(Player user){
 	char temp[64];
 	int cursor[3];
 	int key_code = 0;
+	//free(storeman);
+	//free(user->INVENTORY);
+	//for (i = 0; i < 3; i++)
+		//enemies[i] = NULL;
 
-	free(user->INVENTORY);
-	for (i = 0; i < 3; i++)
-		enemies[i] = NULL;
-
-	user->INVENTORY = malloc(sizeof(Inventory));
-	user->INVENTORY->head = malloc(sizeof(Item));
-	user->INVENTORY->head = NULL;
-	user->INVENTORY->size = 0;
+	//user->INVENTORY = malloc(sizeof(Inventory));
+	///user->INVENTORY->head = malloc(sizeof(Item));
+	//user->INVENTORY->head = NULL;
+	//user->INVENTORY->size = 0;
 
 	for (i = 0; i < 19; i++){
 		for (j = 0; j < 80; j++){
@@ -3907,7 +3900,7 @@ void gameOver(Player user){
 		Sleep(20);
 	}
 
-	sprintf(temp, "Load");
+	sprintf(temp, "Try again!");
 	for (j = 0; j < strlen(temp); j++){
 		screen[10][j + 31] = temp[j];
 	}
@@ -3942,8 +3935,7 @@ void gameOver(Player user){
 		if (key_code == 13){
 			switch (cursor[2]){
 			case 0:
-				loadGame(user);
-				main(NULL,NULL);
+				user->HP = user->MAXHP;
 				break;
 			case 1:
 				exit(1);

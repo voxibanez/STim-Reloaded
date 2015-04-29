@@ -1,7 +1,9 @@
 #include "Stim.h"
 
 int titleScreen(Player user);
+
 void setWindow();
+
 void battleSequence(Enemy en, Player user);
 
 void updateScreen();
