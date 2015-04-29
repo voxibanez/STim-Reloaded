@@ -16,7 +16,7 @@ void initPlayerPosition(Player user);
 
 void titleMusic();
 
-char** loadArt(char* filename);
+char** loadArt(FILE* fp);
 
 SalesMan addSalesman(Player user);
 
