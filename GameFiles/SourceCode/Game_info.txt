@@ -1,0 +1,70 @@
+Stim: an RPG
+Turn based, Dungeon Crawling, Player selects different attacks
+Classes:
+Mage, Rogue, Cleric, Warrior
+
+Class: Mage
+Ability: Reroll Drops
+Offensive Specialization: Rune
+Defensive Specialization: Mage Armor
+Extra Slot:
+
+Class: Rogue
+Ability: % to randomly have an extra turn
+Offensive Specialization: Dagger
+Defensive Specialization: Rogue Armor
+Extra Slot:
+
+Class: Cleric
+Ability: Bonus to healing
+Offensive Specialization: Club
+Defensive Specialization: Cleric Armor
+Extra Slot:
+
+Class: Warrior
+Ability: Bonus to armor
+Offensive Specialization: Sword
+Defensive Specialization: Warrior
+Extra Slot: 
+
+Stats:
+
+Mage: 
+HP: 10
+ATK: 7
+DEF: 10
+M.ATK: 15
+M.DEF: 13
+ACC:  80
+LCK: 10
+Total: 65
+
+Rogue
+HP: 8
+ATK: 10
+DEF: 10
+M.ATK: 9
+M.DEF: 9
+ACC: 90
+LCK: 15
+Total: 60
+
+Cleric
+HP: 15
+ATK: 14
+DEF: 9
+M.ATK: 10
+M.DEF: 12
+ACC: 60
+LCK: 10
+Total: 70
+
+Warrior
+HP: 11
+ATK: 11
+DEF: 13
+M.ATK: 6
+M.DEF: 12
+ACC: 70
+LCK: 8
+Total: 67

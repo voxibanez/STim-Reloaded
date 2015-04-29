@@ -84,7 +84,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graphics.c" />
-    <ClCompile Include="InventoryLinkedList.c" />
     <ClCompile Include="Stim.c" />
   </ItemGroup>
   <ItemGroup>
